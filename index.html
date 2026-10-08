@@ -7,149 +7,195 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-color: #0B0C10;
-      color: #E0E0E0;
+      background-color: #07080B;
+      color: #E2E8F0;
       font-family: system-ui, -apple-system, sans-serif;
     }
     .gold-glow {
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+      box-shadow: 0 0 35px rgba(212, 175, 55, 0.12);
     }
     .gold-border {
-      border-color: rgba(212, 175, 55, 0.3);
+      border-color: rgba(212, 175, 55, 0.25);
     }
     .gold-gradient-text {
-      background: linear-gradient(135deg, #FFF099 0%, #D4AF37 100%);
+      background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA820A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .candle-glow {
+      filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black relative overflow-x-hidden">
 
-  <!-- Ambient Glow -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- Ambient Glow Background -->
+  <div class="fixed -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
   <!-- Header -->
   <header class="w-full max-w-xl mx-auto px-6 pt-8 pb-4 flex justify-between items-center z-10">
-    <div class="text-xl font-bold tracking-widest uppercase gold-gradient-text">
-      Unholy Confessions
+    <div class="text-lg font-extrabold tracking-widest uppercase gold-gradient-text flex items-center gap-2">
+      <span class="candle-glow animate-pulse">🕯️</span> UNHOLY CONFESSIONS
     </div>
-    <span class="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 tracking-wider uppercase">
-      Live Vault
-    </span>
+    <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-semibold tracking-wide">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Vault
+    </div>
   </header>
 
-  <main class="w-full max-w-xl mx-auto px-4 py-6 space-y-12 z-10">
+  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-10 z-10">
 
     <!-- Hero Section -->
     <section class="text-center space-y-4">
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight gold-gradient-text">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium">
+        <span>🔥</span> 1,284 secrets received & counting
+      </div>
+      <h1 class="text-4xl md:text-5xl font-black tracking-tight gold-gradient-text leading-tight">
         Forgive Me, Father.
       </h1>
       <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto leading-relaxed">
-        Spill your darkest secret, wildest regret, or unsaid truth. Zero judgment, zero trace, 100% encrypted anonymity.
+        Spill your darkest regret, unsaid truth, or wildest secret. Zero IP logging, 100% encrypted anonymity.
       </p>
     </section>
 
-    <!-- How It Works -->
-    <section class="grid grid-cols-3 gap-2 bg-[#12141C] p-4 rounded-2xl border border-white/5 text-center text-xs">
-      <div class="space-y-1">
-        <div class="text-amber-400 font-bold">1. Select</div>
-        <div class="text-gray-400">Pick Category</div>
-      </div>
-      <div class="space-y-1">
-        <div class="text-amber-400 font-bold">2. Confess</div>
-        <div class="text-gray-400">Spill Secret</div>
-      </div>
-      <div class="space-y-1">
-        <div class="text-amber-400 font-bold">3. Watch</div>
-        <div class="text-gray-400">Featured on X</div>
+    <!-- How It Works Strip with Connecting Accent -->
+    <section class="bg-[#10121A] p-5 rounded-2xl border border-white/5 relative">
+      <div class="grid grid-cols-3 gap-2 text-center text-xs relative z-10">
+        <div class="space-y-1.5">
+          <div class="w-7 h-7 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold flex items-center justify-center text-xs">1</div>
+          <div class="font-bold text-gray-200">Pick Category</div>
+          <div class="text-[10px] text-gray-500">Tag your sin</div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="w-7 h-7 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold flex items-center justify-center text-xs">2</div>
+          <div class="font-bold text-gray-200">Spill Secret</div>
+          <div class="text-[10px] text-gray-500">100% Anonymous</div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="w-7 h-7 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold flex items-center justify-center text-xs">3</div>
+          <div class="font-bold text-gray-200">Get Featured</div>
+          <div class="text-[10px] text-gray-500">Posted on X</div>
+        </div>
       </div>
     </section>
 
-    <!-- Confession Form Card -->
-    <section class="bg-[#12141C] border gold-border rounded-3xl p-6 md:p-8 gold-glow relative overflow-hidden space-y-6">
+    <!-- Main Confession Form Card -->
+    <section id="confessionSection" class="bg-[#10121A] border gold-border rounded-3xl p-6 md:p-8 gold-glow relative overflow-hidden space-y-6">
       
-      <form id="confessionForm" class="space-y-5">
+      <!-- Security Badge Banner -->
+      <div class="flex items-center justify-between text-[11px] text-gray-400 pb-2 border-b border-white/5">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+          256-Bit Encrypted Vault
+        </span>
+        <span class="text-gray-500">No Logs Kept</span>
+      </div>
+
+      <form id="confessionForm" class="space-y-6">
         
-        <!-- Category Dropdown -->
+        <!-- Interactive Visual Category Grid -->
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">
-            Select Category
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">
+            1. Select Category
           </label>
-          <select id="category" class="w-full bg-[#1B1E2B] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-amber-400 transition-colors">
-            <option value="😳 Embarrassing">😳 Embarrassing</option>
-            <option value="💔 Unfaithful / Relationships">💔 Unfaithful / Relationships</option>
-            <option value="💼 Workplace / Career">💼 Workplace / Career</option>
-            <option value="🔥 Wild / Nightlife">🔥 Wild / Nightlife</option>
-            <option value="🐍 Petty Revenge">🐍 Petty Revenge</option>
-            <option value="🤫 Dark Secret">🤫 Dark Secret</option>
-          </select>
+          <input type="hidden" id="selectedCategory" value="😳 Embarrassing">
+          <div class="grid grid-cols-2 gap-2.5" id="categoryGrid">
+            <button type="button" data-value="😳 Embarrassing" class="cat-btn bg-[#181B26] border border-amber-500/40 text-amber-300 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
+              <span>😳</span> Embarrassing
+            </button>
+            <button type="button" data-value="💔 Unfaithful" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
+              <span>💔</span> Unfaithful
+            </button>
+            <button type="button" data-value="💼 Workplace" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
+              <span>💼</span> Workplace
+            </button>
+            <button type="button" data-value="🔥 Wild Party" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
+              <span>🔥</span> Wild Party
+            </button>
+            <button type="button" data-value="🐍 Petty Revenge" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
+              <span>🐍</span> Petty Revenge
+            </button>
+            <button type="button" data-value="🤫 Dark Secret" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
+              <span>🤫</span> Dark Secret
+            </button>
+          </div>
         </div>
 
         <!-- Sin Severity Selector -->
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">
-            Sin Severity
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">
+            2. Sin Severity
           </label>
           <div class="grid grid-cols-3 gap-2">
             <label class="cursor-pointer">
               <input type="radio" name="severity" value="Mild 😇" class="peer hidden" checked>
-              <div class="text-center text-xs py-2 rounded-xl bg-[#1B1E2B] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all">
+              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all font-medium">
                 Mild 😇
               </div>
             </label>
             <label class="cursor-pointer">
               <input type="radio" name="severity" value="Spicy 😈" class="peer hidden">
-              <div class="text-center text-xs py-2 rounded-xl bg-[#1B1E2B] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all">
+              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all font-medium">
                 Spicy 😈
               </div>
             </label>
             <label class="cursor-pointer">
               <input type="radio" name="severity" value="Unpardonable 💀" class="peer hidden">
-              <div class="text-center text-xs py-2 rounded-xl bg-[#1B1E2B] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all">
+              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all font-medium">
                 Unpardonable 💀
               </div>
             </label>
           </div>
         </div>
 
-        <!-- Confession Textarea -->
+        <!-- Textarea Field -->
         <div>
           <div class="flex justify-between items-center mb-2">
             <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">
-              Your Secret
+              3. Your Secret
             </label>
             <span id="charCount" class="text-[10px] text-gray-500">0 / 1000</span>
           </div>
-          <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Nobody will ever know it was you..." class="w-full bg-[#1B1E2B] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none"></textarea>
+          <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Spill your secret... nobody will ever know it was you." class="w-full bg-[#181B26] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none leading-relaxed"></textarea>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] tracking-wider uppercase text-sm">
-          Submit Anonymously ✝️
+        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:brightness-110 text-black font-extrabold py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] tracking-wider uppercase text-xs flex items-center justify-center gap-2">
+          <span>Submit Anonymously</span> ✝️
         </button>
 
       </form>
 
-      <!-- Success Screen with Funny Penance & X CTA -->
-      <div id="successMessage" class="hidden text-center py-6 space-y-5">
-        <div class="text-4xl">🕯️</div>
+      <!-- Upgraded Animated Success Screen -->
+      <div id="successMessage" class="hidden text-center py-6 space-y-6 animate-fade-in">
+        <div class="inline-block p-4 rounded-full bg-amber-500/10 border border-amber-500/20">
+          <span class="text-4xl candle-glow animate-pulse">🕯️</span>
+        </div>
         
-        <div class="space-y-1">
-          <h3 class="text-xl font-bold gold-gradient-text">"Go in peace, my child."</h3>
-          <p class="text-xs text-amber-400/90 font-medium italic">
+        <div class="space-y-2">
+          <h3 class="text-2xl font-bold gold-gradient-text">"Go in peace, my child."</h3>
+          <p class="text-xs text-amber-300/90 font-medium italic max-w-sm mx-auto leading-relaxed">
             "Thou art 87% forgiven. Say three 'Hail Marys', clear your browser history, and do not repeat this chaos before Friday."
           </p>
         </div>
 
-        <div class="bg-[#1B1E2B] border border-white/5 rounded-2xl p-4 space-y-3">
-          <p class="text-xs text-gray-300 leading-relaxed">
-            Father has received your secret. Your confession will be posted on our <b class="text-amber-400">X page</b> for community absolution!
+        <div class="bg-[#181B26] border border-white/5 rounded-2xl p-5 space-y-4 text-left">
+          <div class="flex items-center gap-2 text-xs font-semibold text-gray-200">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            Confession Logged into Vault
+          </div>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Father has received your submission. Most approved confessions are featured on our official <b class="text-amber-400">X page</b> within <b class="text-white">24 hours</b>.
           </p>
           
-          <a id="xFollowBtn" href="#" target="_blank" class="inline-block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-bold py-3 rounded-xl shadow transition-all tracking-wider uppercase">
-            Follow Us On X To See Your Confession →
+          <a id="xFollowBtn" href="#" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
+            Follow Us On X To See Response →
           </a>
         </div>
 
@@ -164,13 +210,18 @@
 
   </main>
 
+  <!-- Sticky Mobile Scroll Button -->
+  <a href="#confessionSection" class="fixed bottom-6 right-6 z-30 bg-amber-500 text-black font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-amber-300/50 active:scale-95 transition-transform">
+    <span>Confess Now</span> ✝️
+  </a>
+
   <!-- Footer -->
   <footer class="w-full max-w-xl mx-auto px-6 py-6 text-center text-[11px] text-gray-600 space-y-1 z-10">
     <p>Unholy Confessions © 2026. All rights reserved.</p>
     <p>100% Anonymous • No IP Logging • Encrypted Vault</p>
   </footer>
 
-  <!-- Bot Script Integration -->
+  <!-- Integration Script -->
   <script>
     const BOT_TOKEN = "8715731116:AAGmr450A0nx_dKlWsLF090lmPVgjdsoQHU";
     const CHAT_ID = "5982017489";
@@ -180,6 +231,21 @@
     const charCount = document.getElementById('charCount');
     const submitBtn = document.getElementById('submitBtn');
     const successMessage = document.getElementById('successMessage');
+    const selectedCategoryInput = document.getElementById('selectedCategory');
+
+    // Visual Category Card Toggle
+    const catButtons = document.querySelectorAll('.cat-btn');
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catButtons.forEach(b => {
+          b.classList.remove('border-amber-500/40', 'text-amber-300');
+          b.classList.add('border-white/10', 'text-gray-400');
+        });
+        btn.classList.remove('border-white/10', 'text-gray-400');
+        btn.classList.add('border-amber-500/40', 'text-amber-300');
+        selectedCategoryInput.value = btn.dataset.value;
+      });
+    });
 
     textarea.addEventListener('input', () => {
       charCount.textContent = `${textarea.value.length} / 1000`;
@@ -188,13 +254,13 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = textarea.value.trim();
-      const category = document.getElementById('category').value;
+      const category = selectedCategoryInput.value;
       const severity = document.querySelector('input[name="severity"]:checked').value;
 
       if (!text) return;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Encrypting & Sending...';
+      submitBtn.textContent = 'Encrypting & Transmitting...';
 
       const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
 
@@ -215,7 +281,7 @@
         alert('Failed to send confession. Please check connection.');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Anonymously ✝️';
+        submitBtn.innerHTML = '<span>Submit Anonymously</span> ✝️';
       }
     });
 
