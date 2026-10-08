@@ -3,126 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unholy Confessions | Anonymous Secrets</title>
-  <!-- Tailwind CSS CDN for sleek dark styling -->
+  <title>Unholy Confessions | Anonymous Vault</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #0b0c10; color: #e0e6ed; font-family: system-ui, sans-serif; }
-    .gold-accent { color: #d4af37; }
-    .gold-bg { background-color: #d4af37; }
+    body {
+      background-color: #0B0C10;
+      color: #E0E0E0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+    }
+    .gold-border {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF099 0%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-4">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- Header Section -->
-  <header class="text-center mt-6">
-    <div class="text-4xl mb-2">🕯️</div>
-    <h1 class="text-3xl font-extrabold tracking-wide uppercase gold-accent">Unholy Confessions</h1>
-    <p class="text-gray-400 text-sm mt-1 max-w-xs mx-auto">
-      Forgive me Father, for I have sinned... Zero judgment. 100% anonymous.
-    </p>
+  <!-- Ambient Glow -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- Header -->
+  <header class="w-full max-w-xl mx-auto px-6 pt-8 pb-4 flex justify-between items-center z-10">
+    <div class="text-xl font-bold tracking-widest uppercase gold-gradient-text">
+      Unholy Confessions
+    </div>
+    <span class="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 tracking-wider uppercase">
+      Live Vault
+    </span>
   </header>
 
-  <!-- Confessional Box Form -->
-  <main class="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-2xl my-6">
-    
-    <form id="confessionForm" onsubmit="submitConfession(event)" class="space-y-4">
+  <main class="w-full max-w-xl mx-auto px-4 py-6 space-y-12 z-10">
+
+    <!-- Hero Section -->
+    <section class="text-center space-y-4">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight gold-gradient-text">
+        Forgive Me, Father.
+      </h1>
+      <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto leading-relaxed">
+        Spill your darkest secret, wildest regret, or unsaid truth. Zero judgment, zero trace, 100% encrypted anonymity.
+      </p>
+    </section>
+
+    <!-- How It Works -->
+    <section class="grid grid-cols-3 gap-2 bg-[#12141C] p-4 rounded-2xl border border-white/5 text-center text-xs">
+      <div class="space-y-1">
+        <div class="text-amber-400 font-bold">1. Select</div>
+        <div class="text-gray-400">Pick Category</div>
+      </div>
+      <div class="space-y-1">
+        <div class="text-amber-400 font-bold">2. Confess</div>
+        <div class="text-gray-400">Spill Secret</div>
+      </div>
+      <div class="space-y-1">
+        <div class="text-amber-400 font-bold">3. Watch</div>
+        <div class="text-gray-400">Featured on X</div>
+      </div>
+    </section>
+
+    <!-- Confession Form Card -->
+    <section class="bg-[#12141C] border gold-border rounded-3xl p-6 md:p-8 gold-glow relative overflow-hidden space-y-6">
       
-      <!-- Category Selector -->
-      <div>
-        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Select Category</label>
-        <select id="category" class="w-full bg-gray-800 border border-gray-700 text-gray-200 text-sm rounded-lg p-3 focus:outline-none focus:border-yellow-600">
-          <option value="Embarrassing">😳 Embarrassing</option>
-          <option value="Wild & Unbelievable">🔥 Wild & Unbelievable</option>
-          <option value="Petty Revenge">😈 Petty Revenge</option>
-          <option value="Work & School">💼 Work / School</option>
-          <option value="Relationships">💔 Relationships</option>
-        </select>
+      <form id="confessionForm" class="space-y-5">
+        
+        <!-- Category Dropdown -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">
+            Select Category
+          </label>
+          <select id="category" class="w-full bg-[#1B1E2B] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-amber-400 transition-colors">
+            <option value="😳 Embarrassing">😳 Embarrassing</option>
+            <option value="💔 Unfaithful / Relationships">💔 Unfaithful / Relationships</option>
+            <option value="💼 Workplace / Career">💼 Workplace / Career</option>
+            <option value="🔥 Wild / Nightlife">🔥 Wild / Nightlife</option>
+            <option value="🐍 Petty Revenge">🐍 Petty Revenge</option>
+            <option value="🤫 Dark Secret">🤫 Dark Secret</option>
+          </select>
+        </div>
+
+        <!-- Sin Severity Selector -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">
+            Sin Severity
+          </label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="cursor-pointer">
+              <input type="radio" name="severity" value="Mild 😇" class="peer hidden" checked>
+              <div class="text-center text-xs py-2 rounded-xl bg-[#1B1E2B] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all">
+                Mild 😇
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="severity" value="Spicy 😈" class="peer hidden">
+              <div class="text-center text-xs py-2 rounded-xl bg-[#1B1E2B] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all">
+                Spicy 😈
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="severity" value="Unpardonable 💀" class="peer hidden">
+              <div class="text-center text-xs py-2 rounded-xl bg-[#1B1E2B] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all">
+                Unpardonable 💀
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Confession Textarea -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">
+              Your Secret
+            </label>
+            <span id="charCount" class="text-[10px] text-gray-500">0 / 1000</span>
+          </div>
+          <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Nobody will ever know it was you..." class="w-full bg-[#1B1E2B] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] tracking-wider uppercase text-sm">
+          Submit Anonymously ✝️
+        </button>
+
+      </form>
+
+      <!-- Success Screen with Funny Penance & X CTA -->
+      <div id="successMessage" class="hidden text-center py-6 space-y-5">
+        <div class="text-4xl">🕯️</div>
+        
+        <div class="space-y-1">
+          <h3 class="text-xl font-bold gold-gradient-text">"Go in peace, my child."</h3>
+          <p class="text-xs text-amber-400/90 font-medium italic">
+            "Thou art 87% forgiven. Say three 'Hail Marys', clear your browser history, and do not repeat this chaos before Friday."
+          </p>
+        </div>
+
+        <div class="bg-[#1B1E2B] border border-white/5 rounded-2xl p-4 space-y-3">
+          <p class="text-xs text-gray-300 leading-relaxed">
+            Father has received your secret. Your confession will be posted on our <b class="text-amber-400">X page</b> for community absolution!
+          </p>
+          
+          <a id="xFollowBtn" href="#" target="_blank" class="inline-block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-bold py-3 rounded-xl shadow transition-all tracking-wider uppercase">
+            Follow Us On X To See Your Confession →
+          </a>
+        </div>
+
+        <div>
+          <button onclick="resetForm()" class="text-xs text-gray-400 hover:text-amber-400 underline transition-colors">
+            Confess Another Secret
+          </button>
+        </div>
       </div>
 
-      <!-- Secret Text Area -->
-      <div>
-        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Secret Confession</label>
-        <textarea id="confessionText" rows="5" required placeholder="Spill your weirdest truth here... nobody will ever know it was you." class="w-full bg-gray-800 border border-gray-700 text-gray-100 text-sm rounded-lg p-3 focus:outline-none focus:border-yellow-600 resize-none"></textarea>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" id="submitBtn" class="w-full gold-bg hover:bg-yellow-600 text-black font-bold py-3 px-4 rounded-lg transition duration-200 text-sm uppercase tracking-wider shadow-lg">
-        Submit Anonymously ✝️
-      </button>
-
-    </form>
-
-    <!-- Success Message (Hidden by default) -->
-    <div id="statusMessage" class="hidden text-center py-6">
-      <div class="text-3xl mb-2">🤫</div>
-      <h3 class="text-lg font-bold gold-accent">Confession Received!</h3>
-      <p class="text-xs text-gray-400 mt-2">Father has received your secret. Watch TikTok & X to see if your story gets featured!</p>
-      <button onclick="resetForm()" class="mt-4 text-xs text-yellow-500 underline">Send Another Secret</button>
-    </div>
+    </section>
 
   </main>
 
-  <!-- Follow on X (Twitter) Call to Action -->
-  <footer class="w-full max-w-md text-center mb-6">
-    <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-4">
-      <p class="text-xs text-gray-400 mb-2">Want to read wild confessions & Father's responses?</p>
-      <!-- REPLACE YOUR_X_HANDLE BELOW (e.g. https://x.com/MyXAccount) -->
-      <a id="xLink" href="https://x.com/YOUR_X_HANDLE" target="_blank" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xs py-2.5 px-5 rounded-full transition shadow-md">
-        Follow Father on X ➔
-      </a>
-    </div>
+  <!-- Footer -->
+  <footer class="w-full max-w-xl mx-auto px-6 py-6 text-center text-[11px] text-gray-600 space-y-1 z-10">
+    <p>Unholy Confessions © 2026. All rights reserved.</p>
+    <p>100% Anonymous • No IP Logging • Encrypted Vault</p>
   </footer>
 
+  <!-- Bot Script Integration -->
   <script>
-    // YOUR CONFIGURATION
-    const BOT_TOKEN = "8715731116:AAGmr450A0nx_dKlWsLF090lmPVgjdsoQHU"; // Paste your Bot API Key inside these quotes
-    const CHAT_ID = "5982017489";             // Your Telegram User ID is already set!
+    const BOT_TOKEN = "8715731116:AAGmr450A0nx_dKlWsLF090lmPVgjdsoQHU";
+    const CHAT_ID = "5982017489";
 
-    async function submitConfession(e) {
+    const form = document.getElementById('confessionForm');
+    const textarea = document.getElementById('confessionText');
+    const charCount = document.getElementById('charCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+
+    textarea.addEventListener('input', () => {
+      charCount.textContent = `${textarea.value.length} / 1000`;
+    });
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+      const text = textarea.value.trim();
       const category = document.getElementById('category').value;
-      const text = document.getElementById('confessionText').value;
-      const submitBtn = document.getElementById('submitBtn');
+      const severity = document.querySelector('input[name="severity"]:checked').value;
+
+      if (!text) return;
 
       submitBtn.disabled = true;
-      submitBtn.innerText = "Sending to Father...";
+      submitBtn.textContent = 'Encrypting & Sending...';
 
-      const message = `📩 *NEW UNHOLY CONFESSION*\n\n📌 *Category:* ${category}\n💬 *Confession:*\n"${text}"`;
+      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
 
       try {
-        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: CHAT_ID,
             text: message,
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
           })
         });
 
-        if (res.ok) {
-          document.getElementById('confessionForm').classList.add('hidden');
-          document.getElementById('statusMessage').classList.remove('hidden');
-        } else {
-          alert('Failed to send. Make sure you started a chat with your Telegram Bot first!');
-          submitBtn.disabled = false;
-          submitBtn.innerText = "Submit Anonymously ✝️";
-        }
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
       } catch (err) {
-        alert('Network error. Check your internet connection.');
+        alert('Failed to send confession. Please check connection.');
+      } finally {
         submitBtn.disabled = false;
-        submitBtn.innerText = "Submit Anonymously ✝️";
+        submitBtn.textContent = 'Submit Anonymously ✝️';
       }
-    }
+    });
 
     function resetForm() {
-      document.getElementById('confessionText').value = '';
-      document.getElementById('confessionForm').classList.remove('hidden');
-      document.getElementById('statusMessage').classList.add('hidden');
-      document.getElementById('submitBtn').disabled = false;
-      document.getElementById('submitBtn').innerText = "Submit Anonymously ✝️";
+      textarea.value = '';
+      charCount.textContent = '0 / 1000';
+      successMessage.classList.add('hidden');
+      form.classList.remove('hidden');
     }
   </script>
 </body>
