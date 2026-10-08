@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unholy Confessions | Anonymous Secrets</title>
+  <!-- Tailwind CSS CDN for sleek dark styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0b0c10; color: #e0e6ed; font-family: system-ui, sans-serif; }
+    .gold-accent { color: #d4af37; }
+    .gold-bg { background-color: #d4af37; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-4">
+
+  <!-- Header Section -->
+  <header class="text-center mt-6">
+    <div class="text-4xl mb-2">🕯️</div>
+    <h1 class="text-3xl font-extrabold tracking-wide uppercase gold-accent">Unholy Confessions</h1>
+    <p class="text-gray-400 text-sm mt-1 max-w-xs mx-auto">
+      Forgive me Father, for I have sinned... Zero judgment. 100% anonymous.
+    </p>
+  </header>
+
+  <!-- Confessional Box Form -->
+  <main class="w-full max-w-md bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-2xl my-6">
+    
+    <form id="confessionForm" onsubmit="submitConfession(event)" class="space-y-4">
+      
+      <!-- Category Selector -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Select Category</label>
+        <select id="category" class="w-full bg-gray-800 border border-gray-700 text-gray-200 text-sm rounded-lg p-3 focus:outline-none focus:border-yellow-600">
+          <option value="Embarrassing">😳 Embarrassing</option>
+          <option value="Wild & Unbelievable">🔥 Wild & Unbelievable</option>
+          <option value="Petty Revenge">😈 Petty Revenge</option>
+          <option value="Work & School">💼 Work / School</option>
+          <option value="Relationships">💔 Relationships</option>
+        </select>
+      </div>
+
+      <!-- Secret Text Area -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Secret Confession</label>
+        <textarea id="confessionText" rows="5" required placeholder="Spill your weirdest truth here... nobody will ever know it was you." class="w-full bg-gray-800 border border-gray-700 text-gray-100 text-sm rounded-lg p-3 focus:outline-none focus:border-yellow-600 resize-none"></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="submitBtn" class="w-full gold-bg hover:bg-yellow-600 text-black font-bold py-3 px-4 rounded-lg transition duration-200 text-sm uppercase tracking-wider shadow-lg">
+        Submit Anonymously ✝️
+      </button>
+
+    </form>
+
+    <!-- Success Message (Hidden by default) -->
+    <div id="statusMessage" class="hidden text-center py-6">
+      <div class="text-3xl mb-2">🤫</div>
+      <h3 class="text-lg font-bold gold-accent">Confession Received!</h3>
+      <p class="text-xs text-gray-400 mt-2">Father has received your secret. Watch TikTok & X to see if your story gets featured!</p>
+      <button onclick="resetForm()" class="mt-4 text-xs text-yellow-500 underline">Send Another Secret</button>
+    </div>
+
+  </main>
+
+  <!-- Follow on X (Twitter) Call to Action -->
+  <footer class="w-full max-w-md text-center mb-6">
+    <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-4">
+      <p class="text-xs text-gray-400 mb-2">Want to read wild confessions & Father's responses?</p>
+      <!-- REPLACE YOUR_X_HANDLE BELOW (e.g. https://x.com/MyXAccount) -->
+      <a id="xLink" href="https://x.com/YOUR_X_HANDLE" target="_blank" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xs py-2.5 px-5 rounded-full transition shadow-md">
+        Follow Father on X ➔
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // YOUR CONFIGURATION
+    const BOT_TOKEN = "8715731116:AAGmr450A0nx_dKlWsLF090lmPVgjdsoQHU"; // Paste your Bot API Key inside these quotes
+    const CHAT_ID = "5982017489";             // Your Telegram User ID is already set!
+
+    async function submitConfession(e) {
+      e.preventDefault();
+      
+      const category = document.getElementById('category').value;
+      const text = document.getElementById('confessionText').value;
+      const submitBtn = document.getElementById('submitBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Sending to Father...";
+
+      const message = `📩 *NEW UNHOLY CONFESSION*\n\n📌 *Category:* ${category}\n💬 *Confession:*\n"${text}"`;
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        });
+
+        if (res.ok) {
+          document.getElementById('confessionForm').classList.add('hidden');
+          document.getElementById('statusMessage').classList.remove('hidden');
+        } else {
+          alert('Failed to send. Make sure you started a chat with your Telegram Bot first!');
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Submit Anonymously ✝️";
+        }
+      } catch (err) {
+        alert('Network error. Check your internet connection.');
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit Anonymously ✝️";
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('confessionText').value = '';
+      document.getElementById('confessionForm').classList.remove('hidden');
+      document.getElementById('statusMessage').classList.add('hidden');
+      document.getElementById('submitBtn').disabled = false;
+      document.getElementById('submitBtn').innerText = "Submit Anonymously ✝️";
+    }
+  </script>
+</body>
+</html>
