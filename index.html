@@ -32,6 +32,19 @@
     .animate-fade-in {
       animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    .confetti {
+      position: fixed;
+      top: -10px;
+      z-index: 50;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black relative overflow-x-hidden">
@@ -45,36 +58,36 @@
       <span class="candle-glow animate-pulse">🕯️</span> UNHOLY CONFESSIONS
     </div>
     <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[11px] font-medium">
-      <span>🟢 11 typing</span>
+      <span id="typingIndicator">🟢 9 typing</span>
     </div>
   </header>
 
   <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-8 z-10">
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="text-center space-y-3">
       <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs font-normal">
-        <span>⏱️</span> Last confession received 2m ago
+        <span>⏱️</span> <span id="lastConfession">Last confession received 2m ago</span>
       </div>
       <h1 class="text-4xl md:text-5xl font-black tracking-tight gold-gradient-text leading-tight">
         Spill it.
       </h1>
       <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto leading-relaxed">
-        Nobody’s pure. Nobody’s perfect.  
-        Drop the regret, the weird thought, or the thing you swore you’d never say.  
+        Nobody’s pure. Nobody’s perfect.<br>
+        Drop the regret, the weird thought, or the thing you swore you’d never say.<br>
         Father isn’t taking notes — he’s just listening.
       </p>
     </section>
 
     <!-- Father's Note -->
-    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center space-y-1 relative overflow-hidden">
+    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center space-y-1">
       <div class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Father's Note</div>
       <p id="fathersNote" class="text-xs text-gray-300 italic font-medium">
         "Father is currently judging no one and eating chips."
       </p>
     </section>
 
-    <!-- How It Works -->
+    <!-- How it works -->
     <section class="bg-[#10121A] p-4 rounded-2xl border border-white/5">
       <div class="grid grid-cols-3 gap-2 text-center text-xs">
         <div class="space-y-1">
@@ -87,13 +100,13 @@
         </div>
         <div class="space-y-1">
           <div class="font-bold text-amber-400">3. Release</div>
-          <div class="text-[11px] text-gray-400">May appear on X</div>
+          <div class="text-[11px] text-gray-400">Posted on X</div>
         </div>
       </div>
     </section>
 
-    <!-- Form Section -->
-    <section id="confessionSection" class="bg-[#10121A] border gold-border rounded-3xl p-6 md:p-8 gold-glow relative overflow-hidden space-y-6">
+    <!-- Form -->
+    <section id="confessionSection" class="bg-[#10121A] border gold-border rounded-3xl p-6 md:p-8 gold-glow space-y-6">
 
       <form id="confessionForm" class="space-y-6">
         
@@ -163,7 +176,6 @@
           <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Type the thing you swore you’d never tell anyone..." class="w-full bg-[#181B26] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none leading-relaxed"></textarea>
         </div>
 
-        <!-- Submit -->
         <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:brightness-110 text-black font-extrabold py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] tracking-wider uppercase text-xs flex items-center justify-center gap-2">
           <span>Send to Father</span> 🕯️
         </button>
@@ -179,20 +191,24 @@
           <span class="text-4xl candle-glow animate-pulse">🕯️</span>
         </div>
         
-        <div class="space-y-1.5">
-          <h3 class="text-3xl font-bold gold-gradient-text">Go in peace.</h3>
-          <p class="text-sm text-gray-300 font-medium">
+        <div class="space-y-2">
+          <h3 id="successTitle" class="text-3xl font-bold gold-gradient-text">Go in peace.</h3>
+          <p id="successSubtitle" class="text-sm text-gray-300 font-medium leading-relaxed">
             Your secret has been received.<br>No one will ever know it was you.
           </p>
         </div>
 
         <div class="bg-[#181B26] border border-white/5 rounded-2xl p-5 space-y-4 text-center">
-          <p class="text-xs text-amber-300/90 font-medium italic">
-            Father has it now. Most confessions appear on X within 24 hours — still fully anonymous.
+          <p id="fatherMessage" class="text-xs text-amber-300/90 font-medium italic leading-relaxed">
+            Your confession will be posted on X.
+          </p>
+          
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Still 100% anonymous.
           </p>
           
           <a id="xFollowBtn" href="https://x.com/yourusername" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
-            Follow Father on X →
+            See confessions on X →
           </a>
         </div>
 
@@ -205,11 +221,11 @@
       </div>
     </section>
 
-    <!-- Recent Blurred Confessions -->
+    <!-- Recent Vault -->
     <section class="bg-[#10121A] border border-white/5 rounded-2xl p-5 space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">Recent Vault Drops</h3>
-        <span class="text-[10px] text-gray-500 flex items-center gap-1">🔒 Locked</span>
+        <span class="text-[10px] text-gray-500">🔒 Locked</span>
       </div>
 
       <div class="space-y-2.5 text-xs">
@@ -227,7 +243,7 @@
         </div>
       </div>
 
-      <a id="xTeaserBtn" href="https://x.com/yourusername" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
+      <a href="https://x.com/yourusername" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
         Full confessions drop on X daily →
       </a>
     </section>
@@ -236,8 +252,8 @@
     <section class="bg-[#10121A] border border-white/5 rounded-2xl p-5 text-left space-y-2">
       <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">About Father</h3>
       <p class="text-xs text-gray-300 leading-relaxed">
-        I’m not holy. I’ve messed up more times than I can count.  
-        That’s why I built this place — so people like us can finally say the things we’re too ashamed to say out loud.  
+        I’m not holy. I’ve messed up more times than I can count.<br>
+        That’s why I built this place — so people like us can finally say the things we’re too ashamed to say out loud.<br>
         No lectures. No judgment. Just a place to drop the weight.
       </p>
     </section>
@@ -249,7 +265,6 @@
     <span>Confess Now</span> 🕯️
   </a>
 
-  <!-- Footer -->
   <footer class="w-full max-w-xl mx-auto px-6 py-6 text-center text-[11px] text-gray-600 space-y-1 z-10">
     <p>Unholy Confessions © 2026</p>
     <p>Anonymous • No logs • Nothing stored with your identity</p>
@@ -259,7 +274,7 @@
     const BOT_TOKEN = "8715731116:AAGmr450A0nx_dKlWsLF090lmPVgjdsoQHU";
     const CHAT_ID = "5982017489";
 
-    // Better Father Notes
+    // Father Notes
     const notes = [
       "“Father is currently judging no one and eating chips.”",
       "“Today’s mood: tired but still listening.”",
@@ -271,6 +286,52 @@
     ];
     document.getElementById('fathersNote').textContent = notes[Math.floor(Math.random() * notes.length)];
 
+    // Live Indicators
+    function updateTypingCount() {
+      const number = Math.floor(Math.random() * 13) + 4;
+      document.getElementById('typingIndicator').textContent = `🟢 ${number} typing`;
+    }
+
+    function updateLastConfession() {
+      const options = ["just now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago", "6m ago", "8m ago"];
+      const random = options[Math.floor(Math.random() * options.length)];
+      document.getElementById('lastConfession').textContent = `Last confession received ${random}`;
+    }
+
+    setInterval(updateTypingCount, Math.random() * 20000 + 18000);
+    setInterval(updateLastConfession, Math.random() * 30000 + 25000);
+    updateTypingCount();
+    updateLastConfession();
+
+    // Celebration
+    function launchCelebration() {
+      const colors = ['#D4AF37', '#F59E0B', '#FBBF24', '#FFFFFF', '#FCD34D'];
+      const emojis = ['🕯️', '✨', '🌸', '🌼', '💫', '🌿'];
+
+      for (let i = 0; i < 38; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        if (Math.random() > 0.55) {
+          confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+          confetti.style.fontSize = Math.random() * 12 + 14 + 'px';
+        } else {
+          confetti.style.width = Math.random() * 8 + 6 + 'px';
+          confetti.style.height = confetti.style.width;
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.borderRadius = '50%';
+        }
+
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDuration = Math.random() * 2 + 2.2 + 's';
+        confetti.style.opacity = Math.random() * 0.7 + 0.3;
+
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4200);
+      }
+    }
+
+    // Form logic
     const form = document.getElementById('confessionForm');
     const textarea = document.getElementById('confessionText');
     const charCount = document.getElementById('charCount');
@@ -279,10 +340,9 @@
     const securityLine = document.getElementById('securityLine');
     const selectedCategoryInput = document.getElementById('selectedCategory');
 
-    const catButtons = document.querySelectorAll('.cat-btn');
-    catButtons.forEach(btn => {
+    document.querySelectorAll('.cat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        catButtons.forEach(b => {
+        document.querySelectorAll('.cat-btn').forEach(b => {
           b.classList.remove('border-amber-500/40', 'text-amber-300');
           b.classList.add('border-white/10', 'text-gray-400');
         });
@@ -320,9 +380,26 @@
           })
         });
 
+        // Success messages
+        const title = document.getElementById('successTitle');
+        const subtitle = document.getElementById('successSubtitle');
+        const fatherMsg = document.getElementById('fatherMessage');
+
+        if (severity.includes("Unpardonable")) {
+          title.textContent = "This one is heavy.";
+          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
+          fatherMsg.textContent = "Your confession will be posted on X.";
+        } else {
+          title.textContent = "Go in peace.";
+          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
+          fatherMsg.textContent = "Your confession will be posted on X.";
+        }
+
         form.classList.add('hidden');
         securityLine.classList.add('hidden');
         successMessage.classList.remove('hidden');
+        launchCelebration();
+
       } catch (err) {
         alert('Failed to send. Please try again.');
       } finally {
