@@ -62,7 +62,7 @@
     </div>
   </header>
 
-  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-6 z-10">
+  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-8 z-10">
 
     <!-- Hero -->
     <section class="text-center space-y-3">
@@ -79,48 +79,30 @@
       </p>
     </section>
 
-    <!-- Welcome Card / New Here Section -->
-    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-5 md:p-6 space-y-4 shadow-lg">
-      <div class="flex items-center justify-between">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
-          <span>👋</span> NEW HERE? READ THIS FIRST
-        </h2>
-        <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10px] font-semibold">
-          Welcome Sinner
-        </span>
-      </div>
-
-      <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
-        Seems we have a new Sinner 😹🤦<br>
-        But don't worry, unlike earthly judges, Father is non-judgmental (who knows what he does in private anyway 🙂).
-      </p>
-
-      <p class="text-xs text-gray-300 leading-relaxed font-medium">
-        So, if you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. Here’s how this works:
-      </p>
-
-      <ul class="space-y-2.5 text-xs text-gray-300 pt-1">
-        <li class="flex items-start gap-2">
-          <span class="text-amber-400 mt-0.5">•</span>
-          <span><strong class="text-amber-300">100% Anonymous:</strong> We don't ask for your name, email, or IP address. You are a ghost here.</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-amber-400 mt-0.5">•</span>
-          <span><strong class="text-amber-300">Zero Judgment:</strong> Father has seen it all. Nothing is too strange, spicy, or ridiculous.</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-amber-400 mt-0.5">•</span>
-          <span><strong class="text-amber-300">The Release:</strong> Type it out, hit send, and drop the weight. Selected secrets get featured on our X page for community absolution.</span>
-        </li>
-      </ul>
-    </section>
-
     <!-- Father's Note -->
     <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center space-y-1">
       <div class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Father's Note</div>
       <p id="fathersNote" class="text-xs text-gray-300 italic font-medium">
         "Father is currently judging no one and eating chips."
       </p>
+    </section>
+
+    <!-- How it works -->
+    <section class="bg-[#10121A] p-4 rounded-2xl border border-white/5">
+      <div class="grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">1. Choose</div>
+          <div class="text-[11px] text-gray-400">Pick a category</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">2. Write</div>
+          <div class="text-[11px] text-gray-400">No name. No IP.</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">3. Release</div>
+          <div class="text-[11px] text-gray-400">Posted on X</div>
+        </div>
+      </div>
     </section>
 
     <!-- Form -->
@@ -225,7 +207,7 @@
             Still 100% anonymous.
           </p>
           
-          <a id="xFollowBtn" href="https://x.com/UnholyPriet" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
+          <a id="xFollowBtn" href="https://x.com/yourusername" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
             See confessions on X →
           </a>
         </div>
@@ -261,7 +243,7 @@
         </div>
       </div>
 
-      <a href="https://x.com/UnholyPriet" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
+      <a href="https://x.com/yourusername" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
         Full confessions drop on X daily →
       </a>
     </section>
@@ -385,8 +367,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      // FIXED SYNTAX BELOW:
-      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
+      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> \( {severity}\n\n<b>Confession:</b>\n" \){text}"`;
 
       try {
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -409,4 +390,31 @@
           subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
           fatherMsg.textContent = "Your confession will be posted on X.";
         } else {
-          tit
+          title.textContent = "Go in peace.";
+          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
+          fatherMsg.textContent = "Your confession will be posted on X.";
+        }
+
+        form.classList.add('hidden');
+        securityLine.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        launchCelebration();
+
+      } catch (err) {
+        alert('Failed to send. Please try again.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Send to Father</span> 🕯️';
+      }
+    });
+
+    function resetForm() {
+      textarea.value = '';
+      charCount.textContent = '0 / 1000';
+      successMessage.classList.add('hidden');
+      form.classList.remove('hidden');
+      securityLine.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
