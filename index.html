@@ -96,7 +96,7 @@
       </p>
 
       <p class="text-xs text-gray-300 leading-relaxed font-medium">
-        So, if you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. Here’s how this works:
+        If you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. Here’s how this works:
       </p>
 
       <ul class="space-y-2.5 text-xs text-gray-300 pt-1">
@@ -121,6 +121,24 @@
       <p id="fathersNote" class="text-xs text-gray-300 italic font-medium">
         "Father is currently judging no one and eating chips."
       </p>
+    </section>
+
+    <!-- How it works -->
+    <section class="bg-[#10121A] p-4 rounded-2xl border border-white/5">
+      <div class="grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">1. Choose</div>
+          <div class="text-[11px] text-gray-400">Pick a category</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">2. Write</div>
+          <div class="text-[11px] text-gray-400">No name. No IP.</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">3. Release</div>
+          <div class="text-[11px] text-gray-400">Posted on X</div>
+        </div>
+      </div>
     </section>
 
     <!-- Form -->
@@ -304,7 +322,7 @@
     ];
     document.getElementById('fathersNote').textContent = notes[Math.floor(Math.random() * notes.length)];
 
-    // Live Indicators (Dynamic Updates)
+    // Live Indicators
     function updateTypingCount() {
       const number = Math.floor(Math.random() * 13) + 4;
       document.getElementById('typingIndicator').textContent = `🟢 ${number} typing`;
@@ -316,8 +334,8 @@
       document.getElementById('lastConfession').textContent = `Last confession received ${random}`;
     }
 
-    setInterval(updateTypingCount, 6000);
-    setInterval(updateLastConfession, 12000);
+    setInterval(updateTypingCount, Math.random() * 20000 + 18000);
+    setInterval(updateLastConfession, Math.random() * 30000 + 25000);
     updateTypingCount();
     updateLastConfession();
 
@@ -390,23 +408,4 @@
       try {
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: 'HTML'
-          })
-        });
-
-        // Success messages
-        const title = document.getElementById('successTitle');
-        const subtitle = document.getElementById('successSubtitle');
-        const fatherMsg = document.getElementById('fatherMessage');
-
-        if (severity.includes("Unpardonable")) {
-          title.textContent = "This one is heavy.";
-          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textContent = "Your confession will be posted on X.";
-        } else {
-          title.textContent = "Go in peace.";
-          subtitle.innerHTM
+          headers: { 'Content-Type': 'appl
