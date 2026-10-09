@@ -207,7 +207,7 @@
             Still 100% anonymous.
           </p>
           
-          <a id="xFollowBtn" href="https://x.com/yourusername" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
+          <a id="xFollowBtn" href="https://x.com/UnholyPriet" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
             See confessions on X →
           </a>
         </div>
@@ -243,7 +243,7 @@
         </div>
       </div>
 
-      <a href="https://x.com/yourusername" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
+      <a href="https://x.com/UnholyPriet" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
         Full confessions drop on X daily →
       </a>
     </section>
@@ -367,7 +367,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> \( {severity}\n\n<b>Confession:</b>\n" \){text}"`;
+      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
 
       try {
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
