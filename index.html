@@ -12,7 +12,7 @@
       font-family: system-ui, -apple-system, sans-serif;
     }
     .gold-glow {
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.12);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
     }
     .gold-border {
       border-color: rgba(212, 175, 55, 0.25);
@@ -26,108 +26,113 @@
       filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
-      animation: fadeIn 0.4s ease forwards;
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     .confetti {
       position: fixed;
-      top: -20px;
-      z-index: 99;
+      top: -10px;
+      z-index: 50;
       pointer-events: none;
       animation: fall linear forwards;
     }
     @keyframes fall {
       to {
-        transform: translateY(110vh) rotate(720deg);
+        transform: translateY(100vh) rotate(720deg);
         opacity: 0;
       }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black relative overflow-x-hidden">
 
-  <!-- Background -->
-  <div class="fixed -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-600/10 rounded-full blur-[130px] pointer-events-none"></div>
+  <!-- Background Light -->
+  <div class="fixed -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
   <!-- Header -->
-  <header class="w-full max-w-xl mx-auto px-5 pt-7 pb-3 flex justify-between items-center relative z-10">
-    <div class="text-sm font-bold tracking-widest uppercase gold-gradient-text flex items-center gap-2">
+  <header class="w-full max-w-xl mx-auto px-6 pt-8 pb-4 flex justify-between items-center z-10">
+    <div class="text-base font-bold tracking-widest uppercase gold-gradient-text flex items-center gap-2">
       <span class="candle-glow animate-pulse">🕯️</span> UNHOLY CONFESSIONS
     </div>
     <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[11px] font-medium">
-      <span id="typingIndicator">🟢 8 typing</span>
+      <span id="typingIndicator">🟢 9 typing</span>
     </div>
   </header>
 
-  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-6 relative z-10 flex-1">
+  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-8 z-10">
 
     <!-- Hero -->
     <section class="text-center space-y-3">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs">
-        <span>⏱️</span>
-        <span id="lastConfession">Last confession received 2m ago</span>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs font-normal">
+        <span>⏱️</span> <span id="lastConfession">Last confession received 2m ago</span>
       </div>
-      <h1 class="text-4xl font-black tracking-tight gold-gradient-text">Spill it.</h1>
-      <p class="text-gray-400 text-sm leading-relaxed max-w-md mx-auto">
+      <h1 class="text-4xl md:text-5xl font-black tracking-tight gold-gradient-text leading-tight">
+        Spill it.
+      </h1>
+      <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto leading-relaxed">
         Nobody’s pure. Nobody’s perfect.<br>
         Drop the regret, the weird thought, or the thing you swore you’d never say.<br>
         Father isn’t taking notes — he’s just listening.
       </p>
     </section>
 
-    <!-- New Here Box -->
-    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-5 space-y-3">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-          👋 NEW HERE? READ THIS FIRST
-        </h3>
-        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/20">
-          Welcome Sinner
-        </span>
-      </div>
-      <div class="text-xs text-gray-300 space-y-2.5 leading-relaxed">
-        <p>If you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place.</p>
-        <p><span class="text-amber-400 font-medium">100% Anonymous:</span> We don’t ask for your name, email, or IP. You are a ghost here.</p>
-        <p><span class="text-amber-400 font-medium">Zero Judgment:</span> Father has seen it all. Nothing is too strange or ridiculous.</p>
-        <p><span class="text-amber-400 font-medium">The Release:</span> Type it, hit send, and drop the weight. Selected secrets get posted on X.</p>
-      </div>
+    <!-- Father's Note -->
+    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center space-y-1">
+      <div class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Father's Note</div>
+      <p id="fathersNote" class="text-xs text-gray-300 italic font-medium">
+        "Father is currently judging no one and eating chips."
+      </p>
     </section>
 
-    <!-- Father's Note -->
-    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center">
-      <div class="text-[10px] uppercase font-bold tracking-widest text-amber-400 mb-1">Father's Note</div>
-      <p id="fathersNote" class="text-xs text-gray-300 italic">“Father is currently judging no one and eating chips.”</p>
+    <!-- How it works -->
+    <section class="bg-[#10121A] p-4 rounded-2xl border border-white/5">
+      <div class="grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">1. Choose</div>
+          <div class="text-[11px] text-gray-400">Pick a category</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">2. Write</div>
+          <div class="text-[11px] text-gray-400">No name. No IP.</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-bold text-amber-400">3. Release</div>
+          <div class="text-[11px] text-gray-400">Posted on X</div>
+        </div>
+      </div>
     </section>
 
     <!-- Form -->
-    <section id="confessionSection" class="bg-[#10121A] border gold-border rounded-3xl p-6 gold-glow space-y-6">
+    <section id="confessionSection" class="bg-[#10121A] border gold-border rounded-3xl p-6 md:p-8 gold-glow space-y-6">
 
       <form id="confessionForm" class="space-y-6">
         
         <!-- Category -->
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">1. What kind of trouble is this?</label>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">
+            1. What kind of trouble is this?
+          </label>
           <input type="hidden" id="selectedCategory" value="😳 Embarrassing">
-          <div class="grid grid-cols-2 gap-2.5">
-            <button type="button" data-value="😳 Embarrassing" class="cat-btn bg-[#181B26] border border-amber-500/40 text-amber-300 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2">
+          <div class="grid grid-cols-2 gap-2.5" id="categoryGrid">
+            <button type="button" data-value="😳 Embarrassing" class="cat-btn bg-[#181B26] border border-amber-500/40 text-amber-300 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
               <span>😳</span> Embarrassing
             </button>
-            <button type="button" data-value="💔 Unfaithful" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2">
+            <button type="button" data-value="💔 Unfaithful" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
               <span>💔</span> Unfaithful
             </button>
-            <button type="button" data-value="💼 Workplace" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2">
+            <button type="button" data-value="💼 Workplace" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
               <span>💼</span> Workplace
             </button>
-            <button type="button" data-value="🔥 Wild Party" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2">
+            <button type="button" data-value="🔥 Wild Party" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
               <span>🔥</span> Wild Party
             </button>
-            <button type="button" data-value="🐍 Petty Revenge" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2">
+            <button type="button" data-value="🐍 Petty Revenge" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
               <span>🐍</span> Petty Revenge
             </button>
-            <button type="button" data-value="🤫 Dark Secret" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2">
+            <button type="button" data-value="🤫 Dark Secret" class="cat-btn bg-[#181B26] border border-white/10 text-gray-400 hover:text-gray-200 text-xs font-medium py-3 px-3 rounded-xl flex items-center gap-2 transition-all">
               <span>🤫</span> Dark Secret
             </button>
           </div>
@@ -135,23 +140,25 @@
 
         <!-- Severity -->
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">2. How bad is it?</label>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">
+            2. How bad is it?
+          </label>
           <div class="grid grid-cols-3 gap-2">
             <label class="cursor-pointer">
               <input type="radio" name="severity" value="Mild 😇" class="peer hidden" checked>
-              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 font-medium">
+              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all font-medium">
                 Mild 😇
               </div>
             </label>
             <label class="cursor-pointer">
               <input type="radio" name="severity" value="Spicy 😈" class="peer hidden">
-              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 font-medium">
+              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all font-medium">
                 Spicy 😈
               </div>
             </label>
             <label class="cursor-pointer">
               <input type="radio" name="severity" value="Unpardonable 💀" class="peer hidden">
-              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 font-medium">
+              <div class="text-center text-xs py-2.5 rounded-xl bg-[#181B26] border border-white/10 text-gray-400 peer-checked:bg-amber-500/20 peer-checked:border-amber-400 peer-checked:text-amber-300 transition-all font-medium">
                 Unpardonable 💀
               </div>
             </label>
@@ -161,66 +168,89 @@
         <!-- Textarea -->
         <div>
           <div class="flex justify-between items-center mb-2">
-            <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">3. The Secret</label>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">
+              3. The Secret
+            </label>
             <span id="charCount" class="text-[10px] text-gray-500">0 / 1000</span>
           </div>
-          <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Type the thing you swore you’d never tell anyone..." class="w-full bg-[#181B26] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 resize-none"></textarea>
+          <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Type the thing you swore you’d never tell anyone..." class="w-full bg-[#181B26] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none leading-relaxed"></textarea>
         </div>
 
-        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-black font-extrabold py-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2">
-          Send to Father 🕯️
+        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:brightness-110 text-black font-extrabold py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] tracking-wider uppercase text-xs flex items-center justify-center gap-2">
+          <span>Send to Father</span> 🕯️
         </button>
       </form>
 
-      <div id="securityLine" class="text-center text-[11px] text-gray-500">
+      <div id="securityLine" class="text-center text-[11px] text-gray-500 pt-1">
         Nothing is linked to you. No IP. No name. No trace.
       </div>
 
-      <!-- Success -->
-      <div id="successMessage" class="hidden text-center py-6 space-y-5 animate-fade-in">
+      <!-- Success Screen -->
+      <div id="successMessage" class="hidden text-center py-6 space-y-6 animate-fade-in">
         <div class="inline-block p-4 rounded-full bg-amber-500/10 border border-amber-500/20">
-          <span class="text-4xl candle-glow">🕯️</span>
+          <span class="text-4xl candle-glow animate-pulse">🕯️</span>
         </div>
-        <div>
+        
+        <div class="space-y-2">
           <h3 id="successTitle" class="text-3xl font-bold gold-gradient-text">Go in peace.</h3>
-          <p id="successSubtitle" class="text-sm text-gray-300 mt-2">Your secret has been received.<br>No one will ever know it was you.</p>
+          <p id="successSubtitle" class="text-sm text-gray-300 font-medium leading-relaxed">
+            Your secret has been received.<br>No one will ever know it was you.
+          </p>
         </div>
-        <div class="bg-[#181B26] border border-white/5 rounded-2xl p-5 space-y-4">
-          <p id="fatherMessage" class="text-xs text-amber-300 italic">Your confession will be posted on X.</p>
-          <a href="https://x.com/UnholyPriet" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 text-black text-xs font-extrabold py-3.5 rounded-xl uppercase tracking-wider text-center">
+
+        <div class="bg-[#181B26] border border-white/5 rounded-2xl p-5 space-y-4 text-center">
+          <p id="fatherMessage" class="text-xs text-amber-300/90 font-medium italic leading-relaxed">
+            Your confession will be posted on X.
+          </p>
+          
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Still 100% anonymous.
+          </p>
+          
+          <a href="https://x.com/UnholyPriet" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
             See confessions on X →
           </a>
         </div>
-        <button onclick="resetForm()" class="text-xs text-amber-400 font-semibold">Confess again</button>
+
+        <div class="space-y-1">
+          <p class="text-xs text-gray-500">Still carrying something?</p>
+          <button onclick="resetForm()" class="text-xs text-amber-400 hover:underline font-semibold">
+            Confess again
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- Recent -->
+    <!-- Recent Vault -->
     <section class="bg-[#10121A] border border-white/5 rounded-2xl p-5 space-y-4">
-      <div class="flex justify-between items-center">
+      <div class="flex items-center justify-between">
         <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">Recent Vault Drops</h3>
         <span class="text-[10px] text-gray-500">🔒 Locked</span>
       </div>
+
       <div class="space-y-2.5 text-xs">
-        <div class="p-3 rounded-xl bg-[#181B26] border border-white/5 flex justify-between items-center">
-          <p class="text-gray-400 blur-[3px] italic select-none">"I've been secretly eating my roommate's expensive snacks..."</p>
-          <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full">Mild</span>
+        <div class="p-3 rounded-xl bg-[#181B26] border border-white/5 flex items-center justify-between">
+          <p class="text-gray-400 blur-[3px] select-none italic">"I've been secretly eating my roommate's expensive snacks and blaming the cat..."</p>
+          <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full ml-2 shrink-0">Mild</span>
         </div>
-        <div class="p-3 rounded-xl bg-[#181B26] border border-white/5 flex justify-between items-center">
-          <p class="text-gray-400 blur-[3.5px] italic select-none">"I lied on my resume 4 years ago about having a college degree..."</p>
-          <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full">Spicy</span>
+        <div class="p-3 rounded-xl bg-[#181B26] border border-white/5 flex items-center justify-between">
+          <p class="text-gray-400 blur-[3.5px] select-none italic">"I lied on my resume 4 years ago about having a college degree and now I manage 12 people..."</p>
+          <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full ml-2 shrink-0">Spicy</span>
         </div>
-        <div class="p-3 rounded-xl bg-[#181B26] border border-white/5 flex justify-between items-center">
-          <p class="text-gray-400 blur-[4px] italic select-none">"I pretended my car broke down so I could skip the engagement party..."</p>
-          <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full">Unpardonable</span>
+        <div class="p-3 rounded-xl bg-[#181B26] border border-white/5 flex items-center justify-between">
+          <p class="text-gray-400 blur-[4px] select-none italic">"I pretended my car broke down so I could skip my best friend's engagement party..."</p>
+          <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full ml-2 shrink-0">Unpardonable</span>
         </div>
       </div>
-      <a href="https://x.com/UnholyPriet" target="_blank" class="block text-center text-xs text-amber-400 pt-1">Full confessions drop on X daily →</a>
+
+      <a href="https://x.com/UnholyPriet" target="_blank" class="block text-center text-xs text-amber-400 hover:underline pt-1 font-medium">
+        Full confessions drop on X daily →
+      </a>
     </section>
 
-    <!-- About -->
-    <section class="bg-[#10121A] border border-white/5 rounded-2xl p-5">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">About Father</h3>
+    <!-- About Father -->
+    <section class="bg-[#10121A] border border-white/5 rounded-2xl p-5 text-left space-y-2">
+      <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400">About Father</h3>
       <p class="text-xs text-gray-300 leading-relaxed">
         I’m not holy. I’ve messed up more times than I can count.<br>
         That’s why I built this place — so people like us can finally say the things we’re too ashamed to say out loud.<br>
@@ -231,11 +261,11 @@
   </main>
 
   <!-- Sticky Button -->
-  <a href="#confessionSection" class="fixed bottom-6 right-5 z-50 bg-amber-500 text-black font-bold text-xs px-5 py-3.5 rounded-full shadow-xl flex items-center gap-2">
-    Confess Now 🕯️
+  <a href="#confessionSection" class="fixed bottom-6 right-6 z-30 bg-amber-500 text-black font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-amber-300/50 active:scale-95 transition-transform">
+    <span>Confess Now</span> 🕯️
   </a>
 
-  <footer class="w-full max-w-xl mx-auto px-6 py-8 text-center text-[11px] text-gray-600">
+  <footer class="w-full max-w-xl mx-auto px-6 py-6 text-center text-[11px] text-gray-600 space-y-1 z-10">
     <p>Unholy Confessions © 2026</p>
     <p>Anonymous • No logs • Nothing stored with your identity</p>
   </footer>
@@ -251,77 +281,91 @@
       "“If you’re reading this at 3am… same.”",
       "“Whatever you did, someone here probably did worse.”",
       "“You can put the heavy ones here too.”",
-      "“No one is as clean as they look.”"
+      "“No one is as clean as they look.”",
+      "“This stays between us.”"
     ];
     document.getElementById('fathersNote').textContent = notes[Math.floor(Math.random() * notes.length)];
 
-    // Live counters
-    function updateTyping() {
-      const n = Math.floor(Math.random() * 12) + 4;
-      document.getElementById('typingIndicator').textContent = `🟢 ${n} typing`;
+    // Live Indicators
+    function updateTypingCount() {
+      const number = Math.floor(Math.random() * 13) + 4;
+      document.getElementById('typingIndicator').textContent = `🟢 ${number} typing`;
     }
-    function updateLast() {
-      const opts = ["just now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago", "6m ago"];
-      document.getElementById('lastConfession').textContent = `Last confession received ${opts[Math.floor(Math.random() * opts.length)]}`;
+
+    function updateLastConfession() {
+      const options = ["just now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago", "6m ago", "8m ago"];
+      const random = options[Math.floor(Math.random() * options.length)];
+      document.getElementById('lastConfession').textContent = `Last confession received ${random}`;
     }
-    setInterval(updateTyping, 22000);
-    setInterval(updateLast, 28000);
-    updateTyping();
-    updateLast();
+
+    setInterval(updateTypingCount, Math.random() * 20000 + 18000);
+    setInterval(updateLastConfession, Math.random() * 30000 + 25000);
+    updateTypingCount();
+    updateLastConfession();
 
     // Celebration
     function launchCelebration() {
-      const colors = ['#D4AF37', '#F59E0B', '#FBBF24', '#fff', '#FCD34D'];
-      const emojis = ['🕯️', '✨', '🌸', '🌼', '💫'];
-      for (let i = 0; i < 36; i++) {
-        const el = document.createElement('div');
-        el.className = 'confetti';
-        if (Math.random() > 0.5) {
-          el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-          el.style.fontSize = (14 + Math.random() * 10) + 'px';
+      const colors = ['#D4AF37', '#F59E0B', '#FBBF24', '#FFFFFF', '#FCD34D'];
+      const emojis = ['🕯️', '✨', '🌸', '🌼', '💫', '🌿'];
+
+      for (let i = 0; i < 38; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        if (Math.random() > 0.55) {
+          confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+          confetti.style.fontSize = Math.random() * 12 + 14 + 'px';
         } else {
-          el.style.width = el.style.height = (6 + Math.random() * 8) + 'px';
-          el.style.background = colors[Math.floor(Math.random() * colors.length)];
-          el.style.borderRadius = '50%';
+          confetti.style.width = Math.random() * 8 + 6 + 'px';
+          confetti.style.height = confetti.style.width;
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.borderRadius = '50%';
         }
-        el.style.left = Math.random() * 100 + 'vw';
-        el.style.animationDuration = (2 + Math.random() * 2) + 's';
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 4500);
+
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDuration = Math.random() * 2 + 2.2 + 's';
+        confetti.style.opacity = Math.random() * 0.7 + 0.3;
+
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4200);
       }
     }
 
-    // Category buttons
+    // Form logic
+    const form = document.getElementById('confessionForm');
+    const textarea = document.getElementById('confessionText');
+    const charCount = document.getElementById('charCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const securityLine = document.getElementById('securityLine');
+    const selectedCategoryInput = document.getElementById('selectedCategory');
+
     document.querySelectorAll('.cat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.cat-btn').forEach(b => {
           b.classList.remove('border-amber-500/40', 'text-amber-300');
           b.classList.add('border-white/10', 'text-gray-400');
         });
-        btn.classList.add('border-amber-500/40', 'text-amber-300');
         btn.classList.remove('border-white/10', 'text-gray-400');
-        document.getElementById('selectedCategory').value = btn.dataset.value;
+        btn.classList.add('border-amber-500/40', 'text-amber-300');
+        selectedCategoryInput.value = btn.dataset.value;
       });
     });
 
-    // Char count
-    const textarea = document.getElementById('confessionText');
     textarea.addEventListener('input', () => {
-      document.getElementById('charCount').textContent = textarea.value.length + ' / 1000';
+      charCount.textContent = `${textarea.value.length} / 1000`;
     });
 
-    // Form submit
-    document.getElementById('confessionForm').addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = textarea.value.trim();
+      const category = selectedCategoryInput.value;
+      const severity = document.querySelector('input[name="severity"]:checked').value;
+
       if (!text) return;
 
-      const category = document.getElementById('selectedCategory').value;
-      const severity = document.querySelector('input[name="severity"]:checked').value;
-      const btn = document.getElementById('submitBtn');
-
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
 
       const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> \( {severity}\n\n<b>Confession:</b>\n" \){text}"`;
 
@@ -336,24 +380,40 @@
           })
         });
 
-        document.getElementById('confessionForm').classList.add('hidden');
-        document.getElementById('securityLine').classList.add('hidden');
-        document.getElementById('successMessage').classList.remove('hidden');
+        // Success messages
+        const title = document.getElementById('successTitle');
+        const subtitle = document.getElementById('successSubtitle');
+        const fatherMsg = document.getElementById('fatherMessage');
+
+        if (severity.includes("Unpardonable")) {
+          title.textContent = "This one is heavy.";
+          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
+          fatherMsg.textContent = "Your confession will be posted on X.";
+        } else {
+          title.textContent = "Go in peace.";
+          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
+          fatherMsg.textContent = "Your confession will be posted on X.";
+        }
+
+        form.classList.add('hidden');
+        securityLine.classList.add('hidden');
+        successMessage.classList.remove('hidden');
         launchCelebration();
+
       } catch (err) {
         alert('Failed to send. Please try again.');
       } finally {
-        btn.disabled = false;
-        btn.innerHTML = 'Send to Father 🕯️';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Send to Father</span> 🕯️';
       }
     });
 
     function resetForm() {
       textarea.value = '';
-      document.getElementById('charCount').textContent = '0 / 1000';
-      document.getElementById('successMessage').classList.add('hidden');
-      document.getElementById('confessionForm').classList.remove('hidden');
-      document.getElementById('securityLine').classList.remove('hidden');
+      charCount.textContent = '0 / 1000';
+      successMessage.classList.add('hidden');
+      form.classList.remove('hidden');
+      securityLine.classList.remove('hidden');
     }
   </script>
 </body>
