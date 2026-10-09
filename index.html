@@ -385,6 +385,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
+      // FIXED SYNTAX BELOW:
       const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
 
       try {
@@ -408,4 +409,4 @@
           subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
           fatherMsg.textContent = "Your confession will be posted on X.";
         } else {
-          title.textContent = "Go in peace
+          tit
