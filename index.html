@@ -79,6 +79,26 @@
       </p>
     </section>
 
+    <!-- NEW HERE BOX -->
+    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          👋 NEW HERE? READ THIS FIRST
+        </h3>
+        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/20">
+          Welcome Sinner
+        </span>
+      </div>
+      <div class="text-xs text-gray-300 space-y-2.5 leading-relaxed">
+        <p>If you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. Here’s how this works:</p>
+        <ul class="space-y-2">
+          <li><span class="text-amber-400 font-medium">100% Anonymous:</span> We don’t ask for your name, email, or IP address. You are a ghost here.</li>
+          <li><span class="text-amber-400 font-medium">Zero Judgment:</span> Father has seen it all. Nothing is too strange, spicy, or ridiculous.</li>
+          <li><span class="text-amber-400 font-medium">The Release:</span> Type it out, hit send, and drop the weight. Selected secrets get featured on our X page for community absolution.</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- Father's Note -->
     <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center space-y-1">
       <div class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Father's Note</div>
@@ -207,7 +227,7 @@
             Still 100% anonymous.
           </p>
           
-          <a id="xFollowBtn" href="https://x.com/UnholyPriet" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
+          <a href="https://x.com/UnholyPriet" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-extrabold py-3.5 rounded-xl shadow transition-all tracking-wider uppercase text-center">
             See confessions on X →
           </a>
         </div>
@@ -367,7 +387,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
+      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> \( {severity}\n\n<b>Confession:</b>\n" \){text}"`;
 
       try {
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -388,33 +408,4 @@
         if (severity.includes("Unpardonable")) {
           title.textContent = "This one is heavy.";
           subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textContent = "Your confession will be posted on X.";
-        } else {
-          title.textContent = "Go in peace.";
-          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textContent = "Your confession will be posted on X.";
-        }
-
-        form.classList.add('hidden');
-        securityLine.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        launchCelebration();
-
-      } catch (err) {
-        alert('Failed to send. Please try again.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Send to Father</span> 🕯️';
-      }
-    });
-
-    function resetForm() {
-      textarea.value = '';
-      charCount.textContent = '0 / 1000';
-      successMessage.classList.add('hidden');
-      form.classList.remove('hidden');
-      securityLine.classList.remove('hidden');
-    }
-  </script>
-</body>
-</html>
+          fatherMsg.textContent = "Your confession will be posted
