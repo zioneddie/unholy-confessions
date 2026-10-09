@@ -79,6 +79,27 @@
       </p>
     </section>
 
+    <!-- Welcome / How This Works Intro Card for New Users -->
+    <section class="bg-[#10121A] border gold-border rounded-2xl p-5 space-y-3 relative overflow-hidden">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <span>👋</span> New here? Read this first
+        </span>
+        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/20">Welcome Sinner</span>
+      </div>
+      
+      <p class="text-xs text-gray-300 leading-relaxed">
+        If you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. 
+        <b>Here’s how this works:</b>
+      </p>
+
+      <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside pl-1">
+        <li><b class="text-gray-200">100% Anonymous:</b> We don't ask for your name, email, or IP address. You are a ghost here.</li>
+        <li><b class="text-gray-200">Zero Judgment:</b> Father has seen it all. Nothing is too strange, spicy, or ridiculous.</li>
+        <li><b class="text-gray-200">The Release:</b> Type it out, hit send, and drop the weight. Selected secrets get featured on our X page for community absolution.</li>
+      </ul>
+    </section>
+
     <!-- Father's Note -->
     <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-4 text-center space-y-1">
       <div class="text-[10px] uppercase font-bold tracking-widest text-amber-400">Father's Note</div>
@@ -388,33 +409,4 @@
         if (severity.includes("Unpardonable")) {
           title.textContent = "This one is heavy.";
           subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textContent = "Your confession will be posted on X.";
-        } else {
-          title.textContent = "Go in peace.";
-          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textContent = "Your confession will be posted on X.";
-        }
-
-        form.classList.add('hidden');
-        securityLine.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        launchCelebration();
-
-      } catch (err) {
-        alert('Failed to send. Please try again.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Send to Father</span> 🕯️';
-      }
-    });
-
-    function resetForm() {
-      textarea.value = '';
-      charCount.textContent = '0 / 1000';
-      successMessage.classList.add('hidden');
-      form.classList.remove('hidden');
-      securityLine.classList.remove('hidden');
-    }
-  </script>
-</body>
-</html>
+          fatherM
