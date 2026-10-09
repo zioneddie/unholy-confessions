@@ -62,7 +62,7 @@
     </div>
   </header>
 
-  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-8 z-10">
+  <main class="w-full max-w-xl mx-auto px-4 py-4 space-y-6 z-10">
 
     <!-- Hero -->
     <section class="text-center space-y-3">
@@ -79,24 +79,39 @@
       </p>
     </section>
 
-    <!-- Welcome / How This Works Intro Card for Beta Users -->
-    <section class="bg-[#10121A] border gold-border rounded-2xl p-5 space-y-3 relative overflow-hidden">
+    <!-- Welcome Card / New Here Section -->
+    <section class="bg-[#10121A] border border-amber-500/20 rounded-2xl p-5 md:p-6 space-y-4 shadow-lg">
       <div class="flex items-center justify-between">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-          <span>👋</span> New here? Read this first
+        <h2 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+          <span>👋</span> NEW HERE? READ THIS FIRST
+        </h2>
+        <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10px] font-semibold">
+          Welcome Sinner
         </span>
-        <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/20">Welcome Sinner</span>
       </div>
-      
-      <p class="text-xs text-gray-300 leading-relaxed">
-        If you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. 
-        <b>Here’s how this works:</b>
+
+      <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+        Seems we have a new Sinner 😹🤦<br>
+        But don't worry, unlike earthly judges, Father is non-judgmental (who knows what he does in private anyway 🙂).
       </p>
 
-      <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside pl-1">
-        <li><b class="text-gray-200">100% Anonymous:</b> We don't ask for your name, email, or IP address. You are a ghost here.</li>
-        <li><b class="text-gray-200">Zero Judgment:</b> Father has seen it all. Nothing is too strange, spicy, or ridiculous.</li>
-        <li><b class="text-gray-200">The Release:</b> Type it out, hit send, and drop the weight. Selected secrets get featured on our X page for community absolution.</li>
+      <p class="text-xs text-gray-300 leading-relaxed font-medium">
+        So, if you’re carrying a secret that’s heavy, weird, or just plain embarrassing, you’re in the right place. Here’s how this works:
+      </p>
+
+      <ul class="space-y-2.5 text-xs text-gray-300 pt-1">
+        <li class="flex items-start gap-2">
+          <span class="text-amber-400 mt-0.5">•</span>
+          <span><strong class="text-amber-300">100% Anonymous:</strong> We don't ask for your name, email, or IP address. You are a ghost here.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-amber-400 mt-0.5">•</span>
+          <span><strong class="text-amber-300">Zero Judgment:</strong> Father has seen it all. Nothing is too strange, spicy, or ridiculous.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-amber-400 mt-0.5">•</span>
+          <span><strong class="text-amber-300">The Release:</strong> Type it out, hit send, and drop the weight. Selected secrets get featured on our X page for community absolution.</span>
+        </li>
       </ul>
     </section>
 
@@ -106,24 +121,6 @@
       <p id="fathersNote" class="text-xs text-gray-300 italic font-medium">
         "Father is currently judging no one and eating chips."
       </p>
-    </section>
-
-    <!-- How it works -->
-    <section class="bg-[#10121A] p-4 rounded-2xl border border-white/5">
-      <div class="grid grid-cols-3 gap-2 text-center text-xs">
-        <div class="space-y-1">
-          <div class="font-bold text-amber-400">1. Choose</div>
-          <div class="text-[11px] text-gray-400">Pick a category</div>
-        </div>
-        <div class="space-y-1">
-          <div class="font-bold text-amber-400">2. Write</div>
-          <div class="text-[11px] text-gray-400">No name. No IP.</div>
-        </div>
-        <div class="space-y-1">
-          <div class="font-bold text-amber-400">3. Release</div>
-          <div class="text-[11px] text-gray-400">Posted on X</div>
-        </div>
-      </div>
     </section>
 
     <!-- Form -->
@@ -307,21 +304,20 @@
     ];
     document.getElementById('fathersNote').textContent = notes[Math.floor(Math.random() * notes.length)];
 
-    // Live Indicators (Dynamic Updates)
+    // Live Indicators
     function updateTypingCount() {
-      const number = Math.floor(Math.random() * 10) + 5;
+      const number = Math.floor(Math.random() * 13) + 4;
       document.getElementById('typingIndicator').textContent = `🟢 ${number} typing`;
     }
 
     function updateLastConfession() {
-      const options = ["just now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago"];
+      const options = ["just now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago", "6m ago", "8m ago"];
       const random = options[Math.floor(Math.random() * options.length)];
       document.getElementById('lastConfession').textContent = `Last confession received ${random}`;
     }
 
-    // Refresh every 6-8 seconds so the page feels alive right away
-    setInterval(updateTypingCount, 6000);
-    setInterval(updateLastConfession, 8000);
+    setInterval(updateTypingCount, Math.random() * 20000 + 18000);
+    setInterval(updateLastConfession, Math.random() * 30000 + 25000);
     updateTypingCount();
     updateLastConfession();
 
@@ -330,7 +326,7 @@
       const colors = ['#D4AF37', '#F59E0B', '#FBBF24', '#FFFFFF', '#FCD34D'];
       const emojis = ['🕯️', '✨', '🌸', '🌼', '💫', '🌿'];
 
-      for (let i = 0; i < 35; i++) {
+      for (let i = 0; i < 38; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         
@@ -345,11 +341,11 @@
         }
 
         confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+        confetti.style.animationDuration = Math.random() * 2 + 2.2 + 's';
         confetti.style.opacity = Math.random() * 0.7 + 0.3;
 
         document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 4000);
+        setTimeout(() => confetti.remove(), 4200);
       }
     }
 
@@ -402,6 +398,7 @@
           })
         });
 
+        // Success messages
         const title = document.getElementById('successTitle');
         const subtitle = document.getElementById('successSubtitle');
         const fatherMsg = document.getElementById('fatherMessage');
@@ -409,4 +406,6 @@
         if (severity.includes("Unpardonable")) {
           title.textContent = "This one is heavy.";
           subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textConten
+          fatherMsg.textContent = "Your confession will be posted on X.";
+        } else {
+          title.textContent = "Go in peace
