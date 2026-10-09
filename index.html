@@ -172,9 +172,9 @@
             <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">
               3. The Secret
             </label>
-            <span id="charCount" class="text-[10px] text-gray-500">0 / 1000</span>
+            <span id="charCount" class="text-[10px] text-gray-500">0 / 10000</span>
           </div>
-          <textarea id="confessionText" rows="5" maxlength="1000" placeholder="Type the thing you swore you’d never tell anyone..." class="w-full bg-[#181B26] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none leading-relaxed"></textarea>
+          <textarea id="confessionText" rows="6" maxlength="10000" placeholder="Type the thing you swore you’d never tell anyone..." class="w-full bg-[#181B26] border border-white/10 rounded-xl p-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-colors resize-none leading-relaxed"></textarea>
         </div>
 
         <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:brightness-110 text-black font-extrabold py-4 rounded-xl shadow-lg transition-all active:scale-[0.98] tracking-wider uppercase text-xs flex items-center justify-center gap-2">
@@ -354,8 +354,21 @@
     });
 
     textarea.addEventListener('input', () => {
-      charCount.textContent = `${textarea.value.length} / 1000`;
+      charCount.textContent = `${textarea.value.length} / 10000`;
     });
+
+    // Send payload helper
+    async function sendTelegramChunk(messageText) {
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: messageText,
+          parse_mode: 'HTML'
+        })
+      });
+    }
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -368,18 +381,26 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> \( {severity}\n\n<b>Confession:</b>\n" \){text}"`;
+      const maxChunkSize = 3500;
 
       try {
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: 'HTML'
-          })
-        });
+        if (text.length <= maxChunkSize) {
+          // Single message for normal/short confessions
+          const message = `🚨 <b>NEW UNHOLY CONFESSION</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n"${text}"`;
+          await sendTelegramChunk(message);
+        } else {
+          // Split long confessions (1,000+ words) into clean Parts
+          const totalParts = Math.ceil(text.length / maxChunkSize);
+          
+          for (let i = 0; i < totalParts; i++) {
+            const chunk = text.substring(i * maxChunkSize, (i + 1) * maxChunkSize);
+            const header = i === 0 
+              ? `🚨 <b>NEW UNHOLY CONFESSION (Part 1/${totalParts})</b>\n\n<b>Category:</b> ${category}\n<b>Severity:</b> ${severity}\n\n<b>Confession:</b>\n`
+              : `🚨 <b>NEW UNHOLY CONFESSION (Part ${i + 1}/${totalParts})</b>\n\n`;
+              
+            await sendTelegramChunk(header + `"${chunk}"`);
+          }
+        }
 
         // Success messages
         const title = document.getElementById('successTitle');
@@ -391,31 +412,4 @@
           subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
           fatherMsg.textContent = "Your confession will be posted on X.";
         } else {
-          title.textContent = "Go in peace.";
-          subtitle.innerHTML = "Your secret has been received.<br>No one will ever know it was you.";
-          fatherMsg.textContent = "Your confession will be posted on X.";
-        }
-
-        form.classList.add('hidden');
-        securityLine.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        launchCelebration();
-
-      } catch (err) {
-        alert('Failed to send. Please try again.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Send to Father</span> 🕯️';
-      }
-    });
-
-    function resetForm() {
-      textarea.value = '';
-      charCount.textContent = '0 / 1000';
-      successMessage.classList.add('hidden');
-      form.classList.remove('hidden');
-      securityLine.classList.remove('hidden');
-    }
-  </script>
-</body>
-                                                        </html>
+          title.textCont
