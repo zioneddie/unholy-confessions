@@ -2,749 +2,822 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090909">
-<meta name="description" content="What would you confess if nobody knew it was you? Enter the Vault at Unholy Confessions.">
-<meta property="og:title" content="Unholy Confessions | Enter the Vault">
-<meta property="og:description" content="The things you hide. The truths you bury. What would you confess?">
-<meta property="og:type" content="website">
-<title>Unholy Confessions | Enter the Vault</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="Unholy Confessions — reveal your truth, anonymously.">
+  <title>Unholy Confessions | Enter the Vault</title>
 
-<style>
-:root {
-  --bg: #090909;
-  --panel: #141310;
-  --gold: #c8a45d;
-  --gold-light: #f0d79c;
-  --text: #f2eee5;
-  --muted: #aaa08e;
-  --border: #463923;
-  --danger: #ff8585;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 16px; }
-body {
-  margin: 0;
-  background:
-    radial-gradient(ellipse at 50% 0%, #292015 0%, transparent 50%),
-    var(--bg);
-  color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.6;
-}
-body.modal-open { overflow: hidden; }
-a { color: var(--gold-light); }
-a:focus-visible, button:focus-visible, select:focus-visible,
-textarea:focus-visible, input:focus-visible {
-  outline: 2px solid var(--gold-light);
-  outline-offset: 3px;
-}
-.wrap {
-  width: min(760px, 100%);
-  margin: auto;
-  padding: 22px 16px 44px;
-}
-header { text-align: center; padding: 28px 0 30px; }
-.sigil { font-size: 38px; color: var(--gold); }
-.eyebrow {
-  color: var(--gold);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  font: 11px Arial, sans-serif;
-}
-h1 {
-  color: var(--gold-light);
-  font-size: clamp(36px, 9vw, 58px);
-  line-height: 1.05;
-  font-weight: normal;
-  margin: 12px 0;
-}
-.subtitle {
-  color: var(--muted);
-  max-width: 490px;
-  margin: 14px auto 0;
-  font-size: 18px;
-}
-.hero-question {
-  color: var(--text);
-  font-size: clamp(23px, 5vw, 30px);
-  line-height: 1.35;
-  font-style: italic;
-  margin: 24px auto 10px;
-  max-width: 530px;
-}
-.hero-note {
-  color: var(--muted);
-  font: 12px/1.7 Arial, sans-serif;
-  max-width: 450px;
-  margin: 0 auto;
-}
-.divider {
-  height: 1px;
-  margin: 24px 0;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-}
-.panel {
-  background: rgba(20,19,16,.94);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px;
-  margin: 20px 0;
-  box-shadow: 0 14px 40px #0006;
-}
-h2 {
-  color: var(--gold-light);
-  font-size: 25px;
-  font-weight: normal;
-  margin: 0 0 8px;
-}
-p { margin-top: 8px; }
-.muted { color: var(--muted); font-size: 14px; }
-label {
-  display: block;
-  margin: 18px 0 7px;
-  color: var(--gold-light);
-  font-size: 14px;
-}
-textarea, select {
-  display: block;
-  width: 100%;
-  background: #090909;
-  color: var(--text);
-  border: 1px solid #51432b;
-  border-radius: 7px;
-  padding: 13px;
-  font: 16px/1.5 Arial, sans-serif;
-}
-select { min-height: 48px; }
-textarea { min-height: 150px; resize: vertical; }
-textarea::placeholder { color: #827867; }
-.counter {
-  text-align: right;
-  color: var(--muted);
-  font: 12px Arial,sans-serif;
-  margin-top: 5px;
-}
-.consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: var(--muted);
-  font: 13px/1.5 Arial,sans-serif;
-  margin: 20px 0;
-}
-.consent input {
-  margin-top: 4px;
-  accent-color: var(--gold);
-  flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
-}
-button, .cta {
-  display: inline-block;
-  border: 1px solid var(--gold);
-  border-radius: 7px;
-  background: linear-gradient(135deg, #e1c47e, #a47c36);
-  color: #100d07;
-  padding: 13px 20px;
-  font: bold 14px Arial,sans-serif;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: filter .2s, transform .2s;
-}
-button:hover, .cta:hover { filter: brightness(1.08); }
-button:active, .cta:active { transform: scale(.99); }
-button { width: 100%; }
-button:disabled { opacity: .6; cursor: wait; }
-.secondary { background: transparent; color: var(--gold-light); }
-.socials {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-}
-.socials .cta { flex: 0 1 auto; }
-.status {
-  display: none;
-  font: 14px/1.5 Arial,sans-serif;
-  overflow-wrap: anywhere;
-  margin-top: 13px;
-  padding: 11px 12px;
-  border-radius: 6px;
-}
-.status.visible { display: block; }
-.status.error {
-  color: var(--danger);
-  background: #2a1111;
-  border: 1px solid #683737;
-}
-.status.info {
-  color: var(--gold-light);
-  background: #211b10;
-  border: 1px solid var(--border);
-}
-.status.success {
-  color: #c8e0a8;
-  background: #111c0f;
-  border: 1px solid #3d5931;
-}
+  <style>
+    :root {
+      --bg: #090909;
+      --panel: #141310;
+      --panel-light: #1c1913;
+      --gold: #d6b36a;
+      --gold-light: #f1d99a;
+      --text: #eee8dc;
+      --muted: #a49a87;
+      --border: rgba(214, 179, 106, .25);
+      --danger: #e38d83;
+      --success: #a8d8a0;
+    }
 
-/* Blurred confessions */
-.vault-intro {
-  color: var(--muted);
-  font-size: 15px;
-  margin-bottom: 18px;
-}
-.shadow-vault {
-  display: grid;
-  gap: 14px;
-  margin-top: 20px;
-}
-.shadow-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 125px;
-  padding: 18px;
-  border: 1px solid rgba(200,164,93,.3);
-  border-radius: 9px;
-  background:
-    radial-gradient(ellipse at top left, rgba(200,164,93,.09), transparent 65%),
-    linear-gradient(145deg, #191711, #0d0d0c);
-}
-.shadow-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    100deg,
-    rgba(9,9,9,.02),
-    rgba(9,9,9,.28)
-  );
-  pointer-events: none;
-}
-.shadow-label {
-  position: relative;
-  z-index: 1;
-  color: var(--gold);
-  font: 10px Arial,sans-serif;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.shadow-text {
-  position: relative;
-  z-index: 0;
-  margin: 12px 0 0;
-  color: #e1d5bd;
-  font-size: 19px;
-  line-height: 1.65;
-  filter: blur(5px);
-  opacity: .78;
-  user-select: none;
-  pointer-events: none;
-}
-.shadow-whisper {
-  text-align: center;
-  color: var(--muted);
-  font-size: 14px;
-  font-style: italic;
-  margin: 20px 0 0;
-}
-.story {
-  border-left: 2px solid var(--gold);
-  padding: 5px 0 5px 15px;
-  color: #ddd4c3;
-  font-style: italic;
-}
-.trust-list {
-  margin: 16px 0 0;
-  padding-left: 20px;
-  color: #c9bdab;
-  font-size: 15px;
-}
-.trust-list li { margin: 8px 0; }
-footer {
-  text-align: center;
-  color: var(--muted);
-  font: 12px/1.8 Arial,sans-serif;
-  padding-top: 22px;
-}
-footer a { text-decoration: none; }
+    * {
+      box-sizing: border-box;
+    }
 
-/* Flower celebration screen */
-.success-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  background: rgba(5,5,5,.96);
-  backdrop-filter: blur(10px);
-  overflow-y: auto;
-}
-.success-overlay.show {
-  display: flex;
-  animation: fadeIn .45s ease both;
-}
-.success-card {
-  width: min(420px, 100%);
-  text-align: center;
-  padding: 26px 20px;
-  border: 1px solid #8f713b;
-  border-radius: 16px;
-  background: linear-gradient(160deg,#211b10,#0b0b09);
-  box-shadow: 0 15px 60px #0009;
-}
-.success-card h2 {
-  font-size: 29px;
-  margin: 10px 0;
-  color: var(--gold-light);
-}
-.success-card p { color: #c9bd9f; }
-.flower-garden {
-  position: relative;
-  height: 180px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 20px;
-  overflow: hidden;
-}
-.flower {
-  position: relative;
-  height: 145px;
-  width: 52px;
-  transform-origin: bottom;
-  animation: growFlower 1.2s cubic-bezier(.2,.8,.3,1) both;
-}
-.flower:nth-child(2) { height: 175px; animation-delay: .2s; }
-.flower:nth-child(3) { height: 125px; animation-delay: .4s; }
-.stem {
-  position: absolute;
-  bottom: 0;
-  left: 24px;
-  width: 4px;
-  height: 0;
-  border-radius: 5px;
-  background: linear-gradient(#86a95d,#416a38);
-  animation: growStem .9s ease-out forwards;
-}
-.flower:nth-child(2) .stem { animation-delay: .2s; }
-.flower:nth-child(3) .stem { animation-delay: .4s; }
-.bloom {
-  position: absolute;
-  top: 8px;
-  left: 5px;
-  font-size: 40px;
-  opacity: 0;
-  transform: scale(.1) rotate(-35deg);
-  animation: bloomOpen .65s ease-out forwards;
-  animation-delay: .7s;
-}
-.flower:nth-child(2) .bloom { animation-delay: .9s; }
-.flower:nth-child(3) .bloom { animation-delay: 1.1s; }
-.leaf {
-  position: absolute;
-  bottom: 35px;
-  left: 24px;
-  width: 23px;
-  height: 11px;
-  background: #648b48;
-  border-radius: 100% 0 100% 0;
-  transform: rotate(-25deg) scale(0);
-  animation: leafOpen .45s ease-out forwards;
-  animation-delay: .6s;
-}
-.flower:nth-child(2) .leaf { animation-delay: .8s; }
-.flower:nth-child(3) .leaf { animation-delay: 1s; }
-.success-close { margin-top: 18px; width: auto; padding: 10px 20px; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes growFlower { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes growStem { from { height: 0; } to { height: 90%; } }
-@keyframes bloomOpen {
-  0% { opacity: 0; transform: scale(.1) rotate(-35deg); }
-  75% { opacity: 1; transform: scale(1.2) rotate(8deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0); }
-}
-@keyframes leafOpen { to { transform: rotate(-25deg) scale(1); } }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at top, #211a0e 0%, transparent 48%),
+        var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
 
-@media (max-width: 420px) {
-  .panel { padding: 17px; }
-  .wrap { padding-inline: 13px; }
-  .shadow-card { padding: 15px; }
-  .socials .cta { flex: 1 1 100%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-}
-</style>
+    body.overlay-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: var(--gold-light);
+    }
+
+    button,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button,
+    a,
+    select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(100% - 36px, 850px);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      padding: 23px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .header-link {
+      font-size: 13px;
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 85px 0 65px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0;
+      color: var(--gold-light);
+      font-size: clamp(36px, 8vw, 65px);
+      font-weight: normal;
+      line-height: 1.08;
+      letter-spacing: 1px;
+    }
+
+    .hero p {
+      max-width: 540px;
+      margin: 18px auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .gold-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 13px 25px;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      background: var(--gold);
+      color: #100d07;
+      font-weight: bold;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .2s;
+    }
+
+    .gold-button:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .gold-button:disabled {
+      opacity: .55;
+      cursor: wait;
+      transform: none;
+    }
+
+    .outline-button {
+      background: transparent;
+      color: var(--gold-light);
+    }
+
+    .outline-button:hover {
+      background: var(--gold);
+      color: #100d07;
+    }
+
+    .section {
+      padding: 48px 0;
+    }
+
+    .section-heading {
+      margin: 0 0 12px;
+      color: var(--gold-light);
+      text-align: center;
+      font-size: clamp(25px, 5vw, 35px);
+      font-weight: normal;
+    }
+
+    .section-intro {
+      max-width: 550px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .divider {
+      width: 75px;
+      height: 1px;
+      margin: 26px auto;
+      background: var(--gold);
+      opacity: .65;
+    }
+
+    .teaser-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .teaser {
+      min-height: 145px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #19160f, #100f0d);
+    }
+
+    .teaser-label {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .teaser-text {
+      margin-top: 16px;
+      color: #d5c9b4;
+      filter: blur(5px);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .teaser-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .form-panel {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: clamp(20px, 5vw, 38px);
+      border: 1px solid var(--border);
+      background: rgba(20, 19, 16, .96);
+      box-shadow: 0 15px 60px rgba(0, 0, 0, .22);
+    }
+
+    .form-panel h3 {
+      margin: 0 0 8px;
+      color: var(--gold-light);
+      font-size: 25px;
+      font-weight: normal;
+    }
+
+    .form-description {
+      margin: 0 0 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .field-label {
+      display: block;
+      margin: 20px 0 8px;
+      color: var(--gold-light);
+      font-size: 13px;
+    }
+
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: #0b0b0a;
+      color: var(--text);
+      padding: 13px;
+    }
+
+    select {
+      min-height: 48px;
+    }
+
+    textarea {
+      min-height: 175px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    textarea::placeholder {
+      color: #71695b;
+    }
+
+    .field-hint {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin: 23px 0;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .consent-row input {
+      flex: 0 0 auto;
+      margin-top: 4px;
+      accent-color: var(--gold);
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 52px;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 17px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .form-status.visible {
+      display: block;
+    }
+
+    .form-status.success {
+      color: var(--success);
+      border-color: rgba(168, 216, 160, .4);
+    }
+
+    .form-status.error {
+      color: var(--danger);
+      border-color: rgba(227, 141, 131, .4);
+    }
+
+    .form-status.info {
+      color: var(--gold-light);
+    }
+
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .privacy-item {
+      padding: 19px 15px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .privacy-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--gold-light);
+      font-size: 14px;
+      font-weight: normal;
+    }
+
+    .privacy-item span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .site-footer {
+      margin-top: 45px;
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .footer-link {
+      margin-top: 10px;
+    }
+
+    /* Success overlay */
+
+    .success-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(0, 0, 0, .86);
+      backdrop-filter: blur(7px);
+    }
+
+    .success-overlay.open {
+      display: flex;
+    }
+
+    .success-card {
+      width: min(100%, 430px);
+      padding: 35px 25px;
+      border: 1px solid var(--gold);
+      background: #12110e;
+      text-align: center;
+      animation: appear .3s ease-out;
+    }
+
+    .flower {
+      display: inline-block;
+      color: var(--gold-light);
+      font-size: 45px;
+      animation: bloom .7s ease-out;
+    }
+
+    .success-card h2 {
+      margin: 12px 0;
+      color: var(--gold-light);
+      font-size: 29px;
+      font-weight: normal;
+    }
+
+    .success-card p {
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bloom {
+      from {
+        opacity: 0;
+        transform: scale(.3) rotate(-35deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        padding: 65px 0 48px;
+      }
+
+      .teaser-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-grid {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .privacy-item {
+        padding: 15px;
+      }
+
+      .header-link {
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<main class="wrap">
-  <header>
-    <div class="sigil" aria-hidden="true">✦</div>
-    <div class="eyebrow">The Vault is open</div>
-    <h1>Unholy<br>Confessions</h1>
-
-    <p class="hero-question">
-      What would you confess if nobody knew it was you?
-    </p>
-
-    <p class="subtitle">
-      The things you hide. The truths you bury.
-      Enter the Vault and let the weight leave your soul.
-    </p>
-
-    <p class="hero-note">
-      Share only what you feel comfortable sharing.
-      No names are needed.
-    </p>
-
-    <div class="socials">
-      <a class="cta" href="#submit">Enter the Vault</a>
-      <a class="cta secondary"
-         href="https://x.com/UnholyPriet"
-         target="_blank" rel="noopener noreferrer">
-        Follow on X
-      </a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">Unholy Confessions</a>
+      <a class="header-link" href="#submit">Enter the Vault ↓</a>
     </div>
   </header>
 
-  <div class="divider"></div>
+  <main id="top">
+    <section class="hero container">
+      <div class="eyebrow">The Vault Is Open</div>
+      <h1>Confess What<br>Silence Conceals.</h1>
+      <p>
+        What would you confess if nobody knew it was you?
+        Leave your truth at the door. No name required.
+      </p>
+      <div class="divider"></div>
+      <a class="gold-button" href="#submit">✦ ENTER THE VAULT ✦</a>
+    </section>
 
-  <section class="panel" id="submit">
-    <h2>Leave Your Confession</h2>
-    <p class="muted">
-      Your words will be sent privately to the Vault's administrator
-      for review. Submission does not guarantee publication.
-    </p>
+    <section class="section container" aria-labelledby="shadows-heading">
+      <h2 class="section-heading" id="shadows-heading">From the Shadows</h2>
+      <p class="section-intro">
+        Some truths are easier to glimpse than to say aloud.
+        The words below are atmospheric previews, not submitted confessions.
+      </p>
 
-    <form id="confession-form">
-      <label for="category">Choose your sin</label>
-      <select id="category" name="category" required>
-        <option value="Relationships">Relationships</option>
-        <option value="Dark secrets">Dark secrets</option>
-        <option value="Regrets">Regrets</option>
-        <option value="Moral dilemmas">Moral dilemmas</option>
-        <option value="Betrayal">Betrayal</option>
-        <option value="Forbidden thoughts">Forbidden thoughts</option>
-        <option value="Other">Other</option>
-      </select>
+      <div class="teaser-grid">
+        <article class="teaser">
+          <div class="teaser-label">Behind Closed Doors</div>
+          <div class="teaser-text" aria-hidden="true">
+            There is something I have carried for years, and nobody knows...
+          </div>
+          <div class="teaser-note">Some words remain hidden.</div>
+        </article>
 
-      <label for="confession">Your confession</label>
-      <textarea
-        id="confession"
-        name="confession"
-        maxlength="2000"
-        minlength="10"
-        required
-        placeholder="Nobody knows that I..."
-      ></textarea>
-      <div class="counter" id="counter">0 / 2000</div>
+        <article class="teaser">
+          <div class="teaser-label">The Unspoken</div>
+          <div class="teaser-text" aria-hidden="true">
+            If I could tell the truth without consequences, I would finally...
+          </div>
+          <div class="teaser-note">Your truth could be next.</div>
+        </article>
+      </div>
+    </section>
 
-      <label class="consent" for="consent">
-        <input type="checkbox" id="consent" name="consent" required>
-        <span>
-          I consent to my confession being reviewed for possible
-          publication on Unholy Confessions and its social channels.
-          I understand publication is not guaranteed.
-        </span>
-      </label>
+    <section class="section container" id="submit">
+      <h2 class="section-heading">Leave Your Confession</h2>
+      <p class="section-intro">
+        No names. No performance. Just the truth you are ready to release.
+      </p>
 
-      <button id="submit-button" type="submit">
-        ✦ Submit Confession ✦
-      </button>
-
-      <p class="status" id="status" role="status" aria-live="polite"></p>
-    </form>
-  </section>
-
-  <section class="panel" id="shadows">
-    <h2>From the Shadows</h2>
-    <p class="vault-intro">
-      Some secrets are too dark to read in the light.
-    </p>
-
-    <div class="shadow-vault">
-      <article class="shadow-card">
-        <div class="shadow-label">Sealed Confession · 001</div>
-        <p class="shadow-text" aria-hidden="true">
-          I told everyone I had moved on, but I still remember
-          the last thing they said to me.
+      <div class="form-panel">
+        <h3>Speak, and be unburdened.</h3>
+        <p class="form-description">
+          Write honestly. Before submitting, make sure your confession
+          does not expose another person's private identifying information.
         </p>
-      </article>
 
-      <article class="shadow-card">
-        <div class="shadow-label">Sealed Confession · 002</div>
-        <p class="shadow-text" aria-hidden="true">
-          There is something I did years ago that nobody knows
-          about, and sometimes I wonder what would happen if they did.
-        </p>
-      </article>
+        <form id="confession-form" novalidate>
+          <label class="field-label" for="category">
+            Choose your confession
+          </label>
+          <select id="category" name="category" required>
+            <option value="Secret">A secret I've kept</option>
+            <option value="Regret">A regret I carry</option>
+            <option value="Desire">A forbidden desire</option>
+            <option value="Relationship">Love &amp; relationships</option>
+            <option value="Other">Something else</option>
+          </select>
 
-      <article class="shadow-card">
-        <div class="shadow-label">Sealed Confession · 003</div>
-        <p class="shadow-text" aria-hidden="true">
-          I knew the truth before anyone asked me about it.
-          I just hoped nobody would notice.
-        </p>
-      </article>
-    </div>
+          <label class="field-label" for="confession">
+            Your words
+          </label>
+          <textarea
+            id="confession"
+            name="confession"
+            minlength="10"
+            maxlength="2000"
+            placeholder="Let the truth out..."
+            required
+          ></textarea>
+          <div class="field-hint">
+            <span id="character-count">0</span> / 2000 characters
+          </div>
 
-    <p class="shadow-whisper">
-      These are fictional placeholders, not actual submissions.
-      The Vault is waiting for yours.
-    </p>
+          <label class="consent-row" for="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <span>
+              I understand that my confession will be sent to the site
+              administrator. I have removed names and details that could
+              identify me or another person. I understand that anonymity
+              cannot be guaranteed by the website alone.
+            </span>
+          </label>
 
-    <div class="socials">
-      <a class="cta" href="#submit">Leave Your Confession</a>
-    </div>
-  </section>
+          <!-- type="button" prevents native form navigation -->
+          <button
+            id="submit-button"
+            class="gold-button submit-button"
+            type="button"
+          >
+            ✦ Submit Confession ✦
+          </button>
 
-  <section class="panel" id="the-vault">
-    <h2>A Word from the Father</h2>
-    <div class="story">
-      Not every truth needs an audience. Sometimes, saying it
-      somewhere safe is enough to begin.
-    </div>
-    <p class="muted">
-      The Vault is a place to share what weighs on you.
-      You decide what to write, and you may leave without submitting.
-    </p>
-  </section>
+          <div
+            id="status"
+            class="form-status"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </form>
+      </div>
+    </section>
 
-  <section class="panel" id="privacy">
-    <h2>Before You Confess</h2>
-    <p class="muted">
-      Your trust matters. Please understand how submissions are handled.
-    </p>
-    <ul class="trust-list">
-      <li>Your confession is sent to the site's administrator through Telegram.</li>
-      <li>Submissions may be reviewed for possible publication; sending one does not mean it will be published.</li>
-      <li>Do not include full names, addresses, phone numbers, passwords, or other identifying details.</li>
-      <li>The form does not ask for your name, but complete anonymity cannot be guaranteed. Website infrastructure may process technical information.</li>
-      <li>Do not use this form for emergencies or to report an immediate threat.</li>
-    </ul>
-  </section>
+    <section class="section container">
+      <h2 class="section-heading">Within the Vault</h2>
+      <p class="section-intro">
+        A quiet place for words that are difficult to say out loud.
+      </p>
 
-  <section class="panel">
-    <h2>The Vault Continues on X</h2>
-    <p class="muted">
-      Moral dilemmas. Difficult questions. Selected confessions.
-      Join the conversation beyond the Vault.
-    </p>
-    <a class="cta"
-       href="https://x.com/UnholyPriet"
-       target="_blank" rel="noopener noreferrer">
-      Follow @UnholyPriet
-    </a>
-  </section>
+      <div class="privacy-grid">
+        <div class="privacy-item">
+          <strong>No name field</strong>
+          <span>We do not ask you to enter your name.</span>
+        </div>
+        <div class="privacy-item">
+          <strong>Sent privately</strong>
+          <span>Your submission is delivered to the site administrator.</span>
+        </div>
+        <div class="privacy-item">
+          <strong>Choose your words</strong>
+          <span>Leave out personal details you would not want shared.</span>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <footer>
-    <div>✦ UNHOLY CONFESSIONS ✦</div>
-    <div>Enter the Vault. Leave the burden behind.</div>
-    <div>
-      <a href="#privacy">Privacy &amp; submission information</a>
-    </div>
-    <div>
-      &copy; <span id="year"></span> Unholy Confessions
+  <footer class="site-footer">
+    <div class="container">
+      <div>UNHOLY CONFESSIONS</div>
+      <div class="footer-link">
+        <a href="https://x.com/UnholyPriet"
+           target="_blank"
+           rel="noopener noreferrer">
+          Follow the whispers on X
+        </a>
+      </div>
+      <div style="margin-top: 12px;">
+        Speak carefully. Keep what is private, private.
+      </div>
     </div>
   </footer>
-</main>
 
-<!-- Flower celebration after confirmed delivery -->
-<div class="success-overlay"
-     id="success-overlay"
-     role="dialog"
-     aria-modal="true"
-     aria-labelledby="success-title"
-     aria-describedby="success-message">
-
-  <div class="success-card">
-    <div class="eyebrow">The weight has been lifted</div>
-
-    <div class="flower-garden" aria-hidden="true">
-      <div class="flower">
-        <div class="stem"></div>
-        <div class="leaf"></div>
-        <div class="bloom">🌷</div>
-      </div>
-      <div class="flower">
-        <div class="stem"></div>
-        <div class="leaf"></div>
-        <div class="bloom">🌸</div>
-      </div>
-      <div class="flower">
-        <div class="stem"></div>
-        <div class="leaf"></div>
-        <div class="bloom">🌼</div>
-      </div>
+  <!-- Success overlay -->
+  <div
+    id="success-overlay"
+    class="success-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="success-title"
+    aria-describedby="success-message"
+  >
+    <div class="success-card">
+      <div class="flower" aria-hidden="true">✿</div>
+      <h2 id="success-title">The Vault Has Received It</h2>
+      <p id="success-message">
+        Your confession has been delivered.
+      </p>
+      <button
+        id="success-close"
+        class="gold-button outline-button"
+        type="button"
+      >
+        Return to the Vault
+      </button>
     </div>
-
-    <h2 id="success-title">Confession Released</h2>
-    <p id="success-message">
-      Your confession has reached the Vault.
-      May something beautiful grow where the burden once lived.
-    </p>
-    <p class="muted">
-      Thank you for trusting the Vault.
-    </p>
-    <button class="cta success-close" id="success-close" type="button">
-      Return to the Vault
-    </button>
   </div>
-</div>
 
-<script>
-(() => {
-  // Your existing Render API URL — keep this matched to your live service.
-  const API_URL =
-    "https://unholy-confessions.onrender.com/api/confessions";
+  <script>
+    (() => {
+      "use strict";
 
-  const form = document.getElementById("confession-form");
-  const confessionField = document.getElementById("confession");
-  const categoryField = document.getElementById("category");
-  const consentField = document.getElementById("consent");
-  const counter = document.getElementById("counter");
-  const statusBox = document.getElementById("status");
-  const button = document.getElementById("submit-button");
-  const overlay = document.getElementById("success-overlay");
-  const closeButton = document.getElementById("success-close");
+      const API_URL =
+        "https://unholy-confessions-api1.onrender.com/api/confessions";
 
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
+      const form = document.getElementById("confession-form");
+      const confessionInput = document.getElementById("confession");
+      const categoryInput = document.getElementById("category");
+      const consentInput = document.getElementById("consent");
+      const submitButton = document.getElementById("submit-button");
+      const statusBox = document.getElementById("status");
+      const characterCount = document.getElementById("character-count");
+      const successOverlay = document.getElementById("success-overlay");
+      const successClose = document.getElementById("success-close");
 
-  confessionField.addEventListener("input", () => {
-    counter.textContent =
-      confessionField.value.length + " / 2000";
-  });
+      if (
+        !form ||
+        !confessionInput ||
+        !categoryInput ||
+        !consentInput ||
+        !submitButton ||
+        !statusBox ||
+        !characterCount ||
+        !successOverlay ||
+        !successClose
+      ) {
+        console.error(
+          "Unholy Confessions: one or more required HTML elements are missing."
+        );
+        return;
+      }
 
-  function showStatus(message, type) {
-    statusBox.textContent = message;
-    statusBox.className = "status visible " + type;
-  }
+      let isSending = false;
 
-  function hideStatus() {
-    statusBox.textContent = "";
-    statusBox.className = "status";
-  }
+      function showStatus(message, type) {
+        statusBox.textContent = message;
+        statusBox.className = "form-status visible " + type;
+      }
 
-  function openSuccess() {
-    overlay.classList.add("show");
-    document.body.classList.add("modal-open");
-    closeButton.focus();
-  }
+      function hideStatus() {
+        statusBox.textContent = "";
+        statusBox.className = "form-status";
+      }
 
-  function closeSuccess() {
-    overlay.classList.remove("show");
-    document.body.classList.remove("modal-open");
-    button.focus();
-  }
+      function openSuccessOverlay() {
+        successOverlay.classList.add("open");
+        document.body.classList.add("overlay-open");
+        successClose.focus();
+      }
 
-  closeButton.addEventListener("click", closeSuccess);
+      function closeSuccessOverlay() {
+        successOverlay.classList.remove("open");
+        document.body.classList.remove("overlay-open");
+        submitButton.focus();
+      }
 
-  overlay.addEventListener("click", event => {
-    if (event.target === overlay) closeSuccess();
-  });
+      function updateCharacterCount() {
+        characterCount.textContent = String(confessionInput.value.length);
+      }
 
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && overlay.classList.contains("show")) {
-      closeSuccess();
-    }
-  });
+      confessionInput.addEventListener("input", updateCharacterCount);
 
-  form.addEventListener("submit", async event => {
-    event.preventDefault();
-    hideStatus();
-
-    const text = confessionField.value.trim();
-    const category = categoryField.value;
-    const consent = consentField.checked;
-
-    if (text.length < 10 || text.length > 2000) {
-      showStatus(
-        "Write between 10 and 2000 characters.",
-        "error"
-      );
-      return;
-    }
-
-    if (!category) {
-      showStatus("Please choose a category.", "error");
-      categoryField.focus();
-      return;
-    }
-
-    if (!consent) {
-      showStatus("Please confirm your consent.", "error");
-      consentField.focus();
-      return;
-    }
-
-    button.disabled = true;
-    button.textContent = "Sending to the Vault...";
-    showStatus(
-      "Connecting to the Vault. This may take a little while.",
-      "info"
-    );
-
-    // A timeout stops the page waiting indefinitely. A timeout does not
-    // prove that the server failed to deliver the message.
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 45000);
-
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          confession: text,
-          category: category,
-          consent: consent
-        }),
-        signal: controller.signal
+      // Prevent normal browser form submission and any page jump.
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
       });
 
-      let data = {};
-      try {
-        data = await response.json();
-      } catch (_) {
-        data = {};
-      }
+      // The actual sending action is attached directly to this button.
+      submitButton.addEventListener("click", async () => {
+        if (isSending) return;
 
-      if (!response.ok || data.success !== true) {
-        if (response.status === 429) {
-          throw new Error(
-            "Too many attempts. Please wait a few minutes before trying again."
+        const confession = confessionInput.value.trim();
+        const category = categoryInput.value;
+        const consent = consentInput.checked;
+
+        hideStatus();
+
+        if (confession.length < 10) {
+          showStatus(
+            "Please write at least 10 characters before submitting.",
+            "error"
           );
+          confessionInput.focus();
+          return;
         }
 
-        throw new Error(
-          data.error || "Delivery failed. Please try again later."
-        );
-      }
+        if (confession.length > 2000) {
+          showStatus(
+            "Your confession is too long. Please keep it under 2000 characters.",
+            "error"
+          );
+          confessionInput.focus();
+          return;
+        }
 
-      form.reset();
-      counter.textContent = "0 / 2000";
-      hideStatus();
-      openSuccess();
+        if (!consent) {
+          showStatus(
+            "Please confirm the privacy notice before submitting.",
+            "error"
+          );
+          consentInput.focus();
+          return;
+        }
 
-    } catch (error) {
-      console.error("Confession submission error:", error);
+        isSending = true;
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending to the Vault...";
+        showStatus("Sending your confession securely...", "info");
 
-      if (error.name === "AbortError") {
-        showStatus(
-          "The request took too long. Delivery may be uncertain. Check with the Vault administrator 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              confession,
+              category,
+              consent
+            }),
+            signal: controller.signal
+          });
+
+          let result = {};
+
+          try {
+            result = await response.json();
+          } catch {
+            result = {};
+          }
+
+          if (!response.ok || result.success !== true) {
+            throw new Error(
+              result.error ||
+              result.message ||
+              "The server could not confirm delivery. Please try again."
+            );
+          }
+
+          form.reset();
+          updateCharacterCount();
+          hideStatus();
+          openSuccessOverlay();
+        } catch (error) {
+          console.error("Confession submission failed:", error);
+
+          if (error.name === "AbortError") {
+            showStatus(
+              "The request took too long. Check your connection and try again. If you are unsure whether it arrived, check before resubmitting.",
+              "error"
+            );
+          } e
