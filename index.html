@@ -329,8 +329,8 @@ footer { text-align: center; color: var(--muted); font: 12px/1.8 Arial,sans-seri
 
 <script>
 (() => {
-  // Secure backend endpoint on Render (No tokens exposed in browser code!)
-  const API_URL = "https://unholy-confessions-api1.onrender.com/api/confessions";
+  // Correctly points to your live Render backend URL!
+  const API_URL = "https://unholy-confessions.onrender.com/api/confessions";
 
   const form = document.getElementById("confession-form");
   const confession = document.getElementById("confession");
@@ -386,7 +386,7 @@ footer { text-align: center; color: var(--muted); font: 12px/1.8 Arial,sans-seri
 
     button.disabled = true;
     status.style.color = "var(--gold-light)";
-    status.textContent = "Releasing your truth into the Vault (waking server if sleeping)...";
+    status.textContent = "Releasing your truth into the Vault...";
 
     try {
       const response = await fetch(API_URL, {
