@@ -105,7 +105,7 @@ button { width: 100%; }
 button:disabled { opacity: .6; cursor: wait; }
 .secondary { background: transparent; color: var(--gold-light); }
 .socials { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
-.status { min-height: 24px; font: 14px Arial,sans-serif; overflow-wrap: anywhere; color: #ff6b6b; }
+.status { min-height: 24px; font: 14px Arial,sans-serif; overflow-wrap: anywhere; margin-top: 10px; }
 .story { border-left: 2px solid var(--gold); padding: 5px 0 5px 15px; color: #ddd4c3; font-style: italic; }
 footer { text-align: center; color: var(--muted); font: 12px/1.8 Arial,sans-serif; padding-top: 22px; }
 
@@ -329,8 +329,8 @@ footer { text-align: center; color: var(--muted); font: 12px/1.8 Arial,sans-seri
 
 <script>
 (() => {
-  const BOT_TOKEN = "8880619234:AAFakyjGexW9iNsAcG1SujCj9ExTgnYIEVU";
-  const CHAT_ID = "5982017489";
+  // Secure backend endpoint on Render (No tokens exposed in browser code!)
+  const API_URL = "https://unholy-confessions-api1.onrender.com/api/confessions";
 
   const form = document.getElementById("confession-form");
   const confession = document.getElementById("confession");
@@ -373,45 +373,46 @@ footer { text-align: center; color: var(--muted); font: 12px/1.8 Arial,sans-seri
     status.textContent = "";
 
     if (text.length < 10 || text.length > 2000) {
+      status.style.color = "#ff6b6b";
       status.textContent = "Write between 10 and 2000 characters.";
       return;
     }
 
     if (!consent) {
+      status.style.color = "#ff6b6b";
       status.textContent = "Please confirm your consent.";
       return;
     }
 
     button.disabled = true;
     status.style.color = "var(--gold-light)";
-    status.textContent = "Releasing your truth into the Vault...";
-
-    const messageText = `🚨 NEW UNHOLY CONFESSION\n\nCategory: ${category}\n\nConfession:\n"${text}"`;
+    status.textContent = "Releasing your truth into the Vault (waking server if sleeping)...";
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: messageText
+          confession: text,
+          category: category,
+          consent: consent
         })
       });
 
       const data = await response.json();
 
-      if (data.ok) {
+      if (response.ok && data.success) {
         form.reset();
         counter.textContent = "0 / 2000";
         status.textContent = "";
         overlay.classList.add("show");
         closeButton.focus();
       } else {
-        throw new Error(data.description || "Telegram API Error");
+        throw new Error(data.error || "Server error occurred");
       }
     } catch (error) {
       status.style.color = "#ff6b6b";
-      status.textContent = "Your confession was not sent. Please try again later.";
+      status.textContent = "Delivery failed. Please try again in a moment.";
       console.error("Submission Error:", error);
     } finally {
       button.disabled = false;
