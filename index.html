@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080808">
-
-  <title>Unholy Confessions — Enter the Vault</title>
-  <meta name="description" content="Enter the Vault. Confess anonymously. Leave your secrets in the darkness.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="Unholy Confessions — reveal your truth, anonymously.">
+  <title>Unholy Confessions | Enter the Vault</title>
 
   <style>
     :root {
-      --black: #080808;
-      --panel: #11100e;
-      --gold: #c9a45c;
-      --gold-light: #e6ca8c;
-      --muted: #a7a096;
-      --border: rgba(201, 164, 92, .3);
-      --white: #eee9df;
+      --bg: #090909;
+      --panel: #141310;
+      --gold: #c8a45d;
+      --gold-light: #f0d79c;
+      --text: #f2eee5;
+      --muted: #a8a092;
+      --border: #383023;
     }
 
     * { box-sizing: border-box; }
@@ -30,586 +25,388 @@
     body {
       margin: 0;
       background:
-        radial-gradient(ellipse at 50% 0%, #241b0e 0%, transparent 45%),
-        var(--black);
-      color: var(--white);
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 19px;
-      min-height: 100vh;
+        radial-gradient(ellipse at top, #292015 0%, #090909 48%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
     }
 
     a { color: var(--gold-light); }
 
-    .page {
-      width: min(100% - 32px, 760px);
+    .wrap {
+      width: min(760px, 100%);
       margin: auto;
-      padding: 35px 0 55px;
+      padding: 22px 18px 48px;
     }
 
-    header { text-align: center; }
+    header {
+      text-align: center;
+      padding: 28px 0 36px;
+    }
 
     .sigil {
       color: var(--gold);
-      font-size: 34px;
+      font-size: 35px;
       margin-bottom: 8px;
     }
 
     .eyebrow {
-      font-family: "Cinzel", serif;
       color: var(--gold);
-      font-size: 11px;
       letter-spacing: 4px;
       text-transform: uppercase;
-    }
-
-    h1, h2, h3 {
-      font-family: "Cinzel", Georgia, serif;
-      font-weight: 500;
+      font: 11px Arial, sans-serif;
     }
 
     h1 {
+      font-size: clamp(34px, 9vw, 58px);
+      line-height: 1.05;
+      margin: 12px 0;
       color: var(--gold-light);
-      font-size: clamp(27px, 6vw, 44px);
-      letter-spacing: 2px;
-      line-height: 1.25;
-      margin: 14px 0;
+      font-weight: normal;
     }
 
     .subtitle {
-      color: #d0c6b4;
-      font-size: 23px;
-      font-style: italic;
+      color: var(--muted);
+      max-width: 480px;
       margin: 0 auto;
-      max-width: 560px;
     }
 
     .divider {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--gold);
-      margin: 28px 0;
-    }
-
-    .divider::before, .divider::after {
-      content: "";
       height: 1px;
-      flex: 1;
-      background: var(--border);
-    }
-
-    .intro {
-      text-align: center;
-      color: #c4bdb1;
-      line-height: 1.65;
-      margin: 0 0 28px;
+      margin: 24px 0;
+      background: linear-gradient(
+        to right, transparent, var(--gold), transparent
+      );
     }
 
     .panel {
-      background: linear-gradient(145deg, rgba(24, 21, 16, .97), rgba(12, 12, 11, .98));
+      background: rgba(20, 19, 16, .94);
       border: 1px solid var(--border);
-      box-shadow: 0 15px 55px rgba(0, 0, 0, .32);
-      padding: clamp(20px, 5vw, 36px);
+      border-radius: 12px;
+      padding: 22px;
+      margin: 20px 0;
+      box-shadow: 0 14px 40px #0006;
     }
 
-    .panel h2 {
+    h2 {
       color: var(--gold-light);
-      font-size: 22px;
-      text-align: center;
+      font-size: 25px;
+      font-weight: normal;
       margin: 0 0 8px;
     }
 
-    .small-note {
-      color: var(--muted);
-      text-align: center;
-      font-size: 16px;
-      margin: 0 0 25px;
-    }
+    p { margin-top: 8px; }
+
+    .muted { color: var(--muted); font-size: 14px; }
 
     label {
       display: block;
+      margin: 18px 0 7px;
       color: var(--gold-light);
-      font-family: "Cinzel", serif;
-      font-size: 12px;
-      letter-spacing: 1px;
-      margin: 19px 0 9px;
+      font-size: 14px;
     }
 
-    select, textarea {
-      display: block;
+    textarea, select {
       width: 100%;
       background: #090909;
-      border: 1px solid #51442d;
-      border-radius: 0;
-      color: var(--white);
-      font: 18px "Cormorant Garamond", Georgia, serif;
-      padding: 13px 14px;
-      outline: none;
+      color: var(--text);
+      border: 1px solid #51432b;
+      border-radius: 7px;
+      padding: 13px;
+      font: 16px/1.5 Arial, sans-serif;
     }
-
-    select:focus, textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 2px rgba(201, 164, 92, .1);
-    }
-
-    select { min-height: 48px; }
 
     textarea {
-      min-height: 180px;
       resize: vertical;
-      line-height: 1.55;
+      min-height: 150px;
     }
 
-    textarea::placeholder {
-      color: #777064;
-      font-style: italic;
+    textarea:focus, select:focus {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
     }
 
     .counter {
       text-align: right;
       color: var(--muted);
-      font-size: 15px;
-      margin-top: 7px;
+      font: 12px Arial, sans-serif;
+      margin-top: 5px;
     }
 
     .consent {
       display: flex;
       align-items: flex-start;
-      gap: 11px;
-      margin: 22px 0;
-      color: #c7c0b5;
-      font-size: 17px;
-      line-height: 1.45;
+      gap: 10px;
+      color: var(--muted);
+      font: 13px/1.5 Arial, sans-serif;
+      margin: 20px 0;
     }
 
     .consent input {
-      accent-color: var(--gold);
-      width: 18px;
-      height: 18px;
       margin-top: 4px;
-      flex-shrink: 0;
+      accent-color: var(--gold);
     }
 
-    .privacy {
-      border-left: 2px solid var(--gold);
-      padding: 10px 13px;
-      color: #aaa295;
-      background: rgba(201, 164, 92, .055);
-      font-size: 16px;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-
-    .submit {
-      width: 100%;
-      padding: 15px 18px;
-      background: linear-gradient(135deg, #e0c17e, #b18a43);
+    button, .cta {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      border-radius: 7px;
+      background: linear-gradient(135deg, #e1c47e, #a47c36);
       color: #100d07;
-      border: 1px solid #f0d79e;
-      font: 600 13px "Cinzel", serif;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      padding: 13px 20px;
+      font: bold 14px Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
-      transition: filter .2s, transform .2s;
     }
 
-    .submit:hover { filter: brightness(1.1); }
-    .submit:active { transform: scale(.99); }
+    button { width: 100%; }
 
-    .submit:disabled {
-      opacity: .55;
+    button:disabled {
+      opacity: .6;
       cursor: wait;
     }
 
+    .secondary {
+      background: transparent;
+      color: var(--gold-light);
+    }
+
     .status {
-      display: none;
-      margin-top: 17px;
-      padding: 12px;
+      min-height: 32px;
+      font: 14px/1.4 Arial, sans-serif;
+      overflow-wrap: anywhere;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    .status.visible {
+      opacity: 1;
+    }
+
+    .status.success {
+      background: rgba(200, 164, 93, 0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
       text-align: center;
-      font-size: 17px;
-      line-height: 1.45;
-      border: 1px solid var(--border);
+      font-weight: bold;
     }
 
     .status.error {
-      display: block;
-      color: #f1b4a9;
-      border-color: #75443b;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid #ff6b6b;
+      color: #ff6b6b;
     }
 
     .status.info {
-      display: block;
-      color: var(--gold-light);
-    }
-
-    .section { margin-top: 40px; }
-
-    .section h2 {
-      text-align: center;
-      color: var(--gold-light);
-      font-size: 22px;
-    }
-
-    .section p {
-      line-height: 1.65;
-      color: #bdb5a8;
-    }
-
-    .example {
+      background: rgba(200, 164, 93, 0.05);
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.018);
-      padding: 19px;
-      margin: 14px 0;
+      color: var(--gold-light);
+      text-align: center;
     }
 
-    .example-tag {
-      color: var(--gold);
-      font: 11px "Cinzel", serif;
-      letter-spacing: 2px;
+    .socials {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 18px;
     }
 
-    .example p {
+    .story {
+      border-left: 2px solid var(--gold);
+      padding: 5px 0 5px 15px;
+      color: #ddd4c3;
       font-style: italic;
-      margin-bottom: 0;
     }
 
     footer {
-      border-top: 1px solid var(--border);
       text-align: center;
-      margin-top: 42px;
-      padding-top: 25px;
-      color: #8e877b;
-      font-size: 16px;
-      line-height: 1.8;
+      color: var(--muted);
+      font: 12px/1.8 Arial, sans-serif;
+      padding-top: 22px;
     }
 
-    footer a {
-      text-decoration: none;
-      margin: 0 8px;
-    }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background: rgba(0, 0, 0, .91);
-    }
-
-    .overlay.visible { display: flex; }
-
-    .success-card {
-      width: min(100%, 440px);
-      text-align: center;
-      background: #100f0c;
-      border: 1px solid var(--gold);
-      padding: 30px 22px;
-      box-shadow: 0 0 70px rgba(201, 164, 92, .13);
-    }
-
-    .flower {
-      font-size: 64px;
-      display: inline-block;
-      animation: bloom 1.2s ease-out both;
-      filter: drop-shadow(0 0 15px rgba(201,164,92,.35));
-    }
-
-    @keyframes bloom {
-      0% { transform: scale(.15) rotate(-35deg); opacity: 0; }
-      65% { transform: scale(1.18) rotate(8deg); opacity: 1; }
-      100% { transform: scale(1) rotate(0); opacity: 1; }
-    }
-
-    .success-card h2 {
-      color: var(--gold-light);
-      font-size: 24px;
-    }
-
-    .success-card p {
-      color: #c6bdae;
-      line-height: 1.55;
-    }
-
-    .close-success {
-      background: transparent;
-      color: var(--gold-light);
-      border: 1px solid var(--border);
-      padding: 12px 22px;
-      margin-top: 12px;
-      font: 12px "Cinzel", serif;
-      letter-spacing: 1px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 480px) {
-      .page { width: min(100% - 22px, 760px); padding-top: 25px; }
-      .subtitle { font-size: 21px; }
-      .panel { padding: 20px 16px; }
+    @media (max-width: 420px) {
+      .panel { padding: 17px; }
+      .wrap { padding-inline: 13px; }
     }
   </style>
 </head>
 
 <body>
-  <main class="page">
+  <main class="wrap">
     <header>
-      <div class="sigil" aria-hidden="true">✠</div>
-      <div class="eyebrow">The confessional is open</div>
-      <h1>UNHOLY CONFESSIONS</h1>
-      <p class="subtitle">Every soul has a secret. What is yours?</p>
+      <div class="sigil" aria-hidden="true">✦</div>
+      <div class="eyebrow">Confession has a price</div>
+      <h1>Unholy<br>Confessions</h1>
+      <p class="subtitle">
+        The things you hide. The truths you bury.
+        Enter the Vault and let the weight leave your soul.
+      </p>
+
+      <div class="socials">
+        <a class="cta" href="#submit">Enter the Vault</a>
+        <a class="cta secondary"
+           href="https://x.com/UnholyPriet"
+           target="_blank" rel="noopener noreferrer">
+          Follow on X
+        </a>
+      </div>
     </header>
 
-    <div class="divider" aria-hidden="true">✦</div>
+    <div class="divider"></div>
 
-    <p class="intro">
-      Welcome to the Vault. Leave your confession behind the veil.
-      No names are required. No judgment will be passed here.
-      Only the truth you choose to share.
-    </p>
-
-    <section class="panel" id="confessional">
-      <h2>Enter the Confessional</h2>
-      <p class="small-note">Speak freely. The darkness is listening.</p>
+    <section class="panel" id="submit">
+      <h2>Leave Your Confession</h2>
+      <p class="muted">
+        No names or identifying details, please. Submissions are
+        reviewed before any possible publication.
+      </p>
 
       <form id="confession-form">
         <label for="category">Choose your sin</label>
-        <select id="category" name="category" required>
-          <option value="">Select a category...</option>
-          <option value="Love & Desire">Love &amp; Desire</option>
-          <option value="Betrayal">Betrayal</option>
-          <option value="Regret">Regret</option>
-          <option value="Secrets">Secrets</option>
-          <option value="Forbidden Thoughts">Forbidden Thoughts</option>
-          <option value="Revenge">Revenge</option>
+        <select id="category" required>
+          <option value="Relationships">Relationships</option>
+          <option value="Dark secrets">Dark secrets</option>
+          <option value="Regrets">Regrets</option>
+          <option value="Moral dilemmas">Moral dilemmas</option>
           <option value="Other">Other</option>
         </select>
 
         <label for="confession">Your confession</label>
         <textarea
           id="confession"
-          name="confession"
-          minlength="10"
           maxlength="2000"
-          placeholder="Write what you have never dared to say..."
+          minlength="10"
           required
+          placeholder="Nobody knows that I..."
         ></textarea>
+        <div class="counter" id="counter">0 / 2000</div>
 
-        <div class="counter" id="counter">0 / 2000 characters</div>
-
-        <label class="consent" for="consent">
-          <input type="checkbox" id="consent" name="consent" required>
+        <label class="consent">
+          <input type="checkbox" id="consent" required>
           <span>
-            I understand that my confession will be sent to the site's
-            administrator through Telegram. I have not included details
-            that directly identify me or another person.
+            I understand that my confession may be reviewed for
+            possible publication on Unholy Confessions and its
+            social channels. Publication is not guaranteed.
           </span>
         </label>
 
-        <div class="privacy">
-          Your name is not requested by this form. However, complete
-          anonymity cannot be guaranteed: website infrastructure may
-          process technical information, and the administrator can read
-          submitted confessions. Please do not include identifying details.
-        </div>
-
-        <button class="submit" id="submit-button" type="submit">
-          ✦ Send My Confession ✦
+        <button id="submit-button" type="submit">
+          Submit Confession
         </button>
-
-        <div class="status" id="status" role="status" aria-live="polite"></div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
       </form>
     </section>
 
-    <section class="section">
-      <h2>A Word from the Father</h2>
-      <p>
-        Every confession carries a weight. Some are whispered in the
-        silence of the night; others remain buried for years. Here,
-        you may set your words free. Share only what you feel comfortable
-        sharing, and remember: never include passwords, addresses, or
-        other sensitive personal information.
+    <section class="panel">
+      <h2>From the Shadows</h2>
+      <p class="muted">
+        Illustrative writing — not actual user submissions.
       </p>
+      <div class="story">
+        "Sometimes the hardest truth to admit is that you knew
+        exactly what you were doing."
+      </div>
+      <div class="divider"></div>
+      <div class="story">
+        "Would you reveal a truth that could destroy a friendship
+        if keeping it meant living with the lie?"
+      </div>
     </section>
 
-    <section class="section">
-      <h2>Whispers from the Darkness</h2>
-      <p style="text-align:center;font-size:15px">
-        The following are fictional examples, not real user submissions.
+    <section class="panel">
+      <h2>The Vault Continues on X</h2>
+      <p class="muted">
+        Follow the conversation, weigh in on moral dilemmas,
+        and watch for selected confessions.
       </p>
-
-      <article class="example">
-        <div class="example-tag">EXAMPLE CONFESSION I</div>
-        <p>
-          "Sometimes I miss the person I was before I learned how to
-          hide everything I felt."
-        </p>
-      </article>
-
-      <article class="example">
-        <div class="example-tag">EXAMPLE CONFESSION II</div>
-        <p>
-          "There are apologies I rehearse every night, knowing I may
-          never have the courage to say them aloud."
-        </p>
-      </article>
+      <a class="cta" href="https://x.com/UnholyPriet"
+         target="_blank" rel="noopener noreferrer">
+        Follow @UnholyPriet
+      </a>
     </section>
 
     <footer>
-      <div>✠ UNHOLY CONFESSIONS ✠</div>
-      <div>Enter the Vault. Leave the burden behind.</div>
-      <p>
-        <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener noreferrer">
-          Follow the Father on X
-        </a>
-      </p>
-      <div>Share carefully. Confess freely.</div>
+      Unholy Confessions<br>
+      Think before sharing. Never include private information
+      about yourself or another person.<br>
+      &copy; <span id="year"></span> Unholy Confessions
     </footer>
   </main>
 
-  <div class="overlay" id="success-overlay" role="dialog"
-       aria-modal="true" aria-labelledby="success-title">
-    <div class="success-card">
-      <div class="flower" aria-hidden="true">🌹</div>
-      <h2 id="success-title">Your Secret Has Been Received</h2>
-      <p>
-        Your confession has reached the Vault. Let the weight leave
-        your heart, and let the flower grow in silence.
-      </p>
-      <button class="close-success" id="close-success" type="button">
-        Return to the darkness
-      </button>
-    </div>
-  </div>
-
   <script>
-    // Connected to your secure Render backend service
+    // Connected securely to your Render backend service
     const API_URL = "https://unholy-confessions-api1.onrender.com/api/confessions";
 
     const form = document.getElementById("confession-form");
-    const confessionField = document.getElementById("confession");
-    const categoryField = document.getElementById("category");
-    const consentField = document.getElementById("consent");
+    const confession = document.getElementById("confession");
     const counter = document.getElementById("counter");
-    const statusBox = document.getElementById("status");
-    const submitButton = document.getElementById("submit-button");
-    const overlay = document.getElementById("success-overlay");
-    const closeSuccess = document.getElementById("close-success");
+    const status = document.getElementById("status");
+    const button = document.getElementById("submit-button");
 
-    confessionField.addEventListener("input", () => {
-      counter.textContent =
-        confessionField.value.length + " / 2000 characters";
-    });
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    function showStatus(message, type) {
-      statusBox.textContent = message;
-      statusBox.className = "status " + type;
-    }
-
-    function hideStatus() {
-      statusBox.textContent = "";
-      statusBox.className = "status";
-    }
-
-    function openSuccess() {
-      overlay.classList.add("visible");
-      closeSuccess.focus();
-    }
-
-    function closeSuccessOverlay() {
-      overlay.classList.remove("visible");
-      document.getElementById("confessional").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    closeSuccess.addEventListener("click", closeSuccessOverlay);
-
-    overlay.addEventListener("click", (event) => {
-      if (event.target === overlay) {
-        closeSuccessOverlay();
-      }
+    confession.addEventListener("input", () => {
+      counter.textContent = confession.value.length + " / 2000";
     });
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      hideStatus();
 
-      const confession = confessionField.value.trim();
-      const category = categoryField.value;
-      const consent = consentField.checked;
+      const text = confession.value.trim();
+      const category = document.getElementById("category").value;
+      const consent = document.getElementById("consent").checked;
 
-      if (confession.length < 10 || confession.length > 2000) {
-        showStatus(
-          "Your confession must be between 10 and 2000 characters.",
-          "error"
-        );
-        return;
-      }
+      status.className = "status"; // Reset status styling
 
-      if (!category) {
-        showStatus("Please choose a category.", "error");
-        categoryField.focus();
+      if (text.length < 10 || text.length > 2000) {
+        status.className = "status error visible";
+        status.textContent = "Write between 10 and 2000 characters.";
         return;
       }
 
       if (!consent) {
-        showStatus("Please confirm consent before submitting.", "error");
-        consentField.focus();
+        status.className = "status error visible";
+        status.textContent = "Please confirm your consent.";
         return;
       }
 
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending to the Vault...";
-      showStatus("Your confession is being delivered. Please wait.", "info");
+      button.disabled = true;
+      status.className = "status info visible";
+      status.textContent = "Releasing your truth into the Vault...";
 
       try {
         const response = await fetch(API_URL, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            confession,
-            category,
-            consent
+            confession: text,
+            category: category,
+            consent: consent
           })
         });
 
-        let result;
+        const data = await response.json();
 
-        try {
-          result = await response.json();
-        } catch {
-          result = {};
+        if (response.ok && data.success) {
+          status.className = "status success visible";
+          status.textContent = "✦ Your confession has been sealed in the Vault ✦";
+          form.reset();
+          counter.textContent = "0 / 2000";
+        } else {
+          throw new Error(data.error || "Submission failed.");
         }
-
-        if (!response.ok || result.success !== true) {
-          throw new Error(
-            result.error ||
-            "Your confession could not be delivered. Please try again."
-          );
-        }
-
-        // Reset form and show success blossom animation
-        form.reset();
-        counter.textContent = "0 / 2000 characters";
-        hideStatus();
-        openSuccess();
-
       } catch (error) {
-        console.error("Confession submission failed:", error);
-
-        showStatus(
-          error.message ||
-          "Connection failed. Please try again in a moment.",
-          "error"
-        );
+        status.className = "status error visible";
+        status.textContent = "Submission failed. Please try again later.";
+        console.error("Submission Error:", error);
       } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "✦ Send My Confession ✦";
+        button.disabled = false;
       }
     });
   </script>
