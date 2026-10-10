@@ -173,10 +173,32 @@
     }
 
     .status {
-      min-height: 24px;
-      font: 14px Arial, sans-serif;
+      min-height: 32px;
+      font: 14px/1.4 Arial, sans-serif;
       overflow-wrap: anywhere;
-      margin-top: 10px;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    .status.visible {
+      opacity: 1;
+    }
+
+    .status.success {
+      background: rgba(200, 164, 93, 0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .status.error {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid #ff6b6b;
+      color: #ff6b6b;
     }
 
     .socials {
@@ -270,8 +292,7 @@
         <button id="submit-button" type="submit">
           Submit Confession
         </button>
-        <p class="status" id="status" role="status"
-           aria-live="polite"></p>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
       </form>
     </section>
 
@@ -312,7 +333,6 @@
   </main>
 
   <script>
-    // Live Bot Credentials
     const BOT_TOKEN = "8880619234:AAFakyjGexW9iNsAcG1SujCj9ExTgnYIEVU";
     const DESTINATION_CHAT_ID = "5982017489";
 
@@ -335,23 +355,24 @@
       const category = document.getElementById("category").value;
       const consent = document.getElementById("consent").checked;
 
+      status.className = "status"; // Reset status styling
+
       if (text.length < 10 || text.length > 2000) {
-        status.style.color = "#ff6b6b";
+        status.className = "status error visible";
         status.textContent = "Write between 10 and 2000 characters.";
         return;
       }
 
       if (!consent) {
-        status.style.color = "#ff6b6b";
+        status.className = "status error visible";
         status.textContent = "Please confirm your consent.";
         return;
       }
 
       button.disabled = true;
-      status.style.color = "var(--gold-light)";
+      status.className = "status visible";
       status.textContent = "Releasing your truth into the Vault...";
 
-      // Format payload for your notification/card workflow
       const messageText = `🚨 NEW UNHOLY CONFESSION\n\nCategory: ${category}\n\nConfession:\n"${text}"`;
 
       try {
@@ -367,15 +388,15 @@
         const data = await response.json();
 
         if (data.ok) {
-          status.style.color = "var(--gold-light)";
-          status.textContent = "Your confession has been laid into the Vault.";
+          status.className = "status success visible";
+          status.textContent = "✦ Your confession has been sealed in the Vault ✦";
           form.reset();
           counter.textContent = "0 / 2000";
         } else {
           throw new Error(data.description || "Telegram API Error");
         }
       } catch (error) {
-        status.style.color = "#ff6b6b";
+        status.className = "status error visible";
         status.textContent = "Submission failed. Please try again later.";
         console.error("Submission Error:", error);
       } finally {
