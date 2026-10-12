@@ -38,7 +38,6 @@
     padding: 0 20px;
   }
 
-  /* Header */
   header {
     display: flex;
     justify-content: space-between;
@@ -64,9 +63,9 @@
   header nav a:hover { color: var(--text); }
 
   /* Hero */
-  .hero { margin-bottom: 48px; }
+  .hero { margin-bottom: 40px; }
   .hero h1 {
-    font-size: 40px;
+    font-size: 38px;
     line-height: 1.1;
     letter-spacing: -1px;
     margin: 0 0 20px;
@@ -86,47 +85,25 @@
     letter-spacing: 1.5px;
     color: var(--text-muted);
     font-weight: 700;
-    margin: 0 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin: 0 0 8px;
+  }
+  .section-sub {
+    font-size: 17px;
+    color: var(--text);
+    margin: 0 0 24px;
+    font-weight: 500;
   }
 
-  /* Confession Feed */
-  .feed { display: flex; flex-direction: column; gap: 16px; margin-bottom: 60px; }
-  .card {
+  /* X CTA (tight) */
+  .x-cta {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px;
-    transition: transform 0.2s, border-color 0.2s;
-  }
-  .card:active { transform: scale(0.99); }
-  .card-meta {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-  .card-meta .num { color: var(--accent); }
-  .card p {
-    margin: 0;
-    font-size: 20px;
-    line-height: 1.5;
-    color: var(--text);
-  }
-
-  /* X CTA (smaller now) */
-  .x-cta {
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 20px;
+    padding: 18px;
     text-align: center;
     margin-bottom: 48px;
   }
-  .x-cta .x-text {
+  .x-cta p {
     font-size: 15px;
     color: var(--text-muted);
     margin: 0 0 14px;
@@ -265,7 +242,7 @@
     font-size: 17px;
     line-height: 1.65;
     color: var(--text);
-    margin: 0 0 18px;
+    margin: 0 0 20px;
     max-width: 52ch;
   }
   .about .sig {
@@ -274,14 +251,13 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 24px;
+    margin-top: 8px;
   }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding-top: 24px;
-    margin-top: 40px;
+    margin-top: 60px;
     display: flex;
     justify-content: space-between;
     font-size: 14px;
@@ -370,8 +346,7 @@
   }
 
   @media (min-width: 600px) {
-    .hero h1 { font-size: 52px; }
-    .card p { font-size: 22px; }
+    .hero h1 { font-size: 46px; }
   }
 </style>
 </head>
@@ -389,29 +364,18 @@
   </header>
 
   <section class="hero">
-    <h1>What people can't say out loud.</h1>
-    <p>Anonymous. No accounts. No tracking. If it's real, it gets posted. No name attached.</p>
-  </section>
-
-  <section id="archive">
-    <div class="section-head">Archive</div>
-    <div class="feed">
-
-      <article class="card">
-        <div class="card-meta"><span class="num">№ 001</span> &nbsp;·&nbsp; The Keeper &nbsp;·&nbsp; Oct 2026</div>
-        <p>I want to know what someone would say if no one would ever know it was them.</p>
-      </article>
-
-    </div>
+    <h1>What would you say if no one would ever find out it was you?</h1>
+    <p>Write yours here. Read them all on X.</p>
   </section>
 
   <section class="x-cta">
-    <p class="x-text">All confessions get posted on X. This site is just the inbox.</p>
+    <p>Read what people sent. It's all on X.</p>
     <a class="btn" href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow @UnholyPriet</a>
   </section>
 
   <section id="post">
     <div class="section-head">Add yours</div>
+    <p class="section-sub">Say the thing.</p>
     <form id="confession-form" novalidate>
 
       <div class="form-group">
@@ -443,21 +407,19 @@
   </section>
 
   <section id="about" class="about" style="margin-top: 60px;">
-    <div class="section-head">About</div>
+    <div class="section-head" style="margin-bottom: 24px;">About</div>
 
-    <p>I built this because I had something I couldn't say out loud. Nothing dangerous. Just heavy. And I got curious. What do other people carry around that they never say? What would someone admit if no one could ever know it was them?</p>
+    <p>I built this because I had something I couldn't say out loud. Nothing dangerous. Just heavy.</p>
 
-    <p>That's really why this exists. The website is just the inbox. You type it out, tick the box, hit post. It goes through a bot straight to me. No names. No emails. No logins. Nothing that could lead back to you. I don't know who you are and I never will.</p>
+    <p>That got me wondering. What do other people carry around that they never say? What would someone admit if no one could ever know it was them?</p>
 
-    <p>Then it gets posted on X. All of it. The strange ones, the dark ones, the heavy ones, the ones that don't fit anywhere else. The only things I won't post are things that could get someone hurt.</p>
-
-    <p>So if you've been carrying something around, put it down here. Someone else will read it and feel less alone. That's the point.</p>
+    <p>Same question for you. If you've been holding something, put it down here. Someone else will read it and feel less alone.</p>
 
     <p class="sig">The Keeper</p>
   </section>
 
   <footer>
-    <span>Unholy Confessions · 2026</span>
+    <span>Unholy Confessions</span>
     <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow on X</a>
   </footer>
 
