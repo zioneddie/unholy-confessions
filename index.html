@@ -2,272 +2,347 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f3eee5">
-<title>Unholy Confessions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-color" content="#121212">
 <meta name="description" content="Anonymous confessions. Posted as written.">
+<title>Unholy Confessions</title>
 <style>
-  * { box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0a;
+    --surface: #171717;
+    --surface-hover: #1f1f1f;
+    --border: #2a2a2a;
+    --text: #ededed;
+    --text-muted: #999999;
+    --accent: #d92638;
+    --accent-hover: #f03b4e;
+    --radius: 12px;
+  }
 
-  html { -webkit-text-size-adjust: 100%; }
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    background: #f3eee5;
-    color: #1a1815;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 18px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
     line-height: 1.6;
-    padding: 40px 0 80px;
+    padding-bottom: 80px;
+    -webkit-font-smoothing: antialiased;
   }
 
   .wrap {
-    max-width: 680px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 0 22px;
+    padding: 0 20px;
   }
 
-  /* small mono meta layer */
-  .mono {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: #78716a;
-    text-transform: uppercase;
-  }
-
-  /* header */
+  /* Header */
   header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 18px;
-    border-bottom: 1px solid #d9d1c2;
-    margin-bottom: 60px;
+    align-items: center;
+    padding: 24px 0;
+    margin-bottom: 20px;
   }
-  header .brand { color: #1a1815; text-decoration: none; font-weight: bold; }
-  header nav a {
-    color: #78716a;
+  header .brand {
+    color: var(--text);
     text-decoration: none;
-    margin-left: 18px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
   }
-  header nav a:hover { color: #a8341f; }
+  header nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 15px;
+    margin-left: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  header nav a:hover { color: var(--text); }
 
-  /* hero */
-  .hero { margin-bottom: 72px; }
+  /* Hero */
+  .hero { margin-bottom: 48px; }
   .hero h1 {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-weight: normal;
-    font-size: clamp(34px, 8vw, 56px);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    margin: 0 0 28px;
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin: 0 0 20px;
+    font-weight: 800;
   }
   .hero p {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    font-size: 18px;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 45ch;
+  }
+
+  /* Section Headers */
+  .section-head {
     font-size: 13px;
-    letter-spacing: 0.04em;
-    color: #78716a;
-    text-transform: none;
-    margin: 0;
-    max-width: 46ch;
-    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin: 0 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  /* section headers */
-  h2 {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  /* Confession Feed */
+  .feed { display: flex; flex-direction: column; gap: 16px; margin-bottom: 60px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:active { transform: scale(0.99); }
+  .card-meta {
     font-size: 12px;
-    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
     text-transform: uppercase;
-    font-weight: normal;
-    color: #78716a;
-    margin: 0 0 32px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d9d1c2;
   }
-
-  section { margin-bottom: 72px; }
-
-  /* confession card */
-  .confession { margin-bottom: 44px; }
-  .confession .meta {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: #78716a;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .confession .meta .num { color: #a8341f; }
-  .confession p {
+  .card-meta .num { color: var(--accent); }
+  .card p {
     margin: 0;
-    font-size: 19px;
-    line-height: 1.65;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--text);
   }
 
-  /* form */
-  label.field {
+  /* Form */
+  .form-group { margin-bottom: 24px; }
+  .form-group label {
     display: block;
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
-    color: #78716a;
-    margin-bottom: 8px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
   }
 
   select, textarea {
     width: 100%;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 17px;
-    color: #1a1815;
-    background: transparent;
-    border: 1px solid #d9d1c2;
-    border-radius: 0;
-    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 18px;
+    padding: 16px;
     outline: none;
+    transition: border-color 0.2s;
     -webkit-appearance: none;
     appearance: none;
   }
   select {
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='none' stroke='%2378716a' stroke-width='1.5' d='M1 1l5 5 5-5'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='none' stroke='%23999999' stroke-width='2' d='M1 1l5 5 5-5'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 40px;
+    background-position: right 18px center;
+    padding-right: 48px;
   }
   textarea {
-    min-height: 200px;
+    min-height: 220px;
     resize: vertical;
-    line-height: 1.6;
+    line-height: 1.5;
   }
-  select:focus, textarea:focus {
-    border-color: #1a1815;
-  }
+  select:focus, textarea:focus { border-color: var(--accent); }
 
   .counter {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 11px;
-    color: #78716a;
     text-align: right;
-    margin-top: 6px;
-    letter-spacing: 0.06em;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-weight: 600;
   }
 
   .consent {
     display: flex;
-    gap: 10px;
+    gap: 14px;
     align-items: flex-start;
-    margin: 24px 0 8px;
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    color: #78716a;
-    text-transform: none;
-    letter-spacing: 0.02em;
+    margin: 24px 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-muted);
   }
   .consent input {
     appearance: none;
     -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 1px solid #78716a;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
     background: transparent;
-    margin-top: 3px;
+    margin-top: 0;
     flex: 0 0 auto;
     cursor: pointer;
     position: relative;
+    transition: all 0.2s;
   }
   .consent input:checked {
-    background: #1a1815;
-    border-color: #1a1815;
+    background: var(--accent);
+    border-color: var(--accent);
   }
   .consent input:checked::after {
     content: '';
     position: absolute;
-    left: 4px;
-    top: 1px;
-    width: 5px;
-    height: 9px;
-    border: solid #f3eee5;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 11px;
+    border: solid #fff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
 
-  .helper {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
-    color: #78716a;
-    margin: 0 0 20px;
-    line-height: 1.6;
-  }
-  .helper strong { color: #1a1815; font-weight: normal; }
-
   button.submit {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #f3eee5;
-    background: #1a1815;
-    border: 1px solid #1a1815;
-    padding: 16px 24px;
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px;
     cursor: pointer;
-    border-radius: 0;
-    transition: background 0.15s;
+    transition: background 0.2s, transform 0.1s;
   }
-  button.submit:hover:not(:disabled) { background: #a8341f; border-color: #a8341f; }
+  button.submit:hover:not(:disabled) { background: var(--accent-hover); }
+  button.submit:active:not(:disabled) { transform: scale(0.98); }
   button.submit:disabled { opacity: 0.5; cursor: wait; }
 
   .status {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
     margin-top: 18px;
-    line-height: 1.6;
     display: none;
   }
   .status.show { display: block; }
-  .status.ok { color: #1a1815; }
-  .status.err { color: #a8341f; }
+  .status.ok { color: #4ade80; }
+  .status.err { color: var(--accent); }
 
-  /* about */
+  /* About */
   .about p {
     font-size: 18px;
-    line-height: 1.7;
+    line-height: 1.6;
+    color: var(--text);
     margin: 0 0 18px;
-    max-width: 52ch;
+    max-width: 50ch;
   }
   .about .sig {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
-    color: #78716a;
-    letter-spacing: 0.08em;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 24px;
   }
 
-  /* footer */
+  /* Footer */
   footer {
-    border-top: 1px solid #d9d1c2;
+    border-top: 1px solid var(--border);
     padding-top: 24px;
+    margin-top: 40px;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 12px;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 600;
   }
-  footer, footer a {
-    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #78716a;
+  footer a {
+    color: var(--text-muted);
     text-decoration: none;
+    transition: color 0.2s;
   }
-  footer a:hover { color: #a8341f; }
+  footer a:hover { color: var(--text); }
 
-  /* wider screens: nudge the column off-center for a less template-y feel */
-  @media (min-width: 900px) {
-    .wrap { margin-left: 12%; margin-right: auto; }
+  /* Modal Pop-up */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 1000;
+  }
+  .modal-overlay.open { display: flex; }
+  
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 28px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(217, 38, 56, 0.1);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 28px;
+  }
+  .modal h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+  .modal p {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+  .modal button {
+    width: 100%;
+    background: var(--surface-hover);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .modal button:hover {
+    background: var(--border);
+    border-color: var(--text-muted);
+  }
+
+  @media (min-width: 600px) {
+    .hero h1 { font-size: 52px; }
+    .card p { font-size: 22px; }
   }
 </style>
 </head>
@@ -276,76 +351,68 @@
 <div class="wrap">
 
   <header>
-    <a class="brand mono" href="#">Unholy Confessions</a>
-    <nav class="mono">
+    <a class="brand" href="#">Unholy Confessions</a>
+    <nav>
       <a href="#post">Post</a>
       <a href="#about">About</a>
       <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">X ↗</a>
     </nav>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
-    <h1>What people can't<br>say out loud.</h1>
+    <h1>What people can't say out loud.</h1>
     <p>Anonymous. No accounts. No tracking. If it's real, it gets posted here — as written, without a name attached.</p>
   </section>
 
-  <!-- ARCHIVE / WALL -->
   <section id="archive">
-    <h2>Archive</h2>
-
-    <!-- 001 -->
-    <article class="confession">
-      <div class="meta"><span class="num">№ 001</span> &nbsp;·&nbsp; The Keeper &nbsp;·&nbsp; Oct 2026 &nbsp;·&nbsp; Origin</div>
-      <p>I want to know what someone would say if no one would ever know it was them.</p>
-    </article>
-
-    <!--
-      To add a new confession, copy this block and change the number, category and text:
-
-      <article class="confession">
-        <div class="meta"><span class="num">№ 002</span> &nbsp;·&nbsp; Anonymous &nbsp;·&nbsp; Oct 2026 &nbsp;·&nbsp; Regrets</div>
-        <p>Your confession text goes here.</p>
+    <div class="section-head">Archive</div>
+    <div class="feed">
+      
+      <!-- Confession 001 -->
+      <article class="card">
+        <div class="card-meta"><span class="num">№ 001</span> &nbsp;·&nbsp; The Keeper &nbsp;·&nbsp; Oct 2026</div>
+        <p>I want to know what someone would say if no one would ever know it was them.</p>
       </article>
-    -->
 
+      <!-- Copy the article block above to add more confessions -->
+
+    </div>
   </section>
 
-  <!-- SUBMIT -->
   <section id="post">
-    <h2>Add yours</h2>
-
+    <div class="section-head">Add yours</div>
     <form id="confession-form" novalidate>
 
-      <label class="field" for="category">Category</label>
-      <select id="category" name="category" required>
-        <option value="" disabled selected>Pick one</option>
-        <option value="Relationships">Relationships</option>
-        <option value="Dark secrets">Dark secrets</option>
-        <option value="Regrets">Regrets</option>
-        <option value="Moral dilemmas">Moral dilemmas</option>
-        <option value="Other">Other</option>
-      </select>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="" disabled selected>Pick one</option>
+          <option value="Relationships">Relationships</option>
+          <option value="Dark secrets">Dark secrets</option>
+          <option value="Regrets">Regrets</option>
+          <option value="Moral dilemmas">Moral dilemmas</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
 
-      <label class="field" for="confession" style="margin-top:24px;">Your confession</label>
-      <textarea id="confession" name="confession" maxlength="2000" placeholder="Type it like nobody's reading." required></textarea>
-      <div class="counter"><span id="count">0</span> / 2000</div>
+      <div class="form-group">
+        <label for="confession">Your confession</label>
+        <textarea id="confession" name="confession" maxlength="2000" placeholder="Type it here. No names. No emails." required></textarea>
+        <div class="counter"><span id="count">0</span> / 2000</div>
+      </div>
 
       <label class="consent" for="consent">
         <input id="consent" name="consent" type="checkbox" required>
         <span>I get that this goes to The Keeper and gets posted anonymously. I've left out names and anything that could identify me or anyone else.</span>
       </label>
 
-      <p class="helper"><strong>No names. No emails. No way back to you.</strong> Just write it and send.</p>
-
-      <button id="submit-button" class="submit" type="submit">Post it →</button>
+      <button id="submit-button" class="submit" type="submit">Post it</button>
       <div id="status" class="status" role="status" aria-live="polite"></div>
     </form>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="about">
-    <h2>About</h2>
+  <section id="about" class="about" style="margin-top: 60px;">
+    <div class="section-head">About</div>
     <p>I built this because I had something I couldn't say out loud. Not dangerous — just heavy. And I wanted to know what people would say if no one could ever know it was them.</p>
     <p>So this is where the ones who can't say it get to say it. Nothing you send is traceable. Nothing identifies you. If it's real, I post it.</p>
     <p class="sig">— The Keeper</p>
@@ -353,17 +420,26 @@
 
   <footer>
     <span>Unholy Confessions · 2026</span>
-    <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">@UnholyPriet ↗</a>
+    <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">@UnholyPriet</a>
   </footer>
 
+</div>
+
+<!-- Success Modal -->
+<div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-icon">✓</div>
+    <h2>Sent.</h2>
+    <p>Your words are in the Vault. They'll be posted anonymously soon. You will be witnessed, not known.</p>
+    <button id="close-success" type="button">Close</button>
+  </div>
 </div>
 
 <script>
 (function () {
   "use strict";
 
-  // ---- CONFIG ----
-  // This is your existing Render backend. Nothing about it changes.
+  // Your existing Render backend
   var API_URL = "https://unholy-confessions.onrender.com/api/confessions";
 
   var form      = document.getElementById("confession-form");
@@ -373,6 +449,8 @@
   var button    = document.getElementById("submit-button");
   var statusBox = document.getElementById("status");
   var count     = document.getElementById("count");
+  var overlay   = document.getElementById("success-overlay");
+  var closeBtn  = document.getElementById("close-success");
 
   var sending = false;
 
@@ -388,11 +466,9 @@
     count.textContent = String(textarea.value.length);
   }
 
-  // Live character counter
   textarea.addEventListener("input", updateCount);
   updateCount();
 
-  // Handle submission
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     if (sending) return;
@@ -426,7 +502,7 @@
     sending = true;
     button.disabled = true;
     button.textContent = "Sending...";
-    showStatus("Sending your confession...", "ok");
+    showStatus("Sending to the Vault...", "ok");
 
     var controller = new AbortController();
     var timer = setTimeout(function () { controller.abort(); }, 45000);
@@ -456,7 +532,7 @@
       form.reset();
       updateCount();
       clearStatus();
-      showStatus("Sent. It's in the Vault. It'll be posted anonymously soon.", "ok");
+      overlay.classList.add("open"); // Open the success modal
     })
     .catch(function (error) {
       if (error.name === "AbortError") {
@@ -471,12 +547,29 @@
       clearTimeout(timer);
       sending = false;
       button.disabled = false;
-      button.textContent = "Post it →";
+      button.textContent = "Post it";
     });
   });
+
+  // Close modal logic
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () {
+      overlay.classList.remove("open");
+    });
+  }
+  if (overlay) {
+    overlay.addEventListener("click", function (event) {
+      if (event.target === overlay) overlay.classList.remove("open");
+    });
+  }
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay.classList.contains("open")) {
+      overlay.classList.remove("open");
+    }
+  });
+
 })();
 </script>
 
 </body>
-    
 </html>
