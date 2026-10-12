@@ -28,7 +28,7 @@ h1{margin:17px 0 18px;color:var(--gold-light);font-weight:normal;font-size:clamp
 .section{padding:43px 0}.section-heading{text-align:center;color:var(--gold-light);font-size:clamp(26px,5vw,36px);font-weight:normal;line-height:1.2;margin:0 0 12px}
 .section-intro{max-width:570px;text-align:center;color:var(--muted);font-size:14px;margin:0 auto 30px}
 .teaser-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.teaser{min-height:158px;padding:23px;border:1px solid var(--border);background:linear-gradient(145deg,#19160f,#100f0d)}
-.teaser-label{color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase}.teaser-text{margin-top:17px;color:#d5c9b4;user-select:none; mask-image:linear-gradient(to bottom, #000 30%, transparent 100%);-webkit-mask-image:linear-gradient(to bottom, #000 30%, transparent 100%);}.teaser-note{color:var(--muted);font-size:11px;margin-top:11px}
+.teaser-label{color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase}.teaser-text{margin-top:17px;color:#d5c9b4;user-select:none;opacity:0.4;filter:blur(2px);} .teaser-note{color:var(--muted);font-size:11px;margin-top:11px}
 .form-panel{max-width:700px;margin:0 auto;padding:clamp(21px,5vw,40px);border:1px solid var(--border);background:linear-gradient(145deg,rgba(24,22,17,.98),rgba(13,13,12,.98));box-shadow:0 18px 60px #0006}
 .form-panel h3{text-align:center;color:var(--gold-light);font-size:25px;font-weight:normal;margin:0 0 7px}.form-description{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 23px;max-width:510px}
 .field-label{display:block;margin:20px 0 8px;color:var(--gold-light);font-size:13px}
@@ -98,28 +98,90 @@ textarea{min-height:180px;resize:vertical;line-height:1.7}select:focus,textarea:
 <script>
 (() => {
 "use strict";
-// Backend previously confirmed healthy. If your working deployment uses the other Render service,
-// change only this URL after confirming that service is the one receiving confessions.
 const API_URL = "https://unholy-confessions.onrender.com/api/confessions";
-const form=document.getElementById("confession-form"), confession=document.getElementById("confession"), category=document.getElementById("category"), consent=document.getElementById("consent"), button=document.getElementById("submit-button"), statusBox=document.getElementById("status"), count=document.getElementById("count"), overlay=document.getElementById("success-overlay"), closeSuccess=document.getElementById("close-success");
-let sending=false;
-document.getElementById("year").textContent=String(new Date().getFullYear());
-function status(message,type){statusBox.textContent=message;statusBox.className="status visible "+type}
-function clearStatus(){statusBox.textContent="";statusBox.className="status"}
-function updateCount(){count.textContent=String(confession.value.length)}
-confession.addEventListener("input",updateCount);
-// CHANGED: Now listening for a click on the button instead of a form submit
-button.addEventListener("click",async event=>{
-event.preventDefault();if(sending)return;clearStatus();
-const text=confession.value.trim(), selectedCategory=category.value, hasConsent=consent.checked;
-if(text.length<10){status("Please write at least 10 characters before submitting.","error");confession.focus();return}
-if(text.length>2000){status("Please keep your confession under 2000 characters.","error");confession.focus();return}
-if(!hasConsent){status("Please confirm the privacy notice before submitting.","error");consent.focus();return}
-sending=true;button.disabled=true;button.textContent="Sending to the Vault...";status("Sending your confession. Please wait...","info");
-const controller=new AbortController(), timeoutId=setTimeout(()=>controller.abort(),45000);
-try{
-const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({confession:text,category:selectedCategory,consent:hasConsent}),signal:controller.signal});
-let data={};try{data=await response.json()}catch(_){}
-if(!response.ok||data.success!==true){if(response.status===429)throw new Error("Too many attempts. Please wait a few minutes before trying again.");throw new Error(data.error||data.message||"The server could not confirm delivery. Please try again.")}
-form.reset();updateCount();clearStatus();overlay.classList.add("open");document.body.classList.add("modal-open");closeSuccess.focus();
-}catch(error){console.error("Confession submi
+
+const form = document.getElementById("confession-form");
+const confession = document.getElementById("confession");
+const category = document.getElementById("category");
+const consent = document.getElementById("consent");
+const button = document.getElementById("submit-button");
+const statusBox = document.getElementById("status");
+const count = document.getElementById("count");
+const overlay = document.getElementById("success-overlay");
+const closeSuccess = document.getElementById("close-success");
+const yearSpan = document.getElementById("year");
+
+if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
+
+let sending = false;
+
+function status(message, type) {
+    if (!statusBox) return;
+    statusBox.textContent = message;
+    statusBox.className = "status visible " + type;
+}
+
+function clearStatus() {
+    if (!statusBox) return;
+    statusBox.textContent = "";
+    statusBox.className = "status";
+}
+
+function updateCount() {
+    if (count && confession) {
+        count.textContent = String(confession.value.length);
+    }
+}
+
+if (confession) confession.addEventListener("input", updateCount);
+
+// Stop the form from submitting the traditional way (prevents page reload)
+if (form) {
+    form.addEventListener("submit", (e) => e.preventDefault());
+}
+
+async function sendConfession(event) {
+    if (event) event.preventDefault();
+    if (sending) return;
+    clearStatus();
+
+    const text = confession.value.trim();
+    const selectedCategory = category.value;
+    const hasConsent = consent.checked;
+
+    if (text.length < 10) {
+        status("Please write at least 10 characters before submitting.", "error");
+        confession.focus();
+        return;
+    }
+    if (text.length > 2000) {
+        status("Please keep your confession under 2000 characters.", "error");
+        confession.focus();
+        return;
+    }
+    if (!hasConsent) {
+        status("Please confirm the privacy notice before submitting.", "error");
+        consent.focus();
+        return;
+    }
+
+    sending = true;
+    button.disabled = true;
+    button.textContent = "Sending to the Vault...";
+    status("Sending your confession. Please wait...", "info");
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 45000);
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ confession: text, category: selectedCategory, consent: hasConsent }),
+            signal: controller.signal
+        });
+        
+        let data = {};
+        try { data = await response.json(); } catch (_) {}
+
+        if (!resp
