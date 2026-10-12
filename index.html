@@ -118,6 +118,40 @@
     color: var(--text);
   }
 
+  /* X CTA Box */
+  .x-cta {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .x-cta h3 {
+    font-size: 22px;
+    margin: 0 0 12px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .x-cta p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin: 0 0 24px;
+  }
+  .x-cta .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    transition: background 0.2s, transform 0.1s;
+  }
+  .x-cta .btn:hover { background: var(--accent-hover); }
+  .x-cta .btn:active { transform: scale(0.98); }
+
   /* Form */
   .form-group { margin-bottom: 24px; }
   .form-group label {
@@ -261,11 +295,12 @@
     font-weight: 600;
   }
   footer a {
-    color: var(--text-muted);
+    color: var(--accent);
     text-decoration: none;
+    font-weight: 700;
     transition: color 0.2s;
   }
-  footer a:hover { color: var(--text); }
+  footer a:hover { color: var(--accent-hover); }
 
   /* Modal Pop-up */
   .modal-overlay {
@@ -355,6 +390,7 @@
     <nav>
       <a href="#post">Post</a>
       <a href="#about">About</a>
+      <!-- Top right X link (kept as requested) -->
       <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">X ↗</a>
     </nav>
   </header>
@@ -377,6 +413,13 @@
       <!-- Copy the article block above to add more confessions -->
 
     </div>
+  </section>
+
+  <!-- NEW: X CTA Box -->
+  <section class="x-cta">
+    <h3>Follow the Vault on X</h3>
+    <p>This site is just the anonymous inbox. Every confession gets posted on X. Follow along to read what people can't say out loud.</p>
+    <a class="btn" href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow @UnholyPriet on X</a>
   </section>
 
   <section id="post">
@@ -403,7 +446,7 @@
 
       <label class="consent" for="consent">
         <input id="consent" name="consent" type="checkbox" required>
-        <span>I get that this goes to The Keeper and gets posted anonymously. I've left out names and anything that could identify me or anyone else.</span>
+        <span>I get that this goes to The Keeper and gets posted anonymously on X. I've left out names and anything that could identify me or anyone else.</span>
       </label>
 
       <button id="submit-button" class="submit" type="submit">Post it</button>
@@ -420,7 +463,7 @@
 
   <footer>
     <span>Unholy Confessions · 2026</span>
-    <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">@UnholyPriet</a>
+    <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow on X ↗</a>
   </footer>
 
 </div>
@@ -430,7 +473,7 @@
   <div class="modal">
     <div class="modal-icon">✓</div>
     <h2>Sent.</h2>
-    <p>Your words are in the Vault. They'll be posted anonymously soon. You will be witnessed, not known.</p>
+    <p>Your words are in the Vault. They'll be posted anonymously on X soon. Follow <strong>@UnholyPriet</strong> to see it.</p>
     <button id="close-success" type="button">Close</button>
   </div>
 </div>
