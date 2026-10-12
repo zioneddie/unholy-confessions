@@ -80,7 +80,7 @@ textarea{min-height:180px;resize:vertical;line-height:1.7}select:focus,textarea:
 <label class="field-label" for="confession">Your confession</label><textarea id="confession" name="confession" minlength="10" maxlength="2000" placeholder="Let the truth out..." required></textarea><div class="field-hint"><span id="count">0</span> / 2000 characters</div>
 <label class="consent-row" for="consent"><input id="consent" name="consent" type="checkbox" required><span>I understand this goes to The Keeper and will be shared anonymously on X. I've removed identifying details. I know no site can promise perfect anonymity — but I trust this one to try.</span></label>
 <p class="anon-promise">100% anonymous. No logins. No tracking. I will never know who you are — but your confession will be posted.</p>
-<button id="submit-button" class="button submit-button" type="submit">✦ Release My Confession ✦</button><div id="status" class="status" role="status" aria-live="polite"></div></form></div></section>
+<button id="submit-button" class="button submit-button" type="button">✦ Release My Confession ✦</button><div id="status" class="status" role="status" aria-live="polite"></div></form></div></section>
 <section class="section container"><h2 class="section-heading">The Vault Keeps Its Word</h2><p class="section-intro">Before you let your words go.</p><div class="privacy-grid"><div class="privacy-item"><strong>No name field</strong><span>You are not asked to provide your name.</span></div><div class="privacy-item"><strong>Completely anonymous</strong><span>No logins. No tracking. I can't see who you are, and I never will.</span></div><div class="privacy-item"><strong>It will be posted</strong><span>Your confession will be shared anonymously on X. The dark ones, the weird ones, the heavy ones. All of them.</span></div></div></section>
 <section class="section container"><div class="x-panel"><h2 class="section-heading">The Vault Continues on X</h2><p>Follow the whispers beyond these walls.</p><a class="button outline" href="https://x.com/UnholyPriet" target="_blank" rel="noopener noreferrer">Follow @UnholyPriet ↗</a></div></section>
 </main>
@@ -108,7 +108,8 @@ function status(message,type){statusBox.textContent=message;statusBox.className=
 function clearStatus(){statusBox.textContent="";statusBox.className="status"}
 function updateCount(){count.textContent=String(confession.value.length)}
 confession.addEventListener("input",updateCount);
-form.addEventListener("submit",async event=>{
+// CHANGED: Now listening for a click on the button instead of a form submit
+button.addEventListener("click",async event=>{
 event.preventDefault();if(sending)return;clearStatus();
 const text=confession.value.trim(), selectedCategory=category.value, hasConsent=consent.checked;
 if(text.length<10){status("Please write at least 10 characters before submitting.","error");confession.focus();return}
@@ -121,4 +122,4 @@ const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"appli
 let data={};try{data=await response.json()}catch(_){}
 if(!response.ok||data.success!==true){if(response.status===429)throw new Error("Too many attempts. Please wait a few minutes before trying again.");throw new Error(data.error||data.message||"The server could not confirm delivery. Please try again.")}
 form.reset();updateCount();clearStatus();overlay.classList.add("open");document.body.classList.add("modal-open");closeSuccess.focus();
-}catch(error){console.error("Confession submission error:",error);if(error.name==="AbortError")status("The request timed ou
+}catch(error){console.error("Confession submi
