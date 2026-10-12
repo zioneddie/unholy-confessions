@@ -39,13 +39,14 @@ select{min-height:48px}textarea{min-height:180px;resize:vertical;line-height:1.7
 .footer-link{margin-top:9px;letter-spacing:0}
 .footer a{color:var(--gold);text-decoration:none}
 
-/* New footer classes */
+/* Footer classes */
 .footer-keeper-line{color:var(--gold);font-weight:bold;font-size:13px;margin-bottom:8px;letter-spacing:.4px}
 .footer-promise-line{color:var(--text);font-style:italic;font-size:13px;margin-bottom:6px}
 .footer-sig{color:var(--muted);font-size:12px;margin-bottom:12px}
 .footer-meta{color:#8a7340;font-size:10px;letter-spacing:1px;margin-top:14px}
+.footer-human{color:#6e634f;font-size:10px;margin-top:8px;letter-spacing:.3px}
 
-/* New anonymity notice */
+/* Anonymity notice */
 .anon-promise{
   text-align:center;
   color:var(--gold);
@@ -81,21 +82,44 @@ select{min-height:48px}textarea{min-height:180px;resize:vertical;line-height:1.7
 <main id="top">
 <section class="hero container"><div class="sigil" aria-hidden="true">✦</div><div class="eyebrow">A sanctuary for the unsaid</div><h1>Unholy<br>Confessions</h1><p class="hero-copy">Confession has a price. Truth has a power. Leave the words you've kept buried in the dark — anonymously, without a name.</p><div class="divider"></div><div class="hero-actions"><a class="button" href="#submit">✦ Enter the Vault ✦</a><a class="button outline" href="https://x.com/UnholyPriet" target="_blank" rel="noopener noreferrer">Follow on X ↗</a></div></section>
 <section class="section container"><h2 class="section-heading">From the Shadows</h2><p class="section-intro">Some truths are easier to whisper into the dark. These are atmospheric previews — not real submissions.</p><div class="teaser-grid"><article class="teaser"><div class="teaser-label">Behind Closed Doors</div><div class="teaser-text">There is something I have carried for years, and nobody knows the weight of it...</div><div class="teaser-note">Some words remain hidden.</div></article><article class="teaser"><div class="teaser-label">The Unspoken</div><div class="teaser-text">If I could tell the truth without consequences, I would finally admit...</div><div class="teaser-note">Your truth could be next.</div></article></div></section>
-<section class="section container" id="submit"><h2 class="section-heading">Enter the Vault</h2><p class="section-intro">No names. No judgement. Just the truth you are ready to release.</p><div class="form-panel"><h3>Confess what silence conceals.</h3><p class="form-description">Write honestly, but leave out names, contact details, or information that could identify you or another person.</p>
+<section class="section container" id="submit"><h2 class="section-heading">Enter the Vault</h2><p class="section-intro">No names. No judgement. Just the truth you are ready to release.</p><div class="form-panel">
+<h3>What do you need to say?</h3>
+<p class="form-description">Write honestly, but leave out names, contact details, or anything that could identify you or someone else.</p>
 <form id="confession-form" novalidate>
-<label class="field-label" for="category">Choose your confession</label><select id="category" name="category" required><option value="Relationships">Relationships</option><option value="Dark secrets">Dark secrets</option><option value="Regrets">Regrets</option><option value="Moral dilemmas">Moral dilemmas</option><option value="Other">Other</option></select>
-<label class="field-label" for="confession">Your confession</label><textarea id="confession" name="confession" minlength="10" maxlength="2000" placeholder="Let the truth out..." required></textarea><div class="field-hint"><span id="count">0</span> / 2000 characters</div>
-<label class="consent-row" for="consent"><input id="consent" name="consent" type="checkbox" required><span>I understand this goes to The Keeper and will be shared anonymously on X. I've removed identifying details. I know no site can promise perfect anonymity — but I trust this one to try.</span></label>
+<label class="field-label" for="category">Choose your confession</label>
+<select id="category" name="category" required>
+  <option value="Relationships">Relationships</option>
+  <option value="Dark secrets">Dark secrets</option>
+  <option value="Regrets">Regrets</option>
+  <option value="Moral dilemmas">Moral dilemmas</option>
+  <option value="Other">Other</option>
+</select>
+<label class="field-label" for="confession">Your confession</label>
+<textarea id="confession" name="confession" minlength="10" maxlength="2000" placeholder="Just write it..." required></textarea>
+<div class="field-hint"><span id="count">0</span> / 2000 <span id="count-note"></span></div>
 
-<!-- NEW anonymity notice -->
-<div class="anon-promise">100% anonymous. No logins. No tracking. I will never know who you are — but your confession will be posted.</div>
+<label class="consent-row" for="consent">
+  <input id="consent" name="consent" type="checkbox">
+  <span>I understand this goes to The Keeper and will be shared anonymously on X. I've removed identifying details. I know no site can promise perfect anonymity — but I trust this one to try.</span>
+</label>
 
-<button id="submit-button" class="button submit-button" type="submit">✦ Release My Confession ✦</button><div id="status" class="status" role="status" aria-live="polite"></div></form></div></section>
-<section class="section container"><h2 class="section-heading">The Vault Keeps Its Word</h2><p class="section-intro">Before you let your words go.</p><div class="privacy-grid">
-<div class="privacy-item"><strong>No name field</strong><span>You are not asked to provide your name.</span></div>
-<div class="privacy-item"><strong>Completely anonymous</strong><span>No logins. No tracking. I can't see who you are, and I never will.</span></div>
-<div class="privacy-item"><strong>It will be posted</strong><span>Your confession will be shared anonymously on X. The dark ones, the weird ones, the heavy ones. All of them.</span></div>
+<div class="anon-promise">I won’t know who you are. I never will. Your words will still be seen.</div>
+
+<button id="submit-button" class="button submit-button" type="submit">Let it go</button>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+</form>
 </div></section>
+
+<section class="section container">
+  <h2 class="section-heading">The Vault Keeps Its Word</h2>
+  <p class="section-intro">Before you let your words go.</p>
+  <div class="privacy-grid">
+    <div class="privacy-item"><strong>No name field</strong><span>You are not asked to provide your name.</span></div>
+    <div class="privacy-item"><strong>Completely anonymous</strong><span>No logins. No tracking. I can't see who you are, and I never will.</span></div>
+    <div class="privacy-item"><strong>It will be posted</strong><span>Your confession will be shared anonymously on X. The dark ones, the weird ones, the heavy ones. All of them.</span></div>
+  </div>
+</section>
+
 <section class="section container"><div class="x-panel"><h2 class="section-heading">The Vault Continues on X</h2><p>Follow the whispers beyond these walls.</p><a class="button outline" href="https://x.com/UnholyPriet" target="_blank" rel="noopener noreferrer">Follow @UnholyPriet ↗</a></div></section>
 </main>
 
@@ -106,45 +130,150 @@ select{min-height:48px}textarea{min-height:180px;resize:vertical;line-height:1.7
     <div class="footer-sig">— The Keeper</div>
     <div class="footer-link"><a href="https://x.com/UnholyPriet" target="_blank" rel="noopener noreferrer">Follow the whispers on X</a></div>
     <div class="footer-meta">UNHOLY CONFESSIONS · <span id="year"></span></div>
+    <div class="footer-human">This is kept by one person.</div>
   </div>
 </footer>
 
-<div id="success-overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-message"><div class="success-card"><div class="success-sigil">✦</div><h2 id="success-title">Confession Released</h2><p id="success-message">Your words have entered the Vault. They will be shared anonymously on X. You will be witnessed, not known.</p><div class="garden" aria-label="Three flowers bloom in celebration">
-<div class="flower-plant"><div class="stem"></div><div class="leaf"></div><div class="leaf right"></div><div class="bloom"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="flower-center"></i></div></div>
-<div class="flower-plant"><div class="stem"></div><div class="leaf"></div><div class="leaf right"></div><div class="bloom"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="flower-center"></i></div></div>
-<div class="flower-plant"><div class="stem"></div><div class="leaf"></div><div class="leaf right"></div><div class="bloom"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="flower-center"></i></div></div></div><div class="success-actions"><button id="close-success" class="button outline" type="button">Return to the Vault</button></div></div></div>
+<div id="success-overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-message">
+  <div class="success-card">
+    <div class="success-sigil">✦</div>
+    <h2 id="success-title">Confession Released</h2>
+    <p id="success-message">Your words have entered the Vault. They will be shared anonymously on X. You will be witnessed, not known.</p>
+    <div class="garden" aria-label="Three flowers bloom in celebration">
+      <div class="flower-plant"><div class="stem"></div><div class="leaf"></div><div class="leaf right"></div><div class="bloom"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="flower-center"></i></div></div>
+      <div class="flower-plant"><div class="stem"></div><div class="leaf"></div><div class="leaf right"></div><div class="bloom"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="flower-center"></i></div></div>
+      <div class="flower-plant"><div class="stem"></div><div class="leaf"></div><div class="leaf right"></div><div class="bloom"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="flower-center"></i></div></div>
+    </div>
+    <div class="success-actions"><button id="close-success" class="button outline" type="button">Return to the Vault</button></div>
+  </div>
+</div>
+
 <script>
 (() => {
-"use strict";
-// Backend previously confirmed healthy. If your working deployment uses the other Render service,
-// change only this URL after confirming that service is the one receiving confessions.
-const API_URL = "https://unholy-confessions.onrender.com/api/confessions";
-const form=document.getElementById("confession-form"), confession=document.getElementById("confession"), category=document.getElementById("category"), consent=document.getElementById("consent"), button=document.getElementById("submit-button"), statusBox=document.getElementById("status"), count=document.getElementById("count"), overlay=document.getElementById("success-overlay"), closeSuccess=document.getElementById("close-success");
-let sending=false;
-document.getElementById("year").textContent=String(new Date().getFullYear());
-function status(message,type){statusBox.textContent=message;statusBox.className="status visible "+type}
-function clearStatus(){statusBox.textContent="";statusBox.className="status"}
-function updateCount(){count.textContent=String(confession.value.length)}
-confession.addEventListener("input",updateCount);
-form.addEventListener("submit",async event=>{
-event.preventDefault();if(sending)return;clearStatus();
-const text=confession.value.trim(), selectedCategory=category.value, hasConsent=consent.checked;
-if(text.length<10){status("Please write at least 10 characters before submitting.","error");confession.focus();return}
-if(text.length>2000){status("Please keep your confession under 2000 characters.","error");confession.focus();return}
-if(!hasConsent){status("Please confirm you understand the terms.","error");consent.focus();return}
-sending=true;button.disabled=true;status("Sending your confession into the Vault...","info");
-try{
-const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({category:selectedCategory,confession:text})});
-const data=await res.json().catch(()=>({}));
-if(!res.ok){throw new Error(data.message||data.error||"Something went wrong. Please try again.");}
-form.reset();updateCount();
-overlay.classList.add("open");document.body.classList.add("modal-open");
-}catch(err){status(err.message||"Unable to send. Please try again.","error")}
-finally{sending=false;button.disabled=false}
-});
-closeSuccess.addEventListener("click",()=>{overlay.classList.remove("open");document.body.classList.remove("modal-open")});
-overlay.addEventListener("click",e=>{if(e.target===overlay){overlay.classList.remove("open");document.body.classList.remove("modal-open")}});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("open")){overlay.classList.remove("open");document.body.classList.remove("modal-open")}});
+  "use strict";
+
+  const API_URL = "https://unholy-confessions.onrender.com/api/confessions";
+
+  const form = document.getElementById("confession-form");
+  const confession = document.getElementById("confession");
+  const category = document.getElementById("category");
+  const consent = document.getElementById("consent");
+  const button = document.getElementById("submit-button");
+  const statusBox = document.getElementById("status");
+  const count = document.getElementById("count");
+  const countNote = document.getElementById("count-note");
+  const overlay = document.getElementById("success-overlay");
+  const closeSuccess = document.getElementById("close-success");
+
+  let sending = false;
+
+  document.getElementById("year").textContent = String(new Date().getFullYear());
+
+  function showStatus(message, type) {
+    statusBox.textContent = message;
+    statusBox.className = "status visible " + type;
+  }
+
+  function clearStatus() {
+    statusBox.textContent = "";
+    statusBox.className = "status";
+  }
+
+  function updateCount() {
+    const len = confession.value.length;
+    count.textContent = String(len);
+
+    if (len === 0) {
+      countNote.textContent = "";
+    } else if (len < 10) {
+      countNote.textContent = "— a little more";
+    } else if (len > 1800) {
+      countNote.textContent = "— getting long";
+    } else {
+      countNote.textContent = "";
+    }
+  }
+
+  confession.addEventListener("input", updateCount);
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (sending) return;
+
+    clearStatus();
+
+    const text = confession.value.trim();
+    const selectedCategory = category.value;
+    const hasConsent = consent.checked;
+
+    if (text.length < 10) {
+      showStatus("That was a bit short — try writing a little more.", "error");
+      confession.focus();
+      return;
+    }
+
+    if (text.length > 2000) {
+      showStatus("Please keep it under 2000 characters.", "error");
+      confession.focus();
+      return;
+    }
+
+    if (!hasConsent) {
+      showStatus("Please check the box so I know you understand.", "error");
+      consent.focus();
+      return;
+    }
+
+    sending = true;
+    button.disabled = true;
+    showStatus("Sending it into the dark...", "info");
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: selectedCategory,
+          confession: text
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.message || data.error || "Something went wrong. Please try again.");
+      }
+
+      form.reset();
+      updateCount();
+      overlay.classList.add("open");
+      document.body.classList.add("modal-open");
+    } catch (err) {
+      showStatus(err.message || "Couldn’t send it right now. Please try again.", "error");
+    } finally {
+      sending = false;
+      button.disabled = false;
+    }
+  });
+
+  closeSuccess.addEventListener("click", () => {
+    overlay.classList.remove("open");
+    document.body.classList.remove("modal-open");
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("open");
+      document.body.classList.remove("modal-open");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("open")) {
+      overlay.classList.remove("open");
+      document.body.classList.remove("modal-open");
+    }
+  });
 })();
 </script>
 </body>
