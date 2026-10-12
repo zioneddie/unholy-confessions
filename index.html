@@ -118,34 +118,28 @@
     color: var(--text);
   }
 
-  /* X CTA Box */
+  /* X CTA (smaller now) */
   .x-cta {
     background: var(--surface);
-    border: 1px solid var(--accent);
     border-radius: var(--radius);
-    padding: 28px 24px;
+    padding: 20px;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 48px;
   }
-  .x-cta h3 {
-    font-size: 22px;
-    margin: 0 0 12px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-  }
-  .x-cta p {
+  .x-cta .x-text {
+    font-size: 15px;
     color: var(--text-muted);
-    font-size: 16px;
-    margin: 0 0 24px;
+    margin: 0 0 14px;
+    line-height: 1.5;
   }
   .x-cta .btn {
     display: inline-block;
     background: var(--accent);
     color: #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
-    padding: 16px 32px;
+    padding: 12px 24px;
     border-radius: var(--radius);
     transition: background 0.2s, transform 0.1s;
   }
@@ -268,11 +262,11 @@
 
   /* About */
   .about p {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.65;
     color: var(--text);
     margin: 0 0 18px;
-    max-width: 50ch;
+    max-width: 52ch;
   }
   .about .sig {
     font-size: 14px;
@@ -302,7 +296,7 @@
   }
   footer a:hover { color: var(--accent-hover); }
 
-  /* Modal Pop-up */
+  /* Modal */
   .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -316,7 +310,7 @@
     z-index: 1000;
   }
   .modal-overlay.open { display: flex; }
-  
+
   .modal {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -390,36 +384,30 @@
     <nav>
       <a href="#post">Post</a>
       <a href="#about">About</a>
-      <!-- Top right X link (kept as requested) -->
-      <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">X</a>
     </nav>
   </header>
 
   <section class="hero">
     <h1>What people can't say out loud.</h1>
-    <p>Anonymous. No accounts. No tracking. If it's real, it gets posted here — as written, without a name attached.</p>
+    <p>Anonymous. No accounts. No tracking. If it's real, it gets posted. No name attached.</p>
   </section>
 
   <section id="archive">
     <div class="section-head">Archive</div>
     <div class="feed">
-      
-      <!-- Confession 001 -->
+
       <article class="card">
         <div class="card-meta"><span class="num">№ 001</span> &nbsp;·&nbsp; The Keeper &nbsp;·&nbsp; Oct 2026</div>
         <p>I want to know what someone would say if no one would ever know it was them.</p>
       </article>
 
-      <!-- Copy the article block above to add more confessions -->
-
     </div>
   </section>
 
-  <!-- NEW: X CTA Box -->
   <section class="x-cta">
-    <h3>Follow the Vault on X</h3>
-    <p>This site is just the anonymous inbox. Every confession gets posted on X. Follow along to read what people can't say out loud.</p>
-    <a class="btn" href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow @UnholyPriet on X</a>
+    <p class="x-text">All confessions get posted on X. This site is just the inbox.</p>
+    <a class="btn" href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow @UnholyPriet</a>
   </section>
 
   <section id="post">
@@ -456,24 +444,30 @@
 
   <section id="about" class="about" style="margin-top: 60px;">
     <div class="section-head">About</div>
-    <p>I built this because I had something I couldn't say out loud. Not dangerous — just heavy. And I wanted to know what people would say if no one could ever know it was them.</p>
-    <p>So this is where the ones who can't say it get to say it. Nothing you send is traceable. Nothing identifies you. If it's real, I post it.</p>
-    <p class="sig">— The Keeper</p>
+
+    <p>I built this because I had something I couldn't say out loud. Nothing dangerous. Just heavy. And I got curious. What do other people carry around that they never say? What would someone admit if no one could ever know it was them?</p>
+
+    <p>That's really why this exists. The website is just the inbox. You type it out, tick the box, hit post. It goes through a bot straight to me. No names. No emails. No logins. Nothing that could lead back to you. I don't know who you are and I never will.</p>
+
+    <p>Then it gets posted on X. All of it. The strange ones, the dark ones, the heavy ones, the ones that don't fit anywhere else. The only things I won't post are things that could get someone hurt.</p>
+
+    <p>So if you've been carrying something around, put it down here. Someone else will read it and feel less alone. That's the point.</p>
+
+    <p class="sig">The Keeper</p>
   </section>
 
   <footer>
     <span>Unholy Confessions · 2026</span>
-    <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow on X ↗</a>
+    <a href="https://x.com/UnholyPriet" target="_blank" rel="noopener">Follow on X</a>
   </footer>
 
 </div>
 
-<!-- Success Modal -->
 <div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true">
   <div class="modal">
     <div class="modal-icon">✓</div>
     <h2>Sent.</h2>
-    <p>Your words are in the Vault. They'll be posted anonymously on X soon. Follow <strong>@UnholyPriet</strong> to see it.</p>
+    <p>It's in. It'll go up on X soon. Follow @UnholyPriet to see it.</p>
     <button id="close-success" type="button">Close</button>
   </div>
 </div>
@@ -482,7 +476,6 @@
 (function () {
   "use strict";
 
-  // Your existing Render backend
   var API_URL = "https://unholy-confessions.onrender.com/api/confessions";
 
   var form      = document.getElementById("confession-form");
@@ -575,11 +568,11 @@
       form.reset();
       updateCount();
       clearStatus();
-      overlay.classList.add("open"); // Open the success modal
+      overlay.classList.add("open");
     })
     .catch(function (error) {
       if (error.name === "AbortError") {
-        showStatus("Timed out. Delivery may be uncertain — check before sending again.", "err");
+        showStatus("Timed out. Delivery may be uncertain, check before sending again.", "err");
       } else if (error instanceof TypeError) {
         showStatus("Couldn't reach the Vault. Check your connection and try again.", "err");
       } else {
@@ -594,7 +587,6 @@
     });
   });
 
-  // Close modal logic
   if (closeBtn) {
     closeBtn.addEventListener("click", function () {
       overlay.classList.remove("open");
