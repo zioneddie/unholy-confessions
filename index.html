@@ -362,9 +362,9 @@
     <form id="confession-form" novalidate>
 
       <div class="form-group">
-        <label for="category">Category</label>
+        <label for="category">Confession type</label>
         <select id="category" name="category" required>
-          <option value="" disabled selected>Choose a sin</option>
+          <option value="" disabled selected>Select a confession</option>
           <option value="Pride">Pride</option>
           <option value="Greed">Greed</option>
           <option value="Lust">Lust</option>
@@ -477,7 +477,7 @@
     var hasConsent = consent.checked;
 
     if (!chosenCategory) {
-      showStatus("Pick a category first.", "err");
+      showStatus("Pick a confession type first.", "err");
       category.focus();
       return;
     }
