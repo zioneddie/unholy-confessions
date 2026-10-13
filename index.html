@@ -14,8 +14,9 @@
     --border: #2a2a2a;
     --text: #ededed;
     --text-muted: #999999;
-    --accent: #d92638;
-    --accent-hover: #f03b4e;
+    --accent: #e0a04a;
+    --accent-hover: #f0b25c;
+    --accent-text: #1a1208;
     --radius: 12px;
   }
 
@@ -94,7 +95,7 @@
     font-weight: 500;
   }
 
-  /* X CTA (tight) */
+  /* X CTA */
   .x-cta {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -112,7 +113,7 @@
   .x-cta .btn {
     display: inline-block;
     background: var(--accent);
-    color: #fff;
+    color: var(--accent-text);
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
@@ -204,7 +205,7 @@
     top: 2px;
     width: 6px;
     height: 11px;
-    border: solid #fff;
+    border: solid var(--accent-text);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
@@ -212,7 +213,7 @@
   button.submit {
     width: 100%;
     background: var(--accent);
-    color: #fff;
+    color: var(--accent-text);
     border: none;
     border-radius: var(--radius);
     font-family: inherit;
@@ -234,8 +235,8 @@
     display: none;
   }
   .status.show { display: block; }
-  .status.ok { color: #4ade80; }
-  .status.err { color: var(--accent); }
+  .status.ok { color: var(--accent); }
+  .status.err { color: #e05a4a; }
 
   /* About */
   .about p {
@@ -276,14 +277,15 @@
   .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: none;
     align-items: center;
     justify-content: center;
     padding: 24px;
     z-index: 1000;
+    cursor: pointer;
   }
   .modal-overlay.open { display: flex; }
 
@@ -291,58 +293,39 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 40px 28px;
+    padding: 56px 32px 40px;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     text-align: center;
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9);
   }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.9) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .modal-icon {
-    width: 64px;
-    height: 64px;
-    background: rgba(217, 38, 56, 0.1);
-    color: var(--accent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 28px;
-  }
   .modal h2 {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
-    margin: 0 0 12px;
+    margin: 0 0 18px;
     letter-spacing: -0.5px;
+    color: var(--text);
   }
   .modal p {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-muted);
-    margin: 0 0 28px;
-    line-height: 1.5;
+    margin: 0;
+    line-height: 1.55;
   }
-  .modal button {
-    width: 100%;
-    background: var(--surface-hover);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .modal button:hover {
-    background: var(--border);
-    border-color: var(--text-muted);
+  .modal .hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    margin-top: 32px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
   }
 
   @media (min-width: 600px) {
@@ -381,18 +364,21 @@
       <div class="form-group">
         <label for="category">Category</label>
         <select id="category" name="category" required>
-          <option value="" disabled selected>Pick one</option>
-          <option value="Relationships">Relationships</option>
-          <option value="Dark secrets">Dark secrets</option>
-          <option value="Regrets">Regrets</option>
-          <option value="Moral dilemmas">Moral dilemmas</option>
+          <option value="" disabled selected>Choose a sin</option>
+          <option value="Pride">Pride</option>
+          <option value="Greed">Greed</option>
+          <option value="Lust">Lust</option>
+          <option value="Envy">Envy</option>
+          <option value="Gluttony">Gluttony</option>
+          <option value="Wrath">Wrath</option>
+          <option value="Sloth">Sloth</option>
           <option value="Other">Other</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="confession">Your confession</label>
-        <textarea id="confession" name="confession" maxlength="2000" placeholder="Type it here. No names. No emails." required></textarea>
+        <textarea id="confession" name="confession" maxlength="2000" placeholder="In the dark, without a name, I..." required></textarea>
         <div class="counter"><span id="count">0</span> / 2000</div>
       </div>
 
@@ -427,10 +413,9 @@
 
 <div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true">
   <div class="modal">
-    <div class="modal-icon">✓</div>
-    <h2>Sent.</h2>
-    <p>It's in. It'll go up on X soon. Follow @UnholyPriet to see it.</p>
-    <button id="close-success" type="button">Close</button>
+    <h2>Received.</h2>
+    <p>It's off your chest. Go in peace.</p>
+    <div class="hint">tap anywhere to close</div>
   </div>
 </div>
 
@@ -448,9 +433,9 @@
   var statusBox = document.getElementById("status");
   var count     = document.getElementById("count");
   var overlay   = document.getElementById("success-overlay");
-  var closeBtn  = document.getElementById("close-success");
 
   var sending = false;
+  var autoCloseTimer = null;
 
   function showStatus(msg, kind) {
     statusBox.textContent = msg;
@@ -462,6 +447,21 @@
   }
   function updateCount() {
     count.textContent = String(textarea.value.length);
+  }
+
+  function openSuccess() {
+    overlay.classList.add("open");
+    autoCloseTimer = setTimeout(function () {
+      overlay.classList.remove("open");
+    }, 5000);
+  }
+
+  function closeSuccess() {
+    overlay.classList.remove("open");
+    if (autoCloseTimer) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = null;
+    }
   }
 
   textarea.addEventListener("input", updateCount);
@@ -530,7 +530,7 @@
       form.reset();
       updateCount();
       clearStatus();
-      overlay.classList.add("open");
+      openSuccess();
     })
     .catch(function (error) {
       if (error.name === "AbortError") {
@@ -549,19 +549,11 @@
     });
   });
 
-  if (closeBtn) {
-    closeBtn.addEventListener("click", function () {
-      overlay.classList.remove("open");
-    });
-  }
-  if (overlay) {
-    overlay.addEventListener("click", function (event) {
-      if (event.target === overlay) overlay.classList.remove("open");
-    });
-  }
+  overlay.addEventListener("click", closeSuccess);
+
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape" && overlay.classList.contains("open")) {
-      overlay.classList.remove("open");
+      closeSuccess();
     }
   });
 
