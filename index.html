@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<meta name="theme-color" content="#121212">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="description" content="Anonymous confessions. Posted as written.">
 <title>Unholy Confessions</title>
 <link rel="icon" type="image/png" href="/favicon.png?v=1">
@@ -280,8 +280,6 @@
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -299,12 +297,7 @@
     width: 100%;
     max-width: 380px;
     text-align: center;
-    animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     box-shadow: 0 20px 60px rgba(0,0,0,0.9);
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 
   .modal h2 {
@@ -502,7 +495,7 @@
     sending = true;
     button.disabled = true;
     button.textContent = "Sending...";
-    showStatus("Sending to the Vault...", "ok");
+    showStatus("Sending it now.", "ok");
 
     var controller = new AbortController();
     var timer = setTimeout(function () { controller.abort(); }, 45000);
@@ -523,7 +516,7 @@
           if (response.status === 429) {
             throw new Error("Too many attempts. Wait a few minutes and try again.");
           }
-          throw new Error(data.error || data.message || "The Vault didn't confirm delivery. Try again.");
+          throw new Error(data.error || data.message || "Didn't go through. Try again.");
         }
         return data;
       });
@@ -538,7 +531,7 @@
       if (error.name === "AbortError") {
         showStatus("Timed out. Delivery may be uncertain, check before sending again.", "err");
       } else if (error instanceof TypeError) {
-        showStatus("Couldn't reach the Vault. Check your connection and try again.", "err");
+        showStatus("Can't reach the server. Check your connection and try again.", "err");
       } else {
         showStatus(error.message || "Something went wrong. Try again.", "err");
       }
