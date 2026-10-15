@@ -97,6 +97,30 @@
     font-weight: 500;
   }
 
+  /* Info sections (privacy, rules, help) */
+  .info p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    margin: 0 0 20px;
+    max-width: 52ch;
+  }
+  .info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .info ul a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+  .info ul a:hover { color: var(--accent-hover); }
+
   /* X CTA */
   .x-cta {
     background: var(--surface);
@@ -387,6 +411,27 @@
     </form>
   </section>
 
+  <section id="privacy" class="info" style="margin-top: 60px;">
+    <div class="section-head">Privacy</div>
+    <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who posts it on X as written. Don't include names or details that could identify you or anyone else.</p>
+  </section>
+
+  <section id="rules" class="info" style="margin-top: 48px;">
+    <div class="section-head">What I won't post</div>
+    <p>Names, phone numbers, accusations against real people, or anything that could expose someone. If your confession has those, I'll remove them or skip it.</p>
+  </section>
+
+  <section id="help" class="info" style="margin-top: 48px;">
+    <div class="section-head">If it's more than a confession</div>
+    <p>Some things are too heavy to carry alone. If you're in crisis, reach out. You don't have to tell me first.</p>
+    <ul>
+      <li>Uganda Police Force: <a href="https://www.upf.go.ug" target="_blank" rel="noopener">upf.go.ug</a></li>
+      <li>Butabika National Referral Mental Hospital: <a href="https://www.butabikahospital.go.ug" target="_blank" rel="noopener">butabikahospital.go.ug</a></li>
+      <li>Befrienders Worldwide: <a href="https://befrienders.org" target="_blank" rel="noopener">befrienders.org</a></li>
+      <li>Find a helpline in your country: <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a></li>
+    </ul>
+  </section>
+
   <section id="about" class="about" style="margin-top: 60px;">
     <div class="section-head" style="margin-bottom: 24px;">About</div>
 
@@ -409,7 +454,7 @@
 <div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true">
   <div class="modal">
     <h2>Received.</h2>
-    <p>Received. The Keeper will post it on X.</p>
+    <p>The Keeper will post it on X.</p>
     <div class="hint">tap anywhere to close</div>
   </div>
 </div>
@@ -556,4 +601,4 @@
 </script>
 
 </body>
-  </html>
+</html>
