@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="theme-color" content="#0a0a0a">
-<meta name="description" content="Anonymous confessions. Posted as written.">
+<meta name="description" content="Say what you can't say out loud. Anonymous confessions, read by one person.">
 <title>Unholy Confessions</title>
 <link rel="icon" type="image/png" href="/favicon.png?v=2">
 <link rel="apple-touch-icon" href="/favicon.png?v=2">
@@ -136,19 +136,28 @@
     margin: 0 0 14px;
     line-height: 1.5;
   }
-  .x-cta .btn {
+  .btn {
     display: inline-block;
     background: var(--accent);
     color: var(--accent-text);
     text-decoration: none;
+    font-family: inherit;
     font-size: 14px;
     font-weight: 700;
     padding: 12px 24px;
+    border: none;
     border-radius: var(--radius);
+    cursor: pointer;
     transition: background 0.2s, transform 0.1s;
   }
-  .x-cta .btn:hover { background: var(--accent-hover); }
-  .x-cta .btn:active { transform: scale(0.98); }
+  .btn:hover { background: var(--accent-hover); }
+  .btn:active { transform: scale(0.98); }
+  .btn.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn.secondary:hover { background: var(--surface-hover); }
 
   /* Form */
   .form-group { margin-bottom: 24px; }
@@ -253,6 +262,13 @@
   button.submit:active:not(:disabled) { transform: scale(0.98); }
   button.submit:disabled { opacity: 0.5; cursor: wait; }
 
+  .form-note {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 14px 0 0;
+  }
+
   .status {
     text-align: center;
     font-size: 15px;
@@ -309,42 +325,67 @@
     justify-content: center;
     padding: 24px;
     z-index: 1000;
-    cursor: pointer;
+    overflow-y: auto;
   }
   .modal-overlay.open { display: flex; }
 
   .modal {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 56px 32px 40px;
+    padding: 48px 28px 32px;
     width: 100%;
     max-width: 380px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.9);
   }
 
+  .modal-x {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .modal-x:hover { color: var(--text); background: var(--surface-hover); }
+
   .modal h2 {
     font-size: 32px;
     font-weight: 800;
-    margin: 0 0 18px;
+    margin: 0 0 14px;
     letter-spacing: -0.5px;
     color: var(--text);
   }
   .modal p {
-    font-size: 17px;
+    font-size: 16px;
     color: var(--text-muted);
-    margin: 0;
+    margin: 0 0 12px;
     line-height: 1.55;
   }
-  .modal .hint {
-    font-size: 12px;
-    color: var(--text-muted);
-    opacity: 0.5;
-    margin-top: 32px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    font-weight: 600;
+  .modal .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .modal .actions .btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px 24px;
+  }
+
+  a:focus-visible, button:focus-visible, select:focus-visible,
+  textarea:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   @media (min-width: 600px) {
@@ -367,11 +408,11 @@
 
   <section class="hero">
     <h1>What would you say if no one would ever find out it was you?</h1>
-    <p>Write yours here. Read them all on X.</p>
+    <p>Write yours here. Read what others sent on X.</p>
   </section>
 
   <section class="x-cta">
-    <p>Read what people sent. It's all on X.</p>
+    <p>Read what strangers admit when no one's watching.</p>
     <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow @theunholykeeper</a>
   </section>
 
@@ -403,22 +444,23 @@
 
       <label class="consent" for="consent">
         <input id="consent" name="consent" type="checkbox" required>
-        <span>I get that this goes to The Keeper and gets posted anonymously on X. I've left out names and anything that could identify me or anyone else.</span>
+        <span>I get that this goes to The Keeper, who may post it anonymously on X. I've left out names and anything that could identify me or anyone else.</span>
       </label>
 
       <button id="submit-button" class="submit" type="submit">Post it</button>
+      <p class="form-note">One person reads every confession. Not every confession is posted.</p>
       <div id="status" class="status" role="status" aria-live="polite"></div>
     </form>
   </section>
 
   <section id="privacy" class="info" style="margin-top: 60px;">
     <div class="section-head">Privacy</div>
-    <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who posts it on X as written. Don't include names or details that could identify you or anyone else.</p>
+    <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who reads it and may post it on X. Don't include names or details that could identify you or anyone else.</p>
   </section>
 
   <section id="rules" class="info" style="margin-top: 48px;">
     <div class="section-head">What I won't post</div>
-    <p>Names, phone numbers, accusations against real people, or anything that could expose someone. If your confession has those, I'll remove them or skip it.</p>
+    <p>I read every confession myself. I don't post names, phone numbers, or accusations against real people, and I may skip or lightly edit anything that could expose someone.</p>
   </section>
 
   <section id="help" class="info" style="margin-top: 48px;">
@@ -433,11 +475,15 @@
   <section id="about" class="about" style="margin-top: 60px;">
     <div class="section-head" style="margin-bottom: 24px;">About</div>
 
-    <p>I built this because I had something I couldn't say out loud. Nothing dangerous. Just heavy.</p>
+    <p>I built this because I was carrying something I couldn't say out loud. Not dangerous. Just heavy.</p>
 
-    <p>That got me wondering. What do other people carry around that they never say? What would someone admit if no one could ever know it was them?</p>
+    <p>It made me wonder what everyone else is holding that they never say.</p>
 
-    <p>Same question for you. If you've been holding something, put it down here. Someone else will read it and feel less alone.</p>
+    <p>So here's a place to put it down. No name, no account, no one you'll ever have to face. I read every confession myself, and I post what I can on X, lightly edited only to remove anything identifying.</p>
+
+    <p>It might be petty. It might be strange. It might be the thing you've never told anyone. It all belongs here, and someone out there is carrying the same thing and will feel a little less alone reading yours.</p>
+
+    <p>Say the thing.</p>
 
     <p class="sig">The Keeper</p>
   </section>
@@ -449,11 +495,16 @@
 
 </div>
 
-<div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true">
+<div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="success-title">
   <div class="modal">
-    <h2>Received.</h2>
-    <p>The Keeper will post it on X.</p>
-    <div class="hint">tap anywhere to close</div>
+    <button id="close-x" class="modal-x" type="button" aria-label="Close">&times;</button>
+    <h2 id="success-title">Received.</h2>
+    <p>The Keeper will read it. If it goes up, it'll be on X.</p>
+    <p>Follow @theunholykeeper to see what others couldn't say out loud.</p>
+    <div class="actions">
+      <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow on X</a>
+      <button id="close-btn" class="btn secondary" type="button">Close</button>
+    </div>
   </div>
 </div>
 
@@ -471,9 +522,10 @@
   var statusBox = document.getElementById("status");
   var count     = document.getElementById("count");
   var overlay   = document.getElementById("success-overlay");
+  var closeBtn  = document.getElementById("close-btn");
+  var closeX    = document.getElementById("close-x");
 
   var sending = false;
-  var autoCloseTimer = null;
 
   function showStatus(msg, kind) {
     statusBox.textContent = msg;
@@ -489,17 +541,14 @@
 
   function openSuccess() {
     overlay.classList.add("open");
-    autoCloseTimer = setTimeout(function () {
-      overlay.classList.remove("open");
-    }, 5000);
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
   }
 
   function closeSuccess() {
     overlay.classList.remove("open");
-    if (autoCloseTimer) {
-      clearTimeout(autoCloseTimer);
-      autoCloseTimer = null;
-    }
+    document.body.style.overflow = "";
+    try { button.focus({ preventScroll: true }); } catch (e) {}
   }
 
   textarea.addEventListener("input", updateCount);
@@ -587,7 +636,13 @@
     });
   });
 
-  overlay.addEventListener("click", closeSuccess);
+  closeBtn.addEventListener("click", closeSuccess);
+  closeX.addEventListener("click", closeSuccess);
+
+  // Tapping the dark area outside the box also closes it
+  overlay.addEventListener("click", function (event) {
+    if (event.target === overlay) closeSuccess();
+  });
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape" && overlay.classList.contains("open")) {
@@ -599,4 +654,5 @@
 </script>
 
 </body>
-</html>
+  </html>
+  
