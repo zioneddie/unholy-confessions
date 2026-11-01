@@ -20,16 +20,9 @@
 <link rel="apple-touch-icon" href="/favicon.png?v=2">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #171717;
-    --surface-hover: #1f1f1f;
-    --border: #2a2a2a;
-    --text: #ededed;
-    --text-muted: #999999;
-    --accent: #e0a04a;
-    --accent-hover: #f0b25c;
-    --accent-text: #1a1208;
-    --radius: 12px;
+    --bg: #0a0a0a; --surface: #171717; --surface-hover: #1f1f1f; --border: #2a2a2a;
+    --text: #ededed; --text-muted: #999999; --accent: #e0a04a; --accent-hover: #f0b25c;
+    --accent-text: #1a1208; --radius: 12px;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background-color: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.6; padding-bottom: 80px; -webkit-font-smoothing: antialiased; }
@@ -57,10 +50,8 @@
   .btn.secondary:hover { background: var(--surface-hover); }
   .form-group { margin-bottom: 24px; }
   .form-group label { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px; }
-  select, textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: inherit; font-size: 18px; padding: 16px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; }
-  select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='none' stroke='%23999999' stroke-width='2' d='M1 1l5 5 5-5'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 18px center; padding-right: 48px; }
-  textarea { min-height: 220px; resize: vertical; line-height: 1.5; }
-  select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: inherit; font-size: 18px; padding: 16px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; min-height: 220px; resize: vertical; line-height: 1.5; }
+  textarea:focus { border-color: var(--accent); }
   .counter { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 8px; font-weight: 600; }
   .consent { display: flex; gap: 14px; align-items: flex-start; margin: 24px 0; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
   .consent input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; background: transparent; margin-top: 0; flex: 0 0 auto; cursor: pointer; position: relative; transition: all 0.2s; }
@@ -75,9 +66,10 @@
   .status.show { display: block; }
   .status.ok { color: var(--accent); }
   .status.err { color: #e05a4a; }
-  .voice-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: var(--radius); width: 100%; text-align: center; cursor: pointer; font-weight: 600; margin-bottom: 15px; transition: all 0.2s; font-family: inherit; font-size: 15px; }
+  .voice-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: var(--radius); width: 100%; text-align: center; cursor: pointer; font-weight: 600; margin-bottom: 10px; transition: all 0.2s; font-family: inherit; font-size: 15px; }
   .voice-toggle.recording { background: #e05a4a; color: white; border-color: #e05a4a; }
   .voice-hidden { display: none !important; }
+  .voice-warning { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px; }
   .about p { font-size: 17px; line-height: 1.65; color: var(--text); margin: 0 0 20px; max-width: 52ch; }
   .about .sig { font-size: 14px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
   footer { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 60px; display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); font-weight: 600; }
@@ -92,7 +84,7 @@
   .modal p { font-size: 16px; color: var(--text-muted); margin: 0 0 12px; line-height: 1.55; }
   .modal .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
   .modal .actions .btn { width: 100%; font-size: 16px; padding: 14px 24px; }
-  a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (min-width: 600px) { .hero h1 { font-size: 46px; } }
 </style>
 </head>
@@ -124,25 +116,12 @@
 
   <section id="post">
     <div class="section-head">Add yours</div>
-    <p class="section-sub">Say the thing.</p>
+    <p class="section-sub">Send your confession anonymously.</p>
     <form id="confession-form" novalidate>
-
-      <div class="form-group">
-        <label for="category">Confession type</label>
-        <select id="category" name="category" required>
-          <option value="" disabled selected>Select a confession</option>
-          <option value="Pride">Pride</option>
-          <option value="Greed">Greed</option>
-          <option value="Lust">Lust</option>
-          <option value="Envy">Envy</option>
-          <option value="Gluttony">Gluttony</option>
-          <option value="Wrath">Wrath</option>
-          <option value="Sloth">Sloth</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
+      
       <button type="button" id="record-btn" class="voice-toggle">🎙️ Record Voice Confession</button>
+      <p class="voice-warning">Heads up: if someone knows your voice, they will recognize it. For total anonymity, use text.</p>
+      
       <div id="recording-status" class="counter voice-hidden" style="text-align: left; margin-bottom: 15px; color: #e05a4a;">● Recording... tap to stop.</div>
 
       <div id="text-input-group" class="form-group">
@@ -222,7 +201,6 @@
 
   var form      = document.getElementById("confession-form");
   var textarea  = document.getElementById("confession");
-  var category  = document.getElementById("category");
   var consent   = document.getElementById("consent");
   var button    = document.getElementById("submit-button");
   var statusBox = document.getElementById("status");
@@ -313,15 +291,20 @@
     reader.onloadend = function() {
       var base64data = reader.result;
 
+      // Increased timeout to 90 seconds to let Render/Cloudflare finish processing
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); }, 90000);
+
       fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "voice",
           audio: base64data,
-          category: category.value || "Voice",
+          category: "Voice",
           consent: true
-        })
+        }),
+        signal: controller.signal
       })
       .then(function(response) {
         if (!response.ok) throw new Error("Server failed to process voice note");
@@ -341,6 +324,7 @@
         textarea.required = true;
       })
       .finally(function() {
+        clearTimeout(timer);
         button.disabled = false;
       });
     };
@@ -353,14 +337,8 @@
     clearStatus();
 
     var text = textarea.value.trim();
-    var chosenCategory = category.value;
     var hasConsent = consent.checked;
 
-    if (!chosenCategory) {
-      showStatus("Pick a confession type first.", "err");
-      category.focus();
-      return;
-    }
     if (text.length < 10) {
       showStatus("Write at least 10 characters.", "err");
       textarea.focus();
@@ -371,14 +349,14 @@
       consent.focus();
       return;
     }
-    
+
     sending = true;
     button.disabled = true;
     button.textContent = "Sending...";
     showStatus("Sending it now.", "ok");
 
     var controller = new AbortController();
-    var timer = setTimeout(function () { controller.abort(); }, 45000);
+    var timer = setTimeout(function () { controller.abort(); }, 90000);
 
     fetch(API_URL, {
       method: "POST",
@@ -386,7 +364,7 @@
       body: JSON.stringify({
         type: "text",
         confession: text,
-        category: chosenCategory,
+        category: "Confession",
         consent: hasConsent
       }),
       signal: controller.signal
@@ -394,8 +372,12 @@
     .then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok || data.success !== true) {
-          if (response.status === 429) {
-            throw new Error("Too many attempts. Wait a few minutes and try again.");
+            if (!response.ok || data.success !== true) {
+  if (response.status === 429) {
+    throw new Error("Too many attempts. Wait a few minutes and try again.");
+  }
+  throw new Error(data.error || data.message || "Didn't go through. Try again.");
+                          throw new Error("Too many attempts. Wait a few minutes and try again.");
           }
           throw new Error(data.error || data.message || "Didn't go through. Try again.");
         }
@@ -443,5 +425,3 @@
 
 </body>
 </html>
-
-  
