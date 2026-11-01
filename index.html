@@ -371,5 +371,77 @@
       consent.focus();
       return;
     }
+    
+    sending = true;
+    button.disabled = true;
+    button.textContent = "Sending...";
+    showStatus("Sending it now.", "ok");
+
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, 45000);
+
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "text",
+        confession: text,
+        category: chosenCategory,
+        consent: hasConsent
+      }),
+      signal: controller.signal
+    })
+    .then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok || data.success !== true) {
+          if (response.status === 429) {
+            throw new Error("Too many attempts. Wait a few minutes and try again.");
+          }
+          throw new Error(data.error || data.message || "Didn't go through. Try again.");
+        }
+        return data;
+      });
+    })
+    .then(function () {
+      form.reset();
+      updateCount();
+      clearStatus();
+      openSuccess();
+    })
+    .catch(function (error) {
+      if (error.name === "AbortError") {
+        showStatus("Timed out. Delivery may be uncertain, check before sending again.", "err");
+      } else if (error instanceof TypeError) {
+        showStatus("Can't reach the server. Check your connection and try again.", "err");
+      } else {
+        showStatus(error.message || "Something went wrong. Try again.", "err");
+      }
+    })
+    .then(function () {
+      clearTimeout(timer);
+      sending = false;
+      button.disabled = false;
+      button.textContent = "Post it";
+    });
+  });
+
+  closeBtn.addEventListener("click", closeSuccess);
+  closeX.addEventListener("click", closeSuccess);
+
+  overlay.addEventListener("click", function (event) {
+    if (event.target === overlay) closeSuccess();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay.classList.contains("open")) {
+      closeSuccess();
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
 
   
