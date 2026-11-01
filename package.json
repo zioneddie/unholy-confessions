@@ -1,4 +1,3 @@
-
 {
   "name": "unholy-confessions-api",
   "version": "1.0.0",
@@ -8,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "aws4fetch": "^1.0.19"
   }
 }
