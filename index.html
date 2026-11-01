@@ -131,8 +131,8 @@
   }
   .info ul a:hover { color: var(--accent-hover); }
 
-  /* X CTA */
-  .x-cta {
+  /* Social CTA */
+  .social-cta {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -140,11 +140,16 @@
     text-align: center;
     margin-bottom: 48px;
   }
-  .x-cta p {
+  .social-cta p {
     font-size: 15px;
     color: var(--text-muted);
     margin: 0 0 14px;
     line-height: 1.5;
+  }
+  .social-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
   }
   .btn {
     display: inline-block;
@@ -159,6 +164,7 @@
     border-radius: var(--radius);
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
+    flex: 1;
   }
   .btn:hover { background: var(--accent-hover); }
   .btn:active { transform: scale(0.98); }
@@ -290,6 +296,11 @@
   .status.ok { color: var(--accent); }
   .status.err { color: #e05a4a; }
 
+  /* Voice Recorder Styles */
+  .voice-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: var(--radius); width: 100%; text-align: center; cursor: pointer; font-weight: 600; margin-bottom: 15px; transition: all 0.2s; font-family: inherit; font-size: 15px;}
+  .voice-toggle.recording { background: #e05a4a; color: white; border-color: #e05a4a; }
+  .voice-hidden { display: none !important; }
+
   /* About */
   .about p {
     font-size: 17px;
@@ -413,17 +424,21 @@
       <a href="#post">Post</a>
       <a href="#about">About</a>
       <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">X</a>
+      <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">TikTok</a>
     </nav>
   </header>
 
   <section class="hero">
     <h1>What would you say if no one would ever find out it was you?</h1>
-    <p>Write yours here. Read what others sent on X.</p>
+    <p>Write yours here. Read what others sent on X and TikTok.</p>
   </section>
 
-  <section class="x-cta">
+  <section class="social-cta">
     <p>Read what strangers admit when no one's watching.</p>
-    <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow @theunholykeeper</a>
+    <div class="social-buttons">
+      <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow on X</a>
+      <a class="btn secondary" href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">Watch on TikTok</a>
+    </div>
   </section>
 
   <section id="post">
@@ -446,15 +461,18 @@
         </select>
       </div>
 
-      <div class="form-group">
+      <button type="button" id="record-btn" class="voice-toggle">🎙️ Record Voice Confession</button>
+      <div id="recording-status" class="counter voice-hidden" style="text-align: left; margin-bottom: 15px; color: #e05a4a;">● Recording... tap to stop.</div>
+
+      <div id="text-input-group" class="form-group">
         <label for="confession">Your confession</label>
-        <textarea id="confession" name="confession" maxlength="2000" placeholder="In the dark, without a name, I..." required></textarea>
-        <div class="counter"><span id="count">0</span> / 2000</div>
+        <textarea id="confession" name="confession" maxlength="5000" placeholder="In the dark, without a name, I..." required></textarea>
+        <div class="counter"><span id="count">0</span> / 5000</div>
       </div>
 
       <label class="consent" for="consent">
         <input id="consent" name="consent" type="checkbox" required>
-        <span>I get that this goes to The Keeper, who may post it anonymously on X. I've left out names and anything that could identify me or anyone else.</span>
+        <span>I get that this goes to The Keeper, who may post it anonymously on X and TikTok. I've left out names and anything that could identify me or anyone else.</span>
       </label>
 
       <button id="submit-button" class="submit" type="submit">Post it</button>
@@ -465,7 +483,7 @@
 
   <section id="privacy" class="info" style="margin-top: 60px;">
     <div class="section-head">Privacy</div>
-    <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who reads it and may post it on X. Don't include names or details that could identify you or anyone else.</p>
+    <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who reads it and may post it on X or TikTok. Don't include names or details that could identify you or anyone else.</p>
   </section>
 
   <section id="rules" class="info" style="margin-top: 48px;">
@@ -489,7 +507,7 @@
 
     <p>It made me wonder what everyone else is holding that they never say.</p>
 
-    <p>So here's a place to put it down. No name, no account, no one you'll ever have to face. I read every confession myself, and I post what I can on X, lightly edited only to remove anything identifying.</p>
+    <p>So here's a place to put it down. No name, no account, no one you'll ever have to face. I read every confession myself, and I post what I can on X and TikTok, lightly edited only to remove anything identifying.</p>
 
     <p>It might be petty. It might be strange. It might be the thing you've never told anyone. It all belongs here, and someone out there is carrying the same thing and will feel a little less alone reading yours.</p>
 
@@ -500,7 +518,10 @@
 
   <footer>
     <span>Unholy Confessions</span>
-    <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow on X</a>
+    <div style="display: flex; gap: 16px;">
+      <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow on X</a>
+      <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">Follow on TikTok</a>
+    </div>
   </footer>
 
 </div>
@@ -509,7 +530,7 @@
   <div class="modal">
     <button id="close-x" class="modal-x" type="button" aria-label="Close">&times;</button>
     <h2 id="success-title">Received.</h2>
-    <p>The Keeper will read it. If it goes up, it'll be on X.</p>
+    <p>The Keeper will read it. If it goes up, it'll be on X or TikTok.</p>
     <p>Follow @theunholykeeper to see what others couldn't say out loud.</p>
     <div class="actions">
       <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow on X</a>
@@ -534,8 +555,15 @@
   var overlay   = document.getElementById("success-overlay");
   var closeBtn  = document.getElementById("close-btn");
   var closeX    = document.getElementById("close-x");
+  
+  var recordBtn = document.getElementById("record-btn");
+  var recordingStatus = document.getElementById("recording-status");
+  var textInputGroup = document.getElementById("text-input-group");
 
   var sending = false;
+  var mediaRecorder;
+  var audioChunks = [];
+  var isRecording = false;
 
   function showStatus(msg, kind) {
     statusBox.textContent = msg;
@@ -564,104 +592,69 @@
   textarea.addEventListener("input", updateCount);
   updateCount();
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    if (sending) return;
-    clearStatus();
+  // --- VOICE RECORDING LOGIC ---
+  recordBtn.addEventListener("click", async () => {
+    if (!isRecording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
 
-    var text = textarea.value.trim();
-    var chosenCategory = category.value;
-    var hasConsent = consent.checked;
+        mediaRecorder.ondataavailable = event => {
+          audioChunks.push(event.data);
+        };
 
-    if (!chosenCategory) {
-      showStatus("Pick a confession type first.", "err");
-      category.focus();
-      return;
-    }
-    if (text.length < 10) {
-      showStatus("Write at least 10 characters.", "err");
-      textarea.focus();
-      return;
-    }
-    if (text.length > 2000) {
-      showStatus("Keep it under 2000 characters.", "err");
-      textarea.focus();
-      return;
-    }
-    if (!hasConsent) {
-      showStatus("Tick the consent box first.", "err");
-      consent.focus();
-      return;
-    }
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          stream.getTracks().forEach(track => track.stop());
+          await uploadVoiceNote(audioBlob);
+        };
 
-    sending = true;
-    button.disabled = true;
-    button.textContent = "Sending...";
-    showStatus("Sending it now.", "ok");
+        mediaRecorder.start();
+        isRecording = true;
+        recordBtn.textContent = "⏹️ Stop Recording";
+        recordBtn.classList.add("recording");
+        recordingStatus.classList.remove("voice-hidden");
+        textInputGroup.classList.add("voice-hidden");
+        textarea.required = false;
 
-    var controller = new AbortController();
-    var timer = setTimeout(function () { controller.abort(); }, 45000);
-
-    fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        confession: text,
-        category: chosenCategory,
-        consent: hasConsent
-      }),
-      signal: controller.signal
-    })
-    .then(function (response) {
-      return response.json().catch(function () { return {}; }).then(function (data) {
-        if (!response.ok || data.success !== true) {
-          if (response.status === 429) {
-            throw new Error("Too many attempts. Wait a few minutes and try again.");
-          }
-          throw new Error(data.error || data.message || "Didn't go through. Try again.");
-        }
-        return data;
-      });
-    })
-    .then(function () {
-      form.reset();
-      updateCount();
-      clearStatus();
-      openSuccess();
-    })
-    .catch(function (error) {
-      if (error.name === "AbortError") {
-        showStatus("Timed out. Delivery may be uncertain, check before sending again.", "err");
-      } else if (error instanceof TypeError) {
-        showStatus("Can't reach the server. Check your connection and try again.", "err");
-      } else {
-        showStatus(error.message || "Something went wrong. Try again.", "err");
+      } catch (err) {
+        alert("Microphone access denied. Please type your confession instead.");
       }
-    })
-    .then(function () {
-      clearTimeout(timer);
-      sending = false;
-      button.disabled = false;
-      button.textContent = "Post it";
-    });
-  });
-
-  closeBtn.addEventListener("click", closeSuccess);
-  closeX.addEventListener("click", closeSuccess);
-
-  // Tapping the dark area outside the box also closes it
-  overlay.addEventListener("click", function (event) {
-    if (event.target === overlay) closeSuccess();
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && overlay.classList.contains("open")) {
-      closeSuccess();
+    } else {
+      mediaRecorder.stop();
+      isRecording = false;
+      recordBtn.textContent = "🎙️ Record Voice Confession";
+      recordBtn.classList.remove("recording");
+      recordingStatus.classList.add("voice-hidden");
     }
   });
 
-})();
-</script>
+  async function uploadVoiceNote(blob) {
+    showStatus("Sending voice note...", "ok");
+    button.disabled = true;
 
-</body>
-</html>
+    // Convert blob to base64 to send to Render
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = async function() {
+      const base64data = reader.result;
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "voice",
+            audio: base64data,
+            category: category.value || "Voice",
+            consent: true
+          })
+        });
+
+        if (!response.ok) throw new Error("Server failed to process voice note");
+        
+        form.reset();
+        updateCount();
+        clearStatus();
+        openSuccess()
