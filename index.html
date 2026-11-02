@@ -27,29 +27,27 @@
   * { box-sizing: border-box; }
   body { margin: 0; background-color: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.6; padding-bottom: 80px; -webkit-font-smoothing: antialiased; }
   .wrap { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+  
+  /* Header Links */
   header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; margin-bottom: 20px; }
   header .brand { color: var(--text); text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
-  header nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; margin-left: 16px; font-weight: 500; transition: color 0.2s; }
-  header nav a:hover { color: var(--text); }
+  header nav { display: flex; gap: 16px; align-items: center; }
+  header nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
+  header nav a:hover { color: var(--accent); }
+
   .hero { margin-bottom: 40px; }
   .hero h1 { font-size: 38px; line-height: 1.1; letter-spacing: -1px; margin: 0 0 20px; font-weight: 800; }
   .hero p { font-size: 18px; color: var(--text-muted); margin: 0; max-width: 45ch; }
+  
   .section-head { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 700; margin: 0 0 8px; }
   .section-sub { font-size: 17px; color: var(--text); margin: 0 0 24px; font-weight: 500; }
+  
   .info p { font-size: 17px; line-height: 1.65; color: var(--text); margin: 0 0 20px; max-width: 52ch; }
   .info ul { list-style: none; padding: 0; margin: 0; font-size: 16px; line-height: 1.9; color: var(--text); }
   .info ul a { color: var(--accent); text-decoration: none; font-weight: 700; transition: color 0.2s; }
   .info ul a:hover { color: var(--accent-hover); }
-  .social-cta { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; text-align: center; margin-bottom: 48px; }
-  .social-cta p { font-size: 15px; color: var(--text-muted); margin: 0 0 14px; line-height: 1.5; }
-  .social-buttons { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
-  .btn { display: inline-block; background: var(--accent); color: var(--accent-text); text-decoration: none; font-family: inherit; font-size: 14px; font-weight: 700; padding: 12px 24px; border: none; border-radius: var(--radius); cursor: pointer; transition: background 0.2s, transform 0.1s; flex: 1; }
-  .btn:hover { background: var(--accent-hover); }
-  .btn:active { transform: scale(0.98); }
-  .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn.secondary:hover { background: var(--surface-hover); }
+  
   .form-group { margin-bottom: 24px; }
-  .form-group label { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px; }
   textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: inherit; font-size: 18px; padding: 16px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; min-height: 220px; resize: vertical; line-height: 1.5; }
   textarea:focus { border-color: var(--accent); }
   .counter { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 8px; font-weight: 600; }
@@ -57,24 +55,30 @@
   .consent input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; background: transparent; margin-top: 0; flex: 0 0 auto; cursor: pointer; position: relative; transition: all 0.2s; }
   .consent input:checked { background: var(--accent); border-color: var(--accent); }
   .consent input:checked::after { content: ''; position: absolute; left: 6px; top: 2px; width: 6px; height: 11px; border: solid var(--accent-text); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  
   button.submit { width: 100%; background: var(--accent); color: var(--accent-text); border: none; border-radius: var(--radius); font-family: inherit; font-size: 17px; font-weight: 700; padding: 18px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
   button.submit:hover:not(:disabled) { background: var(--accent-hover); }
   button.submit:active:not(:disabled) { transform: scale(0.98); }
   button.submit:disabled { opacity: 0.5; cursor: wait; }
+  
   .form-note { text-align: center; font-size: 14px; color: var(--text-muted); margin: 14px 0 0; }
   .status { text-align: center; font-size: 15px; font-weight: 600; margin-top: 18px; display: none; }
   .status.show { display: block; }
   .status.ok { color: var(--accent); }
   .status.err { color: #e05a4a; }
+  
   .voice-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: var(--radius); width: 100%; text-align: center; cursor: pointer; font-weight: 600; margin-bottom: 10px; transition: all 0.2s; font-family: inherit; font-size: 15px; }
   .voice-toggle.recording { background: #e05a4a; color: white; border-color: #e05a4a; }
   .voice-hidden { display: none !important; }
   .voice-warning { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px; }
+  
   .about p { font-size: 17px; line-height: 1.65; color: var(--text); margin: 0 0 20px; max-width: 52ch; }
   .about .sig { font-size: 14px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+  
   footer { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 60px; display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); font-weight: 600; }
-  footer a { color: var(--accent); text-decoration: none; font-weight: 700; transition: color 0.2s; }
-  footer a:hover { color: var(--accent-hover); }
+  footer a { color: var(--text); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+  footer a:hover { color: var(--accent); }
+  
   .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.88); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 1000; overflow-y: auto; }
   .modal-overlay.open { display: flex; }
   .modal { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px 28px 32px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.9); }
@@ -83,7 +87,9 @@
   .modal h2 { font-size: 32px; font-weight: 800; margin: 0 0 14px; letter-spacing: -0.5px; color: var(--text); }
   .modal p { font-size: 16px; color: var(--text-muted); margin: 0 0 12px; line-height: 1.55; }
   .modal .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
-  .modal .actions .btn { width: 100%; font-size: 16px; padding: 14px 24px; }
+  .modal .actions .btn { width: 100%; font-size: 16px; padding: 14px 24px; background: var(--accent); color: var(--accent-text); border: none; border-radius: var(--radius); font-weight: 700; text-decoration: none; cursor: pointer; }
+  .modal .actions .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  
   a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (min-width: 600px) { .hero h1 { font-size: 46px; } }
 </style>
@@ -94,8 +100,6 @@
   <header>
     <a class="brand" href="#">Unholy Confessions</a>
     <nav>
-      <a href="#post">Post</a>
-      <a href="#about">About</a>
       <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">X</a>
       <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">TikTok</a>
     </nav>
@@ -104,14 +108,6 @@
   <section class="hero">
     <h1>What would you say if no one would ever find out it was you?</h1>
     <p>Write yours here. Read what others sent on X and TikTok.</p>
-  </section>
-
-  <section class="social-cta">
-    <p>Read what strangers admit when no one's watching.</p>
-    <div class="social-buttons">
-      <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow the Keeper on X</a>
-      <a class="btn secondary" href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">Follow the Keeper on TikTok</a>
-    </div>
   </section>
 
   <section id="post">
@@ -125,7 +121,6 @@
       <div id="recording-status" class="counter voice-hidden" style="text-align: left; margin-bottom: 15px; color: #e05a4a;">● Recording... tap to stop.</div>
 
       <div id="text-input-group" class="form-group">
-        <label for="confession">Your confession</label>
         <textarea id="confession" name="confession" maxlength="5000" placeholder="In the dark, without a name, I..." required></textarea>
         <div class="counter"><span id="count">0</span> / 5000</div>
       </div>
@@ -135,7 +130,7 @@
         <span>I get that this goes to The Keeper, who may post it anonymously on X and TikTok. I've left out names and anything that could identify me or anyone else.</span>
       </label>
 
-      <button id="submit-button" class="submit" type="submit">Post it</button>
+      <button id="submit-button" class="submit" type="submit">Leave it here</button>
       <p class="form-note">One person reads every confession. Not every confession is posted.</p>
       <div id="status" class="status" role="status" aria-live="polite"></div>
     </form>
@@ -166,15 +161,15 @@
     <p>It made me wonder what everyone else is holding that they never say.</p>
     <p>So here's a place to put it down. No name, no account, no one you'll ever have to face. I read every confession myself, and I post what I can on X and TikTok, lightly edited only to remove anything identifying.</p>
     <p>It might be petty. It might be strange. It might be the thing you've never told anyone. It all belongs here, and someone out there is carrying the same thing and will feel a little less alone reading yours.</p>
-    <p>Say the thing.</p>
+    <p>The door is open.</p>
     <p class="sig">The Keeper</p>
   </section>
 
   <footer>
     <span>Unholy Confessions</span>
     <div style="display: flex; gap: 16px;">
-      <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow on X</a>
-      <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">Follow on TikTok</a>
+      <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">X</a>
+      <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">TikTok</a>
     </div>
   </footer>
 </div>
@@ -183,7 +178,7 @@
   <div class="modal">
     <button id="close-x" class="modal-x" type="button" aria-label="Close">&times;</button>
     <h2 id="success-title">Received.</h2>
-    <p>The Keeper will read it. If it goes up, it'll be on X or TikTok.</p>
+    <p>The Keeper will read it. If it fits, it'll be shared.</p>
     <p>Follow @theunholykeeper to see what others couldn't say out loud.</p>
     <div class="actions">
       <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow the Keeper on X</a>
@@ -249,7 +244,15 @@
   recordBtn.addEventListener("click", function() {
     if (!isRecording) {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
-        mediaRecorder = new MediaRecorder(stream);
+        
+        // Force higher quality recording
+        var options = { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 128000 };
+        try {
+            mediaRecorder = new MediaRecorder(stream, options);
+        } catch (e) {
+            mediaRecorder = new MediaRecorder(stream); 
+        }
+
         audioChunks = [];
 
         mediaRecorder.ondataavailable = function(event) {
@@ -291,7 +294,6 @@
     reader.onloadend = function() {
       var base64data = reader.result;
 
-      // Increased timeout to 90 seconds to let Render/Cloudflare finish processing
       var controller = new AbortController();
       var timer = setTimeout(function () { controller.abort(); }, 90000);
 
@@ -352,7 +354,7 @@
 
     sending = true;
     button.disabled = true;
-    button.textContent = "Sending...";
+    button.textContent = "Leaving it here...";
     showStatus("Sending it now.", "ok");
 
     var controller = new AbortController();
@@ -372,12 +374,8 @@
     .then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok || data.success !== true) {
-            if (!response.ok || data.success !== true) {
-  if (response.status === 429) {
-    throw new Error("Too many attempts. Wait a few minutes and try again.");
-  }
-  throw new Error(data.error || data.message || "Didn't go through. Try again.");
-                          throw new Error("Too many attempts. Wait a few minutes and try again.");
+          if (response.status === 429) {
+            throw new Error("Too many attempts. Wait a few minutes and try again.");
           }
           throw new Error(data.error || data.message || "Didn't go through. Try again.");
         }
@@ -403,7 +401,7 @@
       clearTimeout(timer);
       sending = false;
       button.disabled = false;
-      button.textContent = "Post it";
+      button.textContent = "Leave it here";
     });
   });
 
@@ -411,7 +409,7 @@
   closeX.addEventListener("click", closeSuccess);
 
   overlay.addEventListener("click", function (event) {
-    if (event.target === overlay) closeSuccess();
+          if (event.target === overlay) closeSuccess();
   });
 
   document.addEventListener("keydown", function (event) {
