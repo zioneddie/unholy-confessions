@@ -18,80 +18,331 @@
 <title>Unholy Confessions</title>
 <link rel="icon" type="image/png" href="/favicon.png?v=2">
 <link rel="apple-touch-icon" href="/favicon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a; --surface: #171717; --surface-hover: #1f1f1f; --border: #2a2a2a;
-    --text: #ededed; --text-muted: #999999; --accent: #e0a04a; --accent-hover: #f0b25c;
-    --accent-text: #1a1208; --radius: 12px;
+    --bg: #070707;
+    --surface: #121212;
+    --surface-hover: #1a1a1a;
+    --border: #262626;
+    --text: #f0f0f0;
+    --text-muted: #a0a0a0;
+    --accent: #d4a04a;
+    --accent-hover: #e8b56a;
+    --accent-text: #1a1208;
+    --radius: 14px;
+    --shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background-color: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.6; padding-bottom: 80px; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 600px; margin: 0 auto; padding: 0 20px; }
-  
-  /* Header Links */
-  header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; margin-bottom: 20px; }
-  header .brand { color: var(--text); text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
-  header nav { display: flex; gap: 16px; align-items: center; }
-  header nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.65;
+    padding-bottom: 100px;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0 20px;
+    margin-bottom: 8px;
+  }
+  header .brand {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.3px;
+  }
+  header nav { display: flex; gap: 20px; align-items: center; }
+  header nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
   header nav a:hover { color: var(--accent); }
 
-  .hero { margin-bottom: 40px; }
-  .hero h1 { font-size: 38px; line-height: 1.1; letter-spacing: -1px; margin: 0 0 20px; font-weight: 800; }
-  .hero p { font-size: 18px; color: var(--text-muted); margin: 0; max-width: 45ch; }
-  
-  .section-head { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 700; margin: 0 0 8px; }
-  .section-sub { font-size: 17px; color: var(--text); margin: 0 0 24px; font-weight: 500; }
-  
-  .info p { font-size: 17px; line-height: 1.65; color: var(--text); margin: 0 0 20px; max-width: 52ch; }
-  .info ul { list-style: none; padding: 0; margin: 0; font-size: 16px; line-height: 1.9; color: var(--text); }
-  .info ul a { color: var(--accent); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+  .hero { margin: 32px 0 48px; }
+  .hero h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 42px;
+    line-height: 1.08;
+    letter-spacing: -0.8px;
+    margin: 0 0 18px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  .hero p { font-size: 18px; color: var(--text-muted); margin: 0; max-width: 42ch; }
+
+  .section-head {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+  .section-sub { font-size: 16.5px; color: var(--text); margin: 0 0 22px; font-weight: 500; }
+
+  .featured {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px 18px;
+    margin: 40px 0 50px;
+    box-shadow: var(--shadow);
+  }
+  .featured .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .featured blockquote {
+    margin: 0 0 14px;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .featured .meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .featured a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .featured a:hover { color: var(--accent-hover); }
+
+  .info p, .about p {
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 18px;
+    max-width: 54ch;
+  }
+  .info ul { list-style: none; padding: 0; margin: 0; font-size: 15.5px; line-height: 1.9; color: var(--text); }
+  .info ul a { color: var(--accent); text-decoration: none; font-weight: 700; }
   .info ul a:hover { color: var(--accent-hover); }
-  
-  .form-group { margin-bottom: 24px; }
-  textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: inherit; font-size: 18px; padding: 16px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; min-height: 220px; resize: vertical; line-height: 1.5; }
-  textarea:focus { border-color: var(--accent); }
-  .counter { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 8px; font-weight: 600; }
-  .consent { display: flex; gap: 14px; align-items: flex-start; margin: 24px 0; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
-  .consent input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; background: transparent; margin-top: 0; flex: 0 0 auto; cursor: pointer; position: relative; transition: all 0.2s; }
+
+  .form-group { margin-bottom: 20px; }
+  textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 17px;
+    padding: 18px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-height: 200px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+  textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,160,74,0.12); }
+  .counter { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
+
+  .consent {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 20px 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .consent input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    background: transparent;
+    margin-top: 1px;
+    flex: 0 0 auto;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s;
+  }
   .consent input:checked { background: var(--accent); border-color: var(--accent); }
-  .consent input:checked::after { content: ''; position: absolute; left: 6px; top: 2px; width: 6px; height: 11px; border: solid var(--accent-text); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-  
-  button.submit { width: 100%; background: var(--accent); color: var(--accent-text); border: none; border-radius: var(--radius); font-family: inherit; font-size: 17px; font-weight: 700; padding: 18px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+  .consent input:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--accent-text);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  button.submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--accent-text);
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 16.5px;
+    font-weight: 700;
+    padding: 16px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
   button.submit:hover:not(:disabled) { background: var(--accent-hover); }
-  button.submit:active:not(:disabled) { transform: scale(0.98); }
-  button.submit:disabled { opacity: 0.5; cursor: wait; }
-  
-  .form-note { text-align: center; font-size: 14px; color: var(--text-muted); margin: 14px 0 0; }
-  .status { text-align: center; font-size: 15px; font-weight: 600; margin-top: 18px; display: none; }
+  button.submit:active:not(:disabled) { transform: scale(0.985); }
+  button.submit:disabled { opacity: 0.55; cursor: wait; }
+
+  .form-note { text-align: center; font-size: 13.5px; color: var(--text-muted); margin: 12px 0 0; }
+  .status { text-align: center; font-size: 14.5px; font-weight: 600; margin-top: 16px; display: none; }
   .status.show { display: block; }
   .status.ok { color: var(--accent); }
   .status.err { color: #e05a4a; }
-  
-  .voice-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: var(--radius); width: 100%; text-align: center; cursor: pointer; font-weight: 600; margin-bottom: 10px; transition: all 0.2s; font-family: inherit; font-size: 15px; }
-  .voice-toggle.recording { background: #e05a4a; color: white; border-color: #e05a4a; }
+
+  .voice-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 13px;
+    border-radius: var(--radius);
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-size: 15px;
+  }
+  .voice-toggle:hover { border-color: var(--accent); }
+  .voice-toggle.recording { background: #c44a3a; color: white; border-color: #c44a3a; }
   .voice-hidden { display: none !important; }
-  .voice-warning { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px; }
-  
-  .about p { font-size: 17px; line-height: 1.65; color: var(--text); margin: 0 0 20px; max-width: 52ch; }
-  .about .sig { font-size: 14px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
-  
-  footer { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 60px; display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); font-weight: 600; }
-  footer a { color: var(--text); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+  .voice-warning { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 18px; }
+
+  .about .sig {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-top: 6px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  footer a { color: var(--text); text-decoration: none; font-weight: 600; }
   footer a:hover { color: var(--accent); }
-  
-  .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.88); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 1000; overflow-y: auto; }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
   .modal-overlay.open { display: flex; }
-  .modal { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px 28px 32px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.9); }
-  .modal-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; background: transparent; border: none; color: var(--text-muted); font-size: 28px; line-height: 1; cursor: pointer; border-radius: 50%; }
+  .modal {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 44px 26px 28px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  }
+  .modal-x {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 26px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
   .modal-x:hover { color: var(--text); background: var(--surface-hover); }
-  .modal h2 { font-size: 32px; font-weight: 800; margin: 0 0 14px; letter-spacing: -0.5px; color: var(--text); }
-  .modal p { font-size: 16px; color: var(--text-muted); margin: 0 0 12px; line-height: 1.55; }
-  .modal .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
-  .modal .actions .btn { width: 100%; font-size: 16px; padding: 14px 24px; background: var(--accent); color: var(--accent-text); border: none; border-radius: var(--radius); font-weight: 700; text-decoration: none; cursor: pointer; }
-  .modal .actions .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  
-  a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  @media (min-width: 600px) { .hero h1 { font-size: 46px; } }
+  .modal h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+  .modal p { font-size: 15.5px; color: var(--text-muted); margin: 0 0 10px; line-height: 1.5; }
+  .modal .actions { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+  .modal .actions .btn {
+    width: 100%;
+    font-size: 15px;
+    padding: 13px 20px;
+    background: var(--accent);
+    color: var(--accent-text);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .modal .actions .btn.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  @media (min-width: 640px) {
+    .hero h1 { font-size: 52px; }
+    .wrap { padding: 0 28px; }
+  }
 </style>
 </head>
 <body>
@@ -108,6 +359,18 @@
   <section class="hero">
     <h1>What would you say if no one would ever find out it was you?</h1>
     <p>Write yours here. Read what others sent on X and TikTok.</p>
+  </section>
+
+  <section class="featured">
+    <div class="label">Recently shared</div>
+    <blockquote>
+      I’m turning 30 next year & NGL, I’m so sick of all this relationship thingi. I used to judge unmarried people back then but now it's my turn. Seriously every man that comes into my life seems to want just one thing, SEX. All of them.<br><br>
+      Being a moslem, the pressure from my family is too much. All my other siblings are married, even the youngest. My village people be expecting you to be married with kids by 25, I’m so confused. I tried to keep my options open thinking it'd help but in vain. I want love and marriage, but I’m scared of making the wrong choice. And I am growing day by day, men have fucked me and honestly I'm just tired.
+    </blockquote>
+    <div class="meta">
+      <span>Anonymous</span>
+      <a href="https://x.com/theunholykeeper/status/2118342949528318010" target="_blank" rel="noopener">View on X →</a>
+    </div>
   </section>
 
   <section id="post">
@@ -136,7 +399,7 @@
     </form>
   </section>
 
-  <section id="privacy" class="info" style="margin-top: 60px;">
+  <section id="privacy" class="info" style="margin-top: 64px;">
     <div class="section-head">Privacy</div>
     <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who reads it and may post it on X or TikTok. Don't include names or details that could identify you or anyone else.</p>
   </section>
@@ -155,8 +418,8 @@
     </ul>
   </section>
 
-  <section id="about" class="about" style="margin-top: 60px;">
-    <div class="section-head" style="margin-bottom: 24px;">About</div>
+  <section id="about" class="about" style="margin-top: 64px;">
+    <div class="section-head" style="margin-bottom: 22px;">About</div>
     <p>I built this because I was carrying something I couldn't say out loud. Not dangerous. Just heavy.</p>
     <p>It made me wonder what everyone else is holding that they never say.</p>
     <p>So here's a place to put it down. No name, no account, no one you'll ever have to face. I read every confession myself, and I post what I can on X and TikTok, lightly edited only to remove anything identifying.</p>
@@ -245,7 +508,6 @@
     if (!isRecording) {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
         
-        // Force higher quality recording
         var options = { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 128000 };
         try {
             mediaRecorder = new MediaRecorder(stream, options);
@@ -374,30 +636,18 @@
     .then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
         if (!response.ok || data.success !== true) {
-          if (response.status === 429) {
-            throw new Error("Too many attempts. Wait a few minutes and try again.");
-          }
-          throw new Error(data.error || data.message || "Didn't go through. Try again.");
+          throw new Error(data.error || "Something went wrong.");
         }
-        return data;
+        form.reset();
+        updateCount();
+        clearStatus();
+        openSuccess();
       });
     })
-    .then(function () {
-      form.reset();
-      updateCount();
-      clearStatus();
-      openSuccess();
-    })
     .catch(function (error) {
-      if (error.name === "AbortError") {
-        showStatus("Timed out. Delivery may be uncertain, check before sending again.", "err");
-      } else if (error instanceof TypeError) {
-        showStatus("Can't reach the server. Check your connection and try again.", "err");
-      } else {
-        showStatus(error.message || "Something went wrong. Try again.", "err");
-      }
+      showStatus(error.message || "Failed to send.", "err");
     })
-    .then(function () {
+    .finally(function () {
       clearTimeout(timer);
       sending = false;
       button.disabled = false;
@@ -407,19 +657,10 @@
 
   closeBtn.addEventListener("click", closeSuccess);
   closeX.addEventListener("click", closeSuccess);
-
-  overlay.addEventListener("click", function (event) {
-          if (event.target === overlay) closeSuccess();
+  overlay.addEventListener("click", function(e) {
+    if (e.target === overlay) closeSuccess();
   });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && overlay.classList.contains("open")) {
-      closeSuccess();
-    }
-  });
-
 })();
 </script>
-
 </body>
 </html>
