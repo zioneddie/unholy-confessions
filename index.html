@@ -10,11 +10,13 @@
 <meta property="og:title" content="What would you say if no one would ever find out it was you?">
 <meta property="og:description" content="Read what strangers admit when no one's watching. Send yours anonymously.">
 <meta property="og:url" content="https://unholyconfessions.online/">
-<meta property="og:image" content="https://unholyconfessions.online/favicon.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://unholyconfessions.online/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="What would you say if no one would ever find out it was you?">
 <meta name="twitter:description" content="Read what strangers admit when no one's watching. Send yours anonymously.">
-<meta name="twitter:image" content="https://unholyconfessions.online/favicon.png">
+<meta name="twitter:image" content="https://unholyconfessions.online/og-image.png">
 <title>Unholy Confessions</title>
 <link rel="icon" type="image/png" href="/favicon.png?v=2">
 <link rel="apple-touch-icon" href="/favicon.png?v=2">
@@ -33,7 +35,7 @@
     --accent-hover: #e8b56a;
     --accent-text: #1a1208;
     --radius: 14px;
-    --shadow: 0 8px 32px rgba(0,0,0,0.4);
+    --err: #e05a4a;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -42,9 +44,8 @@
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 16.5px;
-    line-height: 1.65;
-    padding-bottom: 100px;
+    font-size: 16px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     position: relative;
   }
@@ -55,105 +56,70 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
+    opacity: 0.5;
   }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
+  .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 0 20px;
-    margin-bottom: 8px;
+    padding: 16px 0 12px;
+  }
+  .menu-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+    line-height: 1;
   }
   header .brand {
     color: var(--text);
     text-decoration: none;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 16px;
     letter-spacing: -0.3px;
   }
-  header nav { display: flex; gap: 20px; align-items: center; }
+  header nav { display: flex; gap: 16px; align-items: center; }
   header nav a {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 600;
-    transition: color 0.2s;
   }
   header nav a:hover { color: var(--accent); }
 
-  .hero { margin: 32px 0 48px; }
+  .hero { margin: 12px 0 20px; }
   .hero h1 {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 42px;
-    line-height: 1.08;
-    letter-spacing: -0.8px;
-    margin: 0 0 18px;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.6px;
+    margin: 0;
     font-weight: 400;
     font-style: italic;
   }
-  .hero p { font-size: 18px; color: var(--text-muted); margin: 0; max-width: 42ch; }
 
-  .section-head {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-    color: var(--text-muted);
-    font-weight: 700;
-    margin: 0 0 6px;
-  }
-  .section-sub { font-size: 16.5px; color: var(--text); margin: 0 0 22px; font-weight: 500; }
-
-  .featured {
+  .voice-toggle {
     background: var(--surface);
     border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px;
     border-radius: var(--radius);
-    padding: 22px 22px 18px;
-    margin: 40px 0 50px;
-    box-shadow: var(--shadow);
-  }
-  .featured .label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .featured blockquote {
-    margin: 0 0 14px;
-    font-size: 16.5px;
-    line-height: 1.6;
-    color: var(--text);
-  }
-  .featured .meta {
-    font-size: 13px;
-    color: var(--text-muted);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .featured a {
-    color: var(--accent);
-    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
     font-weight: 600;
-    font-size: 13px;
+    margin-bottom: 6px;
+    font-family: inherit;
+    font-size: 15px;
   }
-  .featured a:hover { color: var(--accent-hover); }
+  .voice-toggle.recording { background: #c44a3a; color: white; border-color: #c44a3a; }
+  .voice-warning { font-size: 12.5px; color: var(--text-muted); text-align: center; margin: 0 0 14px; line-height: 1.4; }
+  .voice-hidden { display: none !important; }
 
-  .info p, .about p {
-    font-size: 16.5px;
-    line-height: 1.7;
-    color: var(--text);
-    margin: 0 0 18px;
-    max-width: 54ch;
-  }
-  .info ul { list-style: none; padding: 0; margin: 0; font-size: 15.5px; line-height: 1.9; color: var(--text); }
-  .info ul a { color: var(--accent); text-decoration: none; font-weight: 700; }
-  .info ul a:hover { color: var(--accent-hover); }
-
-  .form-group { margin-bottom: 20px; }
   textarea {
     width: 100%;
     background: var(--surface);
@@ -161,51 +127,67 @@
     border-radius: var(--radius);
     color: var(--text);
     font-family: inherit;
-    font-size: 17px;
-    padding: 18px;
+    font-size: 16.5px;
+    padding: 14px;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    min-height: 200px;
+    min-height: 140px;
     resize: vertical;
-    line-height: 1.55;
+    line-height: 1.5;
   }
-  textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,160,74,0.12); }
-  .counter { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
+  textarea:focus { border-color: var(--accent); }
+  .counter { text-align: right; font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
 
+  .consent-wrap {
+    margin: 14px 0 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+  }
+  .consent-wrap.error {
+    border-color: var(--err);
+    background: rgba(224,90,74,0.08);
+  }
   .consent {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: flex-start;
-    margin: 20px 0;
-    font-size: 14.5px;
-    line-height: 1.5;
+    font-size: 13.5px;
+    line-height: 1.45;
     color: var(--text-muted);
+    margin: 0;
   }
   .consent input {
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border: 2px solid var(--border);
-    border-radius: 5px;
+    border-radius: 4px;
     background: transparent;
-    margin-top: 1px;
+    margin-top: 2px;
     flex: 0 0 auto;
     cursor: pointer;
     position: relative;
-    transition: all 0.15s;
   }
   .consent input:checked { background: var(--accent); border-color: var(--accent); }
   .consent input:checked::after {
     content: '';
     position: absolute;
-    left: 5px;
-    top: 1px;
-    width: 5px;
-    height: 10px;
+    left: 4px;
+    top: 0px;
+    width: 4px;
+    height: 9px;
     border: solid var(--accent-text);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
+  .consent-error {
+    color: var(--err);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: none;
+  }
+  .consent-wrap.error .consent-error { display: block; }
 
   button.submit {
     width: 100%;
@@ -214,134 +196,87 @@
     border: none;
     border-radius: var(--radius);
     font-family: inherit;
-    font-size: 16.5px;
+    font-size: 16px;
     font-weight: 700;
-    padding: 16px;
+    padding: 14px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    margin-top: 4px;
   }
-  button.submit:hover:not(:disabled) { background: var(--accent-hover); }
-  button.submit:active:not(:disabled) { transform: scale(0.985); }
   button.submit:disabled { opacity: 0.55; cursor: wait; }
 
-  .form-note { text-align: center; font-size: 13.5px; color: var(--text-muted); margin: 12px 0 0; }
-  .status { text-align: center; font-size: 14.5px; font-weight: 600; margin-top: 16px; display: none; }
+  .form-note { text-align: center; font-size: 12.5px; color: var(--text-muted); margin: 10px 0 6px; }
+  .age-note { text-align: center; font-size: 12px; color: var(--text-muted); margin: 0 0 16px; }
+  .status { text-align: center; font-size: 14px; font-weight: 600; margin-top: 10px; display: none; }
   .status.show { display: block; }
   .status.ok { color: var(--accent); }
-  .status.err { color: #e05a4a; }
-
-  .voice-toggle {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 13px;
-    border-radius: var(--radius);
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    font-weight: 600;
-    margin-bottom: 8px;
-    transition: all 0.2s;
-    font-family: inherit;
-    font-size: 15px;
-  }
-  .voice-toggle:hover { border-color: var(--accent); }
-  .voice-toggle.recording { background: #c44a3a; color: white; border-color: #c44a3a; }
-  .voice-hidden { display: none !important; }
-  .voice-warning { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 18px; }
-
-  .about .sig {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-top: 6px;
-  }
+  .status.err { color: var(--err); }
 
   footer {
     border-top: 1px solid var(--border);
-    padding-top: 28px;
-    margin-top: 70px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13.5px;
+    padding: 18px 0 30px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
     color: var(--text-muted);
-    font-weight: 500;
   }
-  footer a { color: var(--text); text-decoration: none; font-weight: 600; }
+  footer a { color: var(--text); text-decoration: none; font-weight: 600; margin: 0 8px; }
   footer a:hover { color: var(--accent); }
 
-  .modal-overlay {
+  /* Drawer */
+  .drawer-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    background: rgba(0,0,0,0.7);
     z-index: 1000;
+    display: none;
   }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    position: relative;
+  .drawer-overlay.open { display: block; }
+  .drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(88%, 360px);
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 44px 26px 28px;
-    width: 100%;
-    max-width: 360px;
-    text-align: center;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    border-right: 1px solid var(--border);
+    z-index: 1001;
+    padding: 20px 18px 40px;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
   }
-  .modal-x {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 40px;
-    height: 40px;
-    background: transparent;
+  .drawer.open { transform: translateX(0); }
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .drawer-close {
+    background: none;
     border: none;
     color: var(--text-muted);
     font-size: 26px;
     cursor: pointer;
-    border-radius: 50%;
   }
-  .modal-x:hover { color: var(--text); background: var(--surface-hover); }
-  .modal h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 30px;
-    font-weight: 400;
-    margin: 0 0 12px;
-    color: var(--text);
-  }
-  .modal p { font-size: 15.5px; color: var(--text-muted); margin: 0 0 10px; line-height: 1.5; }
-  .modal .actions { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
-  .modal .actions .btn {
-    width: 100%;
-    font-size: 15px;
-    padding: 13px 20px;
-    background: var(--accent);
-    color: var(--accent-text);
-    border: none;
-    border-radius: var(--radius);
+  .drawer section { margin-bottom: 28px; }
+  .drawer h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--accent);
+    margin: 0 0 10px;
     font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
   }
-  .modal .actions .btn.secondary {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .drawer p, .drawer li { font-size: 14.5px; line-height: 1.6; color: var(--text); margin: 0 0 10px; }
+  .drawer ul { padding-left: 18px; margin: 0; }
+  .drawer a { color: var(--accent); }
 
-  a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-  @media (min-width: 640px) {
-    .hero h1 { font-size: 52px; }
-    .wrap { padding: 0 28px; }
+  .recording-status { color: #e05a4a; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+
+  @media (min-width: 600px) {
+    .hero h1 { font-size: 38px; }
+    .wrap { max-width: 560px; padding: 0 24px; }
   }
 </style>
 </head>
@@ -349,6 +284,7 @@
 
 <div class="wrap">
   <header>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu">☰</button>
     <a class="brand" href="#">Unholy Confessions</a>
     <nav>
       <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">X</a>
@@ -358,96 +294,102 @@
 
   <section class="hero">
     <h1>What would you say if no one would ever find out it was you?</h1>
-    <p>Write yours here. Read what others sent on X and TikTok.</p>
   </section>
 
-  <section class="featured">
-    <div class="label">Recently shared</div>
-    <blockquote>
-      I’m turning 30 next year & NGL, I’m so sick of all this relationship thingi. I used to judge unmarried people back then but now it's my turn. Seriously every man that comes into my life seems to want just one thing, SEX. All of them.<br><br>
-      Being a moslem, the pressure from my family is too much. All my other siblings are married, even the youngest. My village people be expecting you to be married with kids by 25, I’m so confused. I tried to keep my options open thinking it'd help but in vain. I want love and marriage, but I’m scared of making the wrong choice. And I am growing day by day, men have fucked me and honestly I'm just tired.
-    </blockquote>
-    <div class="meta">
-      <span>Anonymous</span>
-      <a href="https://x.com/theunholykeeper/status/2118342949528318010" target="_blank" rel="noopener">View on X →</a>
+  <form id="confession-form" novalidate>
+    <button type="button" id="record-btn" class="voice-toggle">🎙️ Record Voice Confession</button>
+    <p class="voice-warning">Voice confessions may be shared as audio on TikTok. For full anonymity, use text. If someone knows your voice, they may recognize it.</p>
+    <div id="recording-status" class="recording-status voice-hidden">● Recording... tap to stop.</div>
+
+    <div id="text-input-group">
+      <textarea id="confession" name="confession" maxlength="5000" placeholder="In the dark, without a name, I..." required></textarea>
+      <div class="counter"><span id="count">0</span> / 5000</div>
     </div>
-  </section>
 
-  <section id="post">
-    <div class="section-head">Add yours</div>
-    <p class="section-sub">Send your confession anonymously.</p>
-    <form id="confession-form" novalidate>
-      
-      <button type="button" id="record-btn" class="voice-toggle">🎙️ Record Voice Confession</button>
-      <p class="voice-warning">Heads up: if someone knows your voice, they will recognize it. For total anonymity, use text.</p>
-      
-      <div id="recording-status" class="counter voice-hidden" style="text-align: left; margin-bottom: 15px; color: #e05a4a;">● Recording... tap to stop.</div>
-
-      <div id="text-input-group" class="form-group">
-        <textarea id="confession" name="confession" maxlength="5000" placeholder="In the dark, without a name, I..." required></textarea>
-        <div class="counter"><span id="count">0</span> / 5000</div>
-      </div>
-
+    <div class="consent-wrap" id="consent-wrap">
       <label class="consent" for="consent">
         <input id="consent" name="consent" type="checkbox" required>
-        <span>I get that this goes to The Keeper, who may post it anonymously on X and TikTok. I've left out names and anything that could identify me or anyone else.</span>
+        <span>I understand this may be posted anonymously on X and TikTok, and I've left out names and anything that could identify me or others.</span>
       </label>
+      <div class="consent-error" id="consent-error">Please tick the box to continue.</div>
+    </div>
 
-      <button id="submit-button" class="submit" type="submit">Leave it here</button>
-      <p class="form-note">One person reads every confession. Not every confession is posted.</p>
-      <div id="status" class="status" role="status" aria-live="polite"></div>
-    </form>
-  </section>
+    <button id="submit-button" class="submit" type="submit">Leave it here</button>
+    <p class="form-note">One person reads every confession. Not every confession is posted.</p>
+    <p class="age-note">You must be 18 or older to submit.</p>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </form>
 
-  <section id="privacy" class="info" style="margin-top: 64px;">
-    <div class="section-head">Privacy</div>
-    <p>We don't ask for your name, email, or phone number. Your confession is sent privately to one person, the Keeper, who reads it and may post it on X or TikTok. Don't include names or details that could identify you or anyone else.</p>
-  </section>
+  <footer>
+    <a href="#" data-section="privacy">Privacy</a>
+    <a href="#" data-section="terms">Terms</a>
+  </footer>
+</div>
 
-  <section id="rules" class="info" style="margin-top: 48px;">
-    <div class="section-head">What I won't post</div>
-    <p>I read every confession myself. I don't post names, phone numbers, or accusations against real people, and I may skip or lightly edit anything that could expose someone.</p>
-  </section>
+<!-- Drawer -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-header">
+    <strong>Menu</strong>
+    <button class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
+  </div>
 
-  <section id="help" class="info" style="margin-top: 48px;">
-    <div class="section-head">If it's more than a confession</div>
-    <p>Some things are too heavy to carry alone. If today is one of those days, these people will listen. You don't have to tell me first.</p>
-    <ul>
-      <li>Find a helpline in your country: <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a></li>
-      <li>Befrienders Worldwide: <a href="https://befrienders.org" target="_blank" rel="noopener">befrienders.org</a></li>
-    </ul>
-  </section>
-
-  <section id="about" class="about" style="margin-top: 64px;">
-    <div class="section-head" style="margin-bottom: 22px;">About</div>
+  <section id="about">
+    <h3>About</h3>
     <p>I built this because I was carrying something I couldn't say out loud. Not dangerous. Just heavy.</p>
     <p>It made me wonder what everyone else is holding that they never say.</p>
     <p>So here's a place to put it down. No name, no account, no one you'll ever have to face. I read every confession myself, and I post what I can on X and TikTok, lightly edited only to remove anything identifying.</p>
     <p>It might be petty. It might be strange. It might be the thing you've never told anyone. It all belongs here, and someone out there is carrying the same thing and will feel a little less alone reading yours.</p>
     <p>The door is open.</p>
-    <p class="sig">The Keeper</p>
+    <p style="margin-top:12px; font-size:13px; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:1px;">The Keeper</p>
   </section>
 
-  <footer>
-    <span>Unholy Confessions</span>
-    <div style="display: flex; gap: 16px;">
-      <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener">X</a>
-      <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">TikTok</a>
-    </div>
-  </footer>
-</div>
+  <section id="privacy">
+    <h3>Privacy</h3>
+    <p>We don't ask for your name, email or phone number. Your confession is sent privately to one person, the Keeper. We don't link confessions to accounts or profiles. Like any website, our hosting provider may keep basic technical server logs (such as IP addresses) for security. We don't use them to identify you or publish them. Please don't include names or details that could identify you or anyone else.</p>
+    <p>Text confessions may be posted anonymously on X and TikTok. Voice confessions may be shared as audio on TikTok only.</p>
+  </section>
 
-<div id="success-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="success-title">
-  <div class="modal">
-    <button id="close-x" class="modal-x" type="button" aria-label="Close">&times;</button>
-    <h2 id="success-title">Received.</h2>
-    <p>The Keeper will read it. If it fits, it'll be shared.</p>
-    <p>Follow @theunholykeeper to see what others couldn't say out loud.</p>
-    <div class="actions">
-      <a class="btn" href="https://x.com/theunholykeeper" target="_blank" rel="noopener">Follow the Keeper on X</a>
-      <a class="btn secondary" href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener">Follow the Keeper on TikTok</a>
-      <button id="close-btn" class="btn secondary" type="button" style="margin-top: 10px;">Close</button>
-    </div>
+  <section id="wont-post">
+    <h3>What I won't post</h3>
+    <p>I read every confession myself. I don't post names, phone numbers, or accusations against real people, and I may skip or lightly edit anything that could expose someone.</p>
+  </section>
+
+  <section id="terms">
+    <h3>Terms</h3>
+    <ul>
+      <li>18+ only.</li>
+      <li>Don't submit anything involving minors, sexual content about real people, or accusations or details about real people.</li>
+      <li>By submitting, you allow the Keeper to read, lightly edit and post your confession anonymously on X and TikTok, or choose not to post it.</li>
+      <li>Not every confession is posted.</li>
+      <li>If a confession suggests someone is in danger, it may not be posted, and help resources are listed in the Need help section.</li>
+      <li>This site is not a counselling or emergency service.</li>
+    </ul>
+  </section>
+
+  <section id="takedown">
+    <h3>Take-down request</h3>
+    <p>Regret sending something, or see yourself in a post? Email <a href="mailto:theguidedpathonx@gmail.com">theguidedpathonx@gmail.com</a> and quote the confession text (or send the link). I'll remove it from my accounts as soon as I can.</p>
+  </section>
+
+  <section id="help">
+    <h3>Need help</h3>
+    <p>Some things are too heavy to carry alone. If today is one of those days, these people will listen. You don't have to tell me first.</p>
+    <ul>
+      <li><a href="https://findahelpline.com" target="_blank" rel="noopener">Find a helpline in your country</a></li>
+      <li><a href="https://befrienders.org" target="_blank" rel="noopener">Befrienders Worldwide</a></li>
+    </ul>
+  </section>
+</aside>
+
+<div id="success-overlay" class="drawer-overlay" style="display:none; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px 24px; max-width:340px; text-align:center;">
+    <button id="close-x" style="position:absolute; top:8px; right:8px; background:none; border:none; color:var(--text-muted); font-size:24px; cursor:pointer;">&times;</button>
+    <h2 style="font-family:'Instrument Serif',serif; font-size:28px; margin:0 0 12px; font-weight:400;">Received.</h2>
+    <p style="color:var(--text-muted); margin:0 0 10px; font-size:15px;">The Keeper will read it. If it fits, it'll be shared.</p>
+    <p style="color:var(--text-muted); margin:0 0 18px; font-size:15px;">Follow @theunholykeeper to see what others couldn't say out loud.</p>
+    <a href="https://x.com/theunholykeeper" target="_blank" rel="noopener" style="display:block; background:var(--accent); color:var(--accent-text); padding:12px; border-radius:12px; text-decoration:none; font-weight:700; margin-bottom:8px;">Follow on X</a>
+    <a href="https://www.tiktok.com/@unholypriet" target="_blank" rel="noopener" style="display:block; background:transparent; color:var(--text); border:1px solid var(--border); padding:12px; border-radius:12px; text-decoration:none; font-weight:700;">Follow on TikTok</a>
   </div>
 </div>
 
@@ -457,19 +399,26 @@
 
   var API_URL = "https://unholy-confessions.onrender.com/api/confessions";
 
-  var form      = document.getElementById("confession-form");
-  var textarea  = document.getElementById("confession");
-  var consent   = document.getElementById("consent");
-  var button    = document.getElementById("submit-button");
+  var form = document.getElementById("confession-form");
+  var textarea = document.getElementById("confession");
+  var consent = document.getElementById("consent");
+  var button = document.getElementById("submit-button");
   var statusBox = document.getElementById("status");
-  var count     = document.getElementById("count");
-  var overlay   = document.getElementById("success-overlay");
-  var closeBtn  = document.getElementById("close-btn");
-  var closeX    = document.getElementById("close-x");
-  
+  var count = document.getElementById("count");
+  var consentWrap = document.getElementById("consent-wrap");
+  var consentError = document.getElementById("consent-error");
+
   var recordBtn = document.getElementById("record-btn");
   var recordingStatus = document.getElementById("recording-status");
   var textInputGroup = document.getElementById("text-input-group");
+
+  var menuBtn = document.getElementById("menu-btn");
+  var drawer = document.getElementById("drawer");
+  var drawerOverlay = document.getElementById("drawer-overlay");
+  var drawerClose = document.getElementById("drawer-close");
+
+  var successOverlay = document.getElementById("success-overlay");
+  var closeX = document.getElementById("close-x");
 
   var sending = false;
   var mediaRecorder;
@@ -488,45 +437,62 @@
     count.textContent = String(textarea.value.length);
   }
 
-  function openSuccess() {
-    overlay.classList.add("open");
+  function openDrawer() {
+    drawer.classList.add("open");
+    drawerOverlay.classList.add("open");
     document.body.style.overflow = "hidden";
-    closeBtn.focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove("open");
+    drawerOverlay.classList.remove("open");
+    document.body.style.overflow = "";
   }
 
-  function closeSuccess() {
-    overlay.classList.remove("open");
-    document.body.style.overflow = "";
-    try { button.focus({ preventScroll: true }); } catch (e) {}
+  function openSuccess() {
+    successOverlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
   }
+  function closeSuccess() {
+    successOverlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  menuBtn.addEventListener("click", openDrawer);
+  drawerClose.addEventListener("click", closeDrawer);
+  drawerOverlay.addEventListener("click", closeDrawer);
+  closeX.addEventListener("click", closeSuccess);
+  successOverlay.addEventListener("click", function(e) {
+    if (e.target === successOverlay) closeSuccess();
+  });
+
+  // Footer links open drawer to section
+  document.querySelectorAll("footer a[data-section]").forEach(function(link) {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      openDrawer();
+      var id = this.getAttribute("data-section");
+      var el = document.getElementById(id);
+      if (el) setTimeout(function() { el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 300);
+    });
+  });
 
   textarea.addEventListener("input", updateCount);
   updateCount();
 
-  // --- VOICE RECORDING LOGIC ---
+  // Voice recording
   recordBtn.addEventListener("click", function() {
     if (!isRecording) {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
-        
         var options = { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 128000 };
-        try {
-            mediaRecorder = new MediaRecorder(stream, options);
-        } catch (e) {
-            mediaRecorder = new MediaRecorder(stream); 
-        }
-
+        try { mediaRecorder = new MediaRecorder(stream, options); }
+        catch (e) { mediaRecorder = new MediaRecorder(stream); }
         audioChunks = [];
-
-        mediaRecorder.ondataavailable = function(event) {
-          audioChunks.push(event.data);
-        };
-
+        mediaRecorder.ondataavailable = function(event) { audioChunks.push(event.data); };
         mediaRecorder.onstop = function() {
           var audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
           stream.getTracks().forEach(function(track) { track.stop(); });
           uploadVoiceNote(audioBlob);
         };
-
         mediaRecorder.start();
         isRecording = true;
         recordBtn.textContent = "⏹️ Stop Recording";
@@ -534,8 +500,7 @@
         recordingStatus.classList.remove("voice-hidden");
         textInputGroup.classList.add("voice-hidden");
         textarea.required = false;
-
-      }).catch(function(err) {
+      }).catch(function() {
         alert("Microphone access denied. Please type your confession instead.");
       });
     } else {
@@ -550,24 +515,16 @@
   function uploadVoiceNote(blob) {
     showStatus("Sending voice note...", "ok");
     button.disabled = true;
-
     var reader = new FileReader();
     reader.readAsDataURL(blob);
     reader.onloadend = function() {
       var base64data = reader.result;
-
       var controller = new AbortController();
-      var timer = setTimeout(function () { controller.abort(); }, 90000);
-
+      var timer = setTimeout(function() { controller.abort(); }, 90000);
       fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "voice",
-          audio: base64data,
-          category: "Voice",
-          consent: true
-        }),
+        body: JSON.stringify({ type: "voice", audio: base64data, category: "Voice", consent: true }),
         signal: controller.signal
       })
       .then(function(response) {
@@ -594,11 +551,12 @@
     };
   }
 
-  // --- TEXT SUBMISSION LOGIC ---
-  form.addEventListener("submit", function (event) {
+  // Text submission
+  form.addEventListener("submit", function(event) {
     event.preventDefault();
     if (sending || isRecording) return;
     clearStatus();
+    consentWrap.classList.remove("error");
 
     var text = textarea.value.trim();
     var hasConsent = consent.checked;
@@ -609,7 +567,9 @@
       return;
     }
     if (!hasConsent) {
-      showStatus("Tick the consent box first.", "err");
+      consentWrap.classList.add("error");
+      consentError.style.display = "block";
+      consentWrap.scrollIntoView({ behavior: "smooth", block: "center" });
       consent.focus();
       return;
     }
@@ -620,21 +580,16 @@
     showStatus("Sending it now.", "ok");
 
     var controller = new AbortController();
-    var timer = setTimeout(function () { controller.abort(); }, 90000);
+    var timer = setTimeout(function() { controller.abort(); }, 90000);
 
     fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "text",
-        confession: text,
-        category: "Confession",
-        consent: hasConsent
-      }),
+      body: JSON.stringify({ type: "text", confession: text, category: "Confession", consent: hasConsent }),
       signal: controller.signal
     })
-    .then(function (response) {
-      return response.json().catch(function () { return {}; }).then(function (data) {
+    .then(function(response) {
+      return response.json().catch(function() { return {}; }).then(function(data) {
         if (!response.ok || data.success !== true) {
           throw new Error(data.error || "Something went wrong.");
         }
@@ -644,21 +599,15 @@
         openSuccess();
       });
     })
-    .catch(function (error) {
+    .catch(function(error) {
       showStatus(error.message || "Failed to send.", "err");
     })
-    .finally(function () {
+    .finally(function() {
       clearTimeout(timer);
       sending = false;
       button.disabled = false;
       button.textContent = "Leave it here";
     });
-  });
-
-  closeBtn.addEventListener("click", closeSuccess);
-  closeX.addEventListener("click", closeSuccess);
-  overlay.addEventListener("click", function(e) {
-    if (e.target === overlay) closeSuccess();
   });
 })();
 </script>
